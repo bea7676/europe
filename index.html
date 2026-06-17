@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🇫🇷 France Trip 2026</title>
+
+    <!-- ============================================================
+    🎨 1. STYLES – Edit colors, fonts, spacing here
+    ============================================================ -->
+    <style>
+        /* ---------- RESET & BASE ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #FDF8F3;
+            /* Cream background */
+            color: #2C2C2C;
+            /* Deep charcoal text */
+            padding: 2rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ---------- HEADER ---------- */
+        .header {
+            text-align: center;
+            padding: 2rem 0 2.5rem;
+            border-bottom: 3px solid #D4A373;
+            /* Gold accent line */
+            margin-bottom: 2.5rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #C67C5E;
+            /* Terracotta */
+        }
+
+        .header .tagline {
+            font-size: 1.2rem;
+            color: #8A9A7A;
+            /* Olive */
+            margin-top: 0.3rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .header .dates {
+            font-size: 1rem;
+            color: #6b5b4e;
+            margin-top: 0.5rem;
+            background: #E8DDD0;
+            display: inline-block;
+            padding: 0.3rem 2rem;
+            border-radius: 30px;
+        }
+
+        /* ---------- FLOATING OVERVIEW CARD ---------- */
+        .overview-card {
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 1.8rem 2.5rem;
+            margin: 1.5rem 0 2.5rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            border: 1px solid #E8DDD0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .overview-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 1rem;
+            color: #2C2C2C;
+        }
+
+        .overview-item .icon {
+            font-size: 1.8rem;
+        }
+
+        .overview-item .label {
+            font-weight: 300;
+            color: #8A9A7A;
+        }
+
+        .overview-item .value {
+            font-weight: 600;
+        }
+
+        /* ---------- SECTION DIVIDERS ---------- */
+        .section {
+            margin: 3.5rem 0;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #C67C5E;
+            /* Terracotta */
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-left: 4px solid #D4A373;
+            padding-left: 1rem;
+        }
+
+        .section-sub {
+            font-size: 1rem;
+            color: #8A9A7A;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        /* ---------- DROP ZONE ---------- */
+        .drop-zone {
+            border: 3px dashed #C5B0A0;
+            border-radius: 24px;
+            padding: 3.5rem 2rem;
+            text-align: center;
+            background: #FCF9F7;
+            transition: 0.25s ease;
+            cursor: pointer;
+            margin: 1.5rem 0;
+        }
+
+        .drop-zone:hover {
+            border-color: #C67C5E;
+            background: #FDF8F3;
+        }
+
+        .drop-zone.dragover {
+            border-color: #C67C5E;
+            background: #F5EDE8;
+            transform: scale(1.01);
+        }
+
+        .drop-zone .main-text {
+            font-size: 1.4rem;
+            color: #6B5B4E;
+            font-weight: 500;
+        }
+
+        .drop-zone .sub-text {
+            font-size: 0.95rem;
+            color: #A09080;
+            margin-top: 0.5rem;
+        }
+
+        .drop-zone input[type="file"] {
+            display: none;
+        }
+
+        /* ---------- CAROUSEL ---------- */
+        .carousel-section {
+            margin: 3rem 0 1rem;
+        }
+
+        .carousel-section h2 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: #C67C5E;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            background: #2C2C2C;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+            aspect-ratio: 16 / 9;
+            max-height: 480px;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #2C2C2C;
+            position: relative;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-slide .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(44, 44, 44, 0.7));
+            color: #FDF8F3;
+            padding: 2rem 1.5rem 1.2rem;
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        /* Carousel buttons */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(253, 248, 243, 0.85);
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            font-size: 1.4rem;
+            cursor: pointer;
+            color: #2C2C2C;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: 0.2s;
+            z-index: 10;
+        }
+
+        .carousel-btn:hover {
+            background: #FDF8F3;
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .carousel-btn.prev {
+            left: 16px;
+        }
+
+        .carousel-btn.next {
+            right: 16px;
+        }
+
+        /* Carousel dots */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+
+        .carousel-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #D4A373;
+            opacity: 0.4;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .carousel-dots span.active {
+            opacity: 1;
+            background: #C67C5E;
+            transform: scale(1.2);
+        }
+
+        /* ---------- GALLERY GRID (thumbnail preview) ---------- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 2px solid #E8DDD0;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .gallery-grid img:hover {
+            transform: scale(1.03);
+            border-color: #C67C5E;
+        }
+
+        /* ---------- BUTTONS ---------- */
+        .btn {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            border-radius: 40px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: 0.25s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: #C67C5E;
+            color: #FDF8F3;
+        }
+
+        .btn-primary:hover {
+            background: #A86548;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(198, 124, 94, 0.25);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #C67C5E;
+            border: 2px solid #C67C5E;
+        }
+
+        .btn-outline:hover {
+            background: #C67C5E;
+            color: #FDF8F3;
+        }
+
+        /* ---------- UTILITY ---------- */
+        .flex-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .mt-1 {
+            margin-top: 1rem;
+        }
+        .mt-2 {
+            margin-top: 2rem;
+        }
+        .mb-1 {
+            margin-bottom: 1rem;
+        }
+        .text-center {
+            text-align: center;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .overview-card {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1.2rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+            }
+
+            .drop-zone {
+                padding: 2.5rem 1.2rem;
+            }
+
+            .carousel-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+
+            .carousel-btn.prev {
+                left: 8px;
+            }
+            .carousel-btn.next {
+                right: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================
+    🏠 2. HEADER – Edit title, tagline, dates here
+    ============================================================ -->
+    <header class="header">
+        <h1>🇫🇷 France Trip 2026</h1>
+        <p class="tagline">Montauban · Toulouse · Paris</p>
+        <span class="dates">📅 20 June – 4 July 2026</span>
+    </header>
+
+    <!-- ============================================================
+    📋 3. OVERVIEW CARD – Edit trip details here
+    ============================================================ -->
+    <section class="overview-card">
+        <div class="overview-item">
+            <span class="icon">✈️</span>
+            <span><span class="label">Depart</span> <span class="value">20 Jun 2026</span></span>
+        </div>
+        <div class="overview-item">
+            <span class="icon">🏠</span>
+            <span><span class="label">Nights</span> <span class="value">12</span></span>
+        </div>
+        <div class="overview-item">
+            <span class="icon">👥</span>
+            <span><span class="label">Travelers</span> <span class="value">3 Adults</span></span>
+        </div>
+        <div class="overview-item">
+            <span class="icon">📍</span>
+            <span><span class="label">Cities</span> <span class="value">3</span></span>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    📸 4. DROP ZONE – Drag & drop photos here
+         Edit the text prompts here if you like.
+    ============================================================ -->
+    <section class="section">
+        <h2 class="section-title">📸 Drop Your Travel Photos</h2>
+        <p class="section-sub">Drag & drop images from your phone or computer. They'll appear in the carousel below.</p>
+
+        <div class="drop-zone" id="dropZone">
+            <p class="main-text">📤 Drag & drop photos here</p>
+            <p class="sub-text">or click to browse · JPG, PNG, WEBP</p>
+            <input type="file" id="fileInput" accept="image/*" multiple />
+        </div>
+    </section>
+
+    <!-- ============================================================
+    🎠 5. CAROUSEL – Auto-updates when you drop photos
+         The images will appear here automatically.
+    ============================================================ -->
+    <section class="carousel-section">
+        <h2>🎠 Your Trip Gallery</h2>
+
+        <div class="carousel-wrapper">
+            <div class="carousel-track" id="carouselTrack">
+                <!-- Slides are inserted dynamically by JavaScript -->
+                <div class="carousel-slide" style="background:#2C2C2C;">
+                    <div style="color:#E8DDD0; font-size:1.2rem; text-align:center; padding:1rem;">
+                        🌅 Drop a photo to start your gallery
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carousel Navigation Buttons -->
+            <button class="carousel-btn prev" id="prevBtn" aria-label="Previous slide">‹</button>
+            <button class="carousel-btn next" id="nextBtn" aria-label="Next slide">›</button>
+        </div>
+
+        <!-- Carousel Dots -->
+        <div class="carousel-dots" id="carouselDots"></div>
+
+        <!-- Thumbnail Grid -->
+        <div class="gallery-grid" id="galleryGrid"></div>
+    </section>
+
+    <!-- ============================================================
+    🏨 6. ACCOMMODATION – Edit hotel details here
+    ============================================================ -->
+    <section class="section">
+        <h2 class="section-title">🏨 Where We're Staying</h2>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:1.2rem;">
+
+            <div style="background:white; border-radius:16px; padding:1.5rem; border:1px solid #E8DDD0;">
+                <h3 style="color:#C67C5E;">🏰 Montauban</h3>
+                <p><strong>L'authentique</strong></p>
+                <p style="color:#6B5B4E; font-size:0.9rem;">34 Rue Bessières, 82000</p>
+                <p style="font-size:0.85rem; color:#8A9A7A;">21–25 Jun · 4 nights</p>
+                <p style="font-size:0.85rem; color:#8A9A7A;">📞 +33 6 84 08 09 50</p>
+            </div>
+
+            <div style="background:white; border-radius:16px; padding:1.5rem; border:1px solid #E8DDD0;">
+                <h3 style="color:#C67C5E;">🌸 Toulouse</h3>
+                <p><strong>Adagio Toulouse Centre La Grave</strong></p>
+                <p style="color:#6B5B4E; font-size:0.9rem;">24 Rue du Pont Saint Pierre, 31300</p>
+                <p style="font-size:0.85rem; color:#8A9A7A;">25–29 Jun · 4 nights</p>
+                <p style="font-size:0.85rem; color:#8A9A7A;">📞 +33 05 32 09 73 90</p>
+            </div>
+
+            <div style="background:white; border-radius:16px; padding:1.5rem; border:1px solid #E8DDD0;">
+                <h3 style="color:#C67C5E;">🗼 Paris</h3>
+                <p><strong>Courtyard by Marriott Gare de Lyon</strong></p>
+                <p style="color:#6B5B4E; font-size:0.9rem;">209 Rue de Bercy, 75012</p>
+                <p style="font-size:0.85rem; color:#8A9A7A;">29 Jun–3 Jul · 4 nights</p>
+                <p style="font-size:0.85rem; color:#8A9A7A;">✅ Conf #79641552</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================
+    🍽️ 7. FOOD TARGETS – Edit your food spots here
+    ============================================================ -->
+    <section class="section">
+        <h2 class="section-title">🍽️ Food Targets</h2>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:0.8rem;">
+
+            <div style="background:#FFFFFF; border-radius:12px; padding:1rem; border:1px solid #E8DDD0; text-align:center;">
+                <span style="font-size:1.8rem;">🍕</span>
+                <p style="font-weight:600; font-size:0.95rem;">IL POPOLO</p>
+                <p style="font-size:0.8rem; color:#8A9A7A;">Montauban</p>
+            </div>
+
+            <div style="background:#FFFFFF; border-radius:12px; padding:1rem; border:1px solid #E8DDD0; text-align:center;">
+                <span style="font-size:1.8rem;">🥩</span>
+                <p style="font-weight:600; font-size:0.95rem;">L'Entrecote</p>
+                <p style="font-size:0.8rem; color:#8A9A7A;">Toulouse</p>
+            </div>
+
+            <div style="background:#FFFFFF; border-radius:12px; padding:1rem; border:1px solid #E8DDD0; text-align:center;">
+                <span style="font-size:1.8rem;">🍪</span>
+                <p style="font-weight:600; font-size:0.95rem;">My Cookie Factory</p>
+                <p style="font-size:0.8rem; color:#8A9A7A;">Toulouse</p>
+            </div>
+
+            <div style="background:#FFFFFF; border-radius:12px; padding:1rem; border:1px solid #E8DDD0; text-align:center;">
+                <span style="font-size:1.8rem;">🍝</span>
+                <p style="font-weight:600; font-size:0.95rem;">Mmmmm Carbonara</p>
+                <p style="font-size:0.8rem; color:#8A9A7A;">Paris</p>
+            </div>
+
+            <div style="background:#FFFFFF; border-radius:12px; padding:1rem; border:1px solid #E8DDD0; text-align:center;">
+                <span style="font-size:1.8rem;">🥐</span>
+                <p style="font-weight:600; font-size:0.95rem;">Maison Philippe Conticini</p>
+                <p style="font-size:0.8rem; color:#8A9A7A;">Paris · BIG croissant!</p>
+            </div>
+
+            <div style="background:#FFFFFF; border-radius:12px; padding:1rem; border:1px solid #E8DDD0; text-align:center;">
+                <span style="font-size:1.8rem;">🍫</span>
+                <p style="font-weight:600; font-size:0.95rem;">Maison Pillon</p>
+                <p style="font-size:0.8rem; color:#8A9A7A;">Toulouse · hot chocolate</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================
+    🗺️ 8. FLIGHTS – Edit your flight details here
+    ============================================================ -->
+    <section class="section">
+        <h2 class="section-title">✈️ Flights & Transport</h2>
+
+        <div style="background:#FFFFFF; border-radius:16px; padding:1.5rem; border:1px solid #E8DDD0;">
+
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:1.2rem;">
+
+                <div>
+                    <p style="color:#C67C5E; font-weight:600;">🇸🇬 → 🇫🇷</p>
+                    <p><strong>20 Jun</strong> · 22:20</p>
+                    <p style="font-size:0.9rem; color:#6B5B4E;">AF 257 · SIN → CDG</p>
+                </div>
+
+                <div>
+                    <p style="color:#C67C5E; font-weight:600;">🇫🇷 → 🇫🇷</p>
+                    <p><strong>21 Jun</strong> · 07:30</p>
+                    <p style="font-size:0.9rem; color:#6B5B4E;">AF 7402 · CDG → TLS</p>
+                </div>
+
+                <div>
+                    <p style="color:#C67C5E; font-weight:600;">🚆 Train</p>
+                    <p><strong>25 Jun</strong> · Morning</p>
+                    <p style="font-size:0.9rem; color:#6B5B4E;">Montauban → Toulouse</p>
+                </div>
+
+                <div>
+                    <p style="color:#C67C5E; font-weight:600;">🇫🇷 → 🇫🇷</p>
+                    <p><strong>29 Jun</strong> · 09:35</p>
+                    <p style="font-size:0.9rem; color:#6B5B4E;">AF 7403 · TLS → CDG</p>
+                </div>
+
+                <div>
+                    <p style="color:#C67C5E; font-weight:600;">🇫🇷 → 🇸🇬</p>
+                    <p><strong>3 Jul</strong> · 23:30</p>
+                    <p style="font-size:0.9rem; color:#6B5B4E;">AF 256 · CDG → SIN</p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================
+    📍 9. MARKETS – Edit market info here
+    ============================================================ -->
+    <section class="section">
+        <h2 class="section-title">🛍️ Market Days</h2>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:1rem;">
+
+            <div style="background:#FFFFFF; border-radius:16px; padding:1.2rem; border-left:4px solid #C67C5E;">
+                <p style="font-weight:600;">🏰 Montauban</p>
+                <p style="font-size:1.1rem; color:#C67C5E;"><strong>Sunday 21 June</strong></p>
+                <p style="font-size:0.9rem;">Place Nationale · 08:00-13:00</p>
+                <p style="font-size:0.85rem; color:#8A9A7A;">✅ You arrive Sunday!</p>
+            </div>
+
+            <div style="background:#FFFFFF; border-radius:16px; padding:1.2rem; border-left:4px solid #D4A373;">
+                <p style="font-weight:600;">🌸 Toulouse</p>
+                <p style="font-size:1.1rem; color:#D4A373;"><strong>Sunday 28 June</strong></p>
+                <p style="font-size:0.9rem;">Marché Victor Hugo · 06:00-13:00</p>
+                <p style="font-size:0.85rem; color:#8A9A7A;">⭐ Your main market day!</p>
+            </div>
+
+            <div style="background:#FFFFFF; border-radius:16px; padding:1.2rem; border-left:4px solid #C67C5E;">
+                <p style="font-weight:600;">🗼 Paris</p>
+                <p style="font-size:1.1rem; color:#C67C5E;"><strong>Thursday 2 July</strong></p>
+                <p style="font-size:0.9rem;">Bastille Market · 07:00-14:30</p>
+                <p style="font-size:0.85rem; color:#8A9A7A;">⭐ One of Paris's best!</p>
+            </div>
+
+            <div style="background:#FFFFFF; border-radius:16px; padding:1.2rem; border-left:4px solid #8A9A7A;">
+                <p style="font-weight:600;">🗼 Paris</p>
+                <p style="font-size:1.1rem; color:#8A9A7A;"><strong>Monday 29 June</strong></p>
+                <p style="font-size:0.9rem;">Les Puces · 10:00-17:00</p>
+                <p style="font-size:0.85rem; color:#8A9A7A;">🛍️ Flea market!</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================
+    📞 10. CONTACT – Edit contacts here
+    ============================================================ -->
+    <section class="section">
+        <h2 class="section-title">📞 Useful Contacts</h2>
+
+        <div style="background:#FFFFFF; border-radius:16px; padding:1.5rem; border:1px solid #E8DDD0;">
+
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:1rem;">
+
+                <div>
+                    <p style="font-weight:600; color:#C67C5E;">🏰 Montauban</p>
+                    <p style="font-size:0.9rem;">L'authentique</p>
+                    <p style="font-size:0.85rem; color:#6B5B4E;">📞 +33 6 84 08 09 50</p>
+                </div>
+
+                <div>
+                    <p style="font-weight:600; color:#C67C5E;">🌸 Toulouse</p>
+                    <p style="font-size:0.9rem;">Adagio Toulouse</p>
+                    <p style="font-size:0.85rem; color:#6B5B4E;">📞 +33 05 32 09 73 90</p>
+                    <p style="font-size:0.85rem; color:#6B5B4E;">📧 hb62i@adagio-city.com</p>
+                </div>
+
+                <div>
+                    <p style="font-weight:600; color:#C67C5E;">🗼 Paris</p>
+                    <p style="font-size:0.9rem;">Courtyard Gare de Lyon</p>
+                    <p style="font-size:0.85rem; color:#6B5B4E;">📞 Check Marriott app</p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================
+    🦶 11. FOOTER
+    ============================================================ -->
+    <footer style="text-align:center; margin-top:4rem; padding-top:2rem; border-top:1px solid #E8DDD0; color:#A09080; font-size:0.85rem;">
+        <p>🇫🇷 Bon voyage! · Montauban · Toulouse · Paris · 2026</p>
+        <p style="font-size:0.75rem; margin-top:0.3rem;">💡 Drag & drop photos to build your travel gallery</p>
+    </footer>
+
+    <!-- ============================================================
+    ⚡ 12. JAVASCRIPT – All the interactive magic
+         ============================================================ -->
+    <script>
+        // ------------------------------------------------------------
+        // 📸 SECTION 1: DRAG & DROP + FILE INPUT
+        // ------------------------------------------------------------
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        let imageFiles = [];
+
+        // Click to browse
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        // Drag & drop events
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            handleFiles(files);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+            fileInput.value = ''; // reset so same file can be re-added
+        });
+
+        // ------------------------------------------------------------
+        // 🖼️ SECTION 2: HANDLE FILES & STORE IN LOCALSTORAGE
+        // ------------------------------------------------------------
+        function handleFiles(files) {
+            Array.from(files).forEach(file => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        imageFiles.push(event.target.result);
+                        localStorage.setItem('franceTripPhotos', JSON.stringify(imageFiles));
+                        renderGallery();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // ------------------------------------------------------------
+        // 📦 SECTION 3: LOAD SAVED PHOTOS FROM LOCALSTORAGE
+        // ------------------------------------------------------------
+        function loadSavedPhotos() {
+            const saved = localStorage.getItem('franceTripPhotos');
+            if (saved) {
+                try {
+                    imageFiles = JSON.parse(saved);
+                } catch (e) {
+                    imageFiles = [];
+                }
+            }
+            renderGallery();
+        }
+
+        // ------------------------------------------------------------
+        // 🎠 SECTION 4: RENDER CAROUSEL + THUMBNAILS
+        // ------------------------------------------------------------
+        let currentSlide = 0;
+
+        function renderGallery() {
+            const track = document.getElementById('carouselTrack');
+            const dots = document.getElementById('carouselDots');
+            const grid = document.getElementById('galleryGrid');
+
+            // Clear previous content
+            track.innerHTML = '';
+            dots.innerHTML = '';
+            grid.innerHTML = '';
+
+            if (imageFiles.length === 0) {
+                // Show empty state
+                const emptySlide = document.createElement('div');
+                emptySlide.className = 'carousel-slide';
+                emptySlide.style.cssText = 'background:#2C2C2C; display:flex; align-items:center; justify-content:center;';
+                emptySlide.innerHTML =
+                    `<div style="color:#E8DDD0; font-size:1.2rem; text-align:center; padding:1rem;">🌅 Drop a photo to start your gallery</div>`;
+                track.appendChild(emptySlide);
+                return;
+            }
+
+            // Build slides
+            imageFiles.forEach((src, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                slide.innerHTML = `
+                    <img src="${src}" alt="Trip photo ${index + 1}" loading="lazy" />
+                    <div class="caption">📸 Photo ${index + 1} · ${new Date().toLocaleDateString()}</div>
+                `;
+                track.appendChild(slide);
+
+                // Thumbnails
+                const thumb = document.createElement('img');
+                thumb.src = src;
+                thumb.alt = `Thumb ${index + 1}`;
+                thumb.addEventListener('click', () => goToSlide(index));
+                grid.appendChild(thumb);
+
+                // Dots
+                const dot = document.createElement('span');
+                dot.addEventListener('click', () => goToSlide(index));
+                dots.appendChild(dot);
+            });
+
+            // Reset to first slide
+            goToSlide(0);
+        }
+
+        // ------------------------------------------------------------
+        // 🔄 SECTION 5: CAROUSEL CONTROLS
+        // ------------------------------------------------------------
+        function goToSlide(index) {
+            if (imageFiles.length === 0) return;
+            const total = imageFiles.length;
+            currentSlide = (index + total) % total;
+            const track = document.getElementById('carouselTrack');
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            // Update dots
+            const dots = document.querySelectorAll('#carouselDots span');
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+        }
+
+        // Next / Previous buttons
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if (imageFiles.length > 0) goToSlide(currentSlide + 1);
+        });
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            if (imageFiles.length > 0) goToSlide(currentSlide - 1);
+        });
+
+        // Keyboard support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                if (imageFiles.length > 0) goToSlide(currentSlide + 1);
+            } else if (e.key === 'ArrowLeft') {
+                if (imageFiles.length > 0) goToSlide(currentSlide - 1);
+            }
+        });
+
+        // ------------------------------------------------------------
+        // 🚀 SECTION 6: INITIALIZE
+        // ------------------------------------------------------------
+        loadSavedPhotos();
+    </script>
+
+</body>
+</html>
