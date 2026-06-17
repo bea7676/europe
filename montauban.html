@@ -41,7 +41,7 @@
             border-radius: 28px;
             pointer-events: none;
             z-index: 0;
-            box-shadow: inset 0 0 60px rgba(198, 124, 94, 0.05);
+            box-shadow: inset 0 0 60px rgba(198, 124, 94, .05);
         }
         body::after {
             content: '✦ ✦ ✦ ✦ ✦';
@@ -174,6 +174,99 @@
             color: var(--charcoal);
         }
 
+        /* ─── CAROUSEL ─── */
+        .carousel-wrap {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--charcoal);
+            aspect-ratio: 16/9;
+            max-height: 420px;
+            margin: 1rem 0;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .1);
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform .6s cubic-bezier(.4, 0, .2, 1);
+            height: 100%;
+        }
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--charcoal);
+            position: relative;
+        }
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .carousel-slide .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 1.5rem 1.2rem;
+            background: linear-gradient(transparent, rgba(44, 44, 44, .8));
+            color: #fff;
+            font-size: .9rem;
+            font-weight: 300;
+            font-family: 'Playfair Display', serif;
+        }
+        .carousel-slide .caption strong {
+            font-weight: 700;
+            color: var(--gold-light);
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(253, 248, 243, .85);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--charcoal);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+            transition: .2s;
+            z-index: 10;
+        }
+        .carousel-btn:hover {
+            background: #fff;
+            transform: translateY(-50%) scale(1.05);
+        }
+        .carousel-btn.prev {
+            left: 12px;
+        }
+        .carousel-btn.next {
+            right: 12px;
+        }
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: .6rem;
+            margin-top: .8rem;
+        }
+        .carousel-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--gold);
+            opacity: .35;
+            cursor: pointer;
+            transition: .2s;
+        }
+        .carousel-dots span.active {
+            opacity: 1;
+            background: var(--terracotta);
+            transform: scale(1.2);
+        }
+
         /* ─── DROP ZONE ─── */
         .drop {
             border: 3px dashed var(--gold);
@@ -272,7 +365,7 @@
         /* ─── COLLAGE ─── */
         .collage {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             gap: 1rem;
             margin-top: 1rem;
         }
@@ -469,7 +562,7 @@
             font-size: .65rem;
         }
 
-        /* ─── MINI FLIP (food/museum/landmark) ─── */
+        /* ─── MINI FLIP ─── */
         .mini-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -547,7 +640,6 @@
             border-radius: 20px;
             font-size: .6rem;
         }
-        /* Back colors by type */
         .mini-back.food {
             background: var(--terracotta);
             color: #fff;
@@ -584,7 +676,7 @@
             margin-bottom: .5rem;
         }
 
-        /* ─── MARKET CARD ─── */
+        /* ─── MARKET ─── */
         .market-card {
             background: var(--white);
             border-radius: 16px;
@@ -747,6 +839,20 @@
                 flex-direction: column;
                 gap: .8rem;
             }
+            .carousel-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 1rem;
+            }
+            .carousel-btn.prev {
+                left: 8px;
+            }
+            .carousel-btn.next {
+                right: 8px;
+            }
+            .carousel-wrap {
+                max-height: 280px;
+            }
         }
         @media (max-width:480px) {
             .header h1 {
@@ -811,6 +917,14 @@
                 flex-direction: column;
                 text-align: center;
             }
+            .carousel-wrap {
+                max-height: 200px;
+            }
+            .carousel-btn {
+                width: 28px;
+                height: 28px;
+                font-size: .8rem;
+            }
         }
     </style>
 </head>
@@ -836,10 +950,27 @@
         <div class="overview-item"><span class="icon">📸</span><span class="label">Photos</span><span class="value" id="overviewCount">0</span></div>
     </section>
 
+    <!-- ─── CAROUSEL ─── -->
+    <section>
+        <h2 class="section-title">🎠 Montauban Gallery</h2>
+        <p class="section-sub">Swipe through your photos — drag & drop new ones below</p>
+
+        <div class="carousel-wrap">
+            <div class="carousel-track" id="carouselTrack">
+                <div class="carousel-slide" style="background:#2C2C2C;">
+                    <div style="color:#E8DDD0;font-size:1.2rem;text-align:center;padding:1rem;">🌅 Drop photos to start your gallery</div>
+                </div>
+            </div>
+            <button class="carousel-btn prev" id="prevBtn">‹</button>
+            <button class="carousel-btn next" id="nextBtn">›</button>
+        </div>
+        <div class="carousel-dots" id="carouselDots"></div>
+    </section>
+
     <!-- ─── DROP ZONE ─── -->
     <section>
         <h2 class="section-title">📸 Drop Your Photos</h2>
-        <p class="section-sub">Drag & drop images — they'll appear in the collage below.</p>
+        <p class="section-sub">Drag & drop images — they'll appear in the carousel AND collage below.</p>
         <div class="drop" id="dropZone">
             <span class="icon">🖼️</span>
             <p class="main">Drop photos here</p>
@@ -854,7 +985,11 @@
 
     <!-- ─── COLLAGE ─── -->
     <section>
-        <div class="collage" id="collageGrid"><div class="empty"><span>🖼️</span>No photos yet<br><span style="font-size:1rem;color:#A09080;">Drop some above</span></div></div>
+        <h2 class="section-title">🖼️ Photo Collage</h2>
+        <p class="section-sub">Click a photo to view full size · hover for delete</p>
+        <div class="collage" id="collageGrid">
+            <div class="empty"><span>🖼️</span>No photos yet<br><span style="font-size:1rem;color:#A09080;">Drop some above</span></div>
+        </div>
     </section>
 
     <!-- ─── ACCOMMODATION ─── -->
@@ -970,6 +1105,7 @@
         // ─── CONFIG ───
         const STORAGE_KEY = 'montaubanPhotos';
         let images = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        let currentSlide = 0;
 
         // ─── DOM REFS ───
         const $ = id => document.getElementById(id);
@@ -977,23 +1113,75 @@
             fileInput = $('fileInput'),
             clearBtn = $('clearAllBtn'),
             grid = $('collageGrid'),
+            track = $('carouselTrack'),
+            dots = $('carouselDots'),
             count = $('photoCount'),
             overview = $('overviewCount');
 
-        // ─── RENDER ───
-        function render() {
+        // ─── RENDER CAROUSEL ───
+        function renderCarousel() {
+            track.innerHTML = '';
+            dots.innerHTML = '';
+
+            if (images.length === 0) {
+                track.innerHTML =
+                    `<div class="carousel-slide" style="background:#2C2C2C;"><div style="color:#E8DDD0;font-size:1.2rem;text-align:center;padding:1rem;">🌅 Drop photos to start your gallery</div></div>`;
+                currentSlide = 0;
+                return;
+            }
+
+            images.forEach((src, i) => {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                slide.innerHTML =
+                    `<img src="${src}" loading="lazy" /><div class="caption"><strong>Montauban</strong> · Photo ${i+1}</div>`;
+                track.appendChild(slide);
+
+                const dot = document.createElement('span');
+                dot.onclick = () => goToSlide(i);
+                dots.appendChild(dot);
+            });
+
+            goToSlide(0);
+        }
+
+        // ─── CAROUSEL CONTROLS ───
+        function goToSlide(i) {
+            if (images.length === 0) return;
+            currentSlide = (i + images.length) % images.length;
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            document.querySelectorAll('#carouselDots span').forEach((d, idx) => {
+                d.classList.toggle('active', idx === currentSlide);
+            });
+        }
+
+        document.getElementById('nextBtn').onclick = () => goToSlide(currentSlide + 1);
+        document.getElementById('prevBtn').onclick = () => goToSlide(currentSlide - 1);
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
+            if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
+        });
+
+        // ─── RENDER COLLAGE ───
+        function renderCollage() {
             grid.innerHTML = images.length === 0 ?
                 `<div class="empty"><span>🖼️</span>No photos yet<br><span style="font-size:1rem;color:#A09080;">Drop some above</span></div>` :
                 images.map((src, i) =>
                     `<div class="collage-item" onclick="window.open('${src}','_blank')">
-                        <img src="${src}" loading="lazy" />
-                        <span class="num">#${i+1}</span>
-                        <button class="del" onclick="event.stopPropagation();del(${i})">✕</button>
-                        <span class="cap">Montauban · Photo ${i+1}</span>
-                    </div>`
+                                <img src="${src}" loading="lazy" />
+                                <span class="num">#${i+1}</span>
+                                <button class="del" onclick="event.stopPropagation();del(${i})">✕</button>
+                                <span class="cap">Montauban · Photo ${i+1}</span>
+                            </div>`
                 ).join('');
             count.textContent = images.length;
             overview.textContent = images.length;
+        }
+
+        // ─── RENDER ALL ───
+        function render() {
+            renderCarousel();
+            renderCollage();
             localStorage.setItem(STORAGE_KEY, JSON.stringify(images));
         }
 
