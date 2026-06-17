@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" /> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>🏰 Montauban · France 2026</title>
 
     <style>
@@ -18,24 +18,24 @@
             font-family: 'Inter', sans-serif;
             background: #FFF8F0;
             color: #1E1E2A;
-            padding: 2rem 1.5rem;
+            padding: 1rem;
             max-width: 1200px;
             margin: 0 auto;
             line-height: 1.6;
             position: relative;
             min-height: 100vh;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* ─── DECORATIVE BORDER ─── */
         body::before {
             content: '';
             position: fixed;
-            top: 12px;
-            left: 12px;
-            right: 12px;
-            bottom: 12px;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
             border: 2px solid #C67C5E;
-            border-radius: 28px;
+            border-radius: 20px;
             pointer-events: none;
             z-index: 0;
             box-shadow: inset 0 0 60px rgba(198, 124, 94, .05);
@@ -43,15 +43,15 @@
         body::after {
             content: '✦ ✦ ✦ ✦ ✦';
             position: fixed;
-            bottom: 24px;
+            bottom: 16px;
             left: 50%;
             transform: translateX(-50%);
             color: #D4A373;
-            font-size: .65rem;
-            letter-spacing: 10px;
+            font-size: .5rem;
+            letter-spacing: 8px;
             pointer-events: none;
             z-index: 0;
-            opacity: .35;
+            opacity: .3;
         }
         * {
             position: relative;
@@ -69,72 +69,110 @@
             --burgundy: #8B3A3A;
         }
 
-        /* ─── HEADER ─── */
+        .border-top,
+        .border-bottom {
+            text-align: center;
+            color: #D4A373;
+            font-size: .8rem;
+            letter-spacing: 14px;
+            opacity: .3;
+            font-family: 'Playfair Display', serif;
+            margin: .3rem 0;
+        }
+
         .header {
             text-align: center;
-            padding: 1rem 0 1.5rem;
+            padding: .5rem 0 1rem;
+        }
+        .header .badge {
+            display: inline-block;
+            background: var(--terracotta);
+            color: #fff;
+            padding: .2rem 1.2rem;
+            border-radius: 40px;
+            font-size: .6rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            margin-bottom: .3rem;
         }
         .header h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 4rem;
+            font-size: 2.8rem;
+            font-weight: 700;
             color: var(--terracotta);
-            letter-spacing: 4px;
+            letter-spacing: 3px;
         }
         .header .sub {
-            font-size: 1rem;
+            font-size: .85rem;
             color: var(--olive);
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             text-transform: uppercase;
         }
         .header .dates {
             display: inline-block;
-            margin-top: .5rem;
-            padding: .3rem 2rem;
+            margin-top: .4rem;
+            padding: .25rem 1.5rem;
             background: var(--gold);
             color: #fff;
             border-radius: 40px;
-            font-size: .85rem;
+            font-size: .75rem;
         }
 
-        /* ─── OVERVIEW ─── */
+        .back-btn {
+            display: inline-block;
+            padding: .4rem 1.5rem;
+            background: var(--terracotta);
+            color: #fff;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: .8rem;
+            transition: .3s ease;
+            margin: .5rem 0;
+        }
+        .back-btn:active {
+            transform: scale(.95);
+        }
+
         .overview {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-            gap: .5rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: .3rem;
             background: var(--white);
-            border-radius: 20px;
-            padding: 1.2rem 1.5rem;
-            margin: 1rem 0 2rem;
+            border-radius: 16px;
+            padding: .8rem 1rem;
+            margin: .5rem 0 1.5rem;
             border: 2px solid var(--gold-light);
         }
         .overview-item {
             text-align: center;
-            padding: .5rem;
+            padding: .3rem;
         }
         .overview-item .icon {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             display: block;
         }
         .overview-item .label {
-            font-size: .6rem;
+            font-size: .5rem;
             color: var(--olive);
             text-transform: uppercase;
+            letter-spacing: .5px;
         }
         .overview-item .value {
-            font-size: 1rem;
+            font-size: .85rem;
             font-weight: 600;
             color: var(--charcoal);
         }
 
-        /* ─── CAROUSEL ─── */
         .carousel-wrap {
             position: relative;
-            border-radius: 20px;
+            border-radius: 16px;
             overflow: hidden;
             background: var(--charcoal);
             aspect-ratio: 16/9;
-            max-height: 420px;
-            margin: 1rem 0;
+            max-height: 280px;
+            margin: .5rem 0;
         }
         .carousel-track {
             display: flex;
@@ -160,10 +198,10 @@
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 2rem 1.5rem 1.2rem;
+            padding: 1.5rem 1rem .8rem;
             background: linear-gradient(transparent, rgba(44, 44, 44, .8));
             color: #fff;
-            font-size: .9rem;
+            font-size: .75rem;
         }
         .carousel-btn {
             position: absolute;
@@ -172,28 +210,28 @@
             background: rgba(253, 248, 243, .85);
             border: none;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
+            width: 32px;
+            height: 32px;
+            font-size: 1rem;
             cursor: pointer;
             color: var(--charcoal);
             z-index: 10;
         }
         .carousel-btn.prev {
-            left: 12px;
+            left: 8px;
         }
         .carousel-btn.next {
-            right: 12px;
+            right: 8px;
         }
         .carousel-dots {
             display: flex;
             justify-content: center;
-            gap: .6rem;
-            margin-top: .8rem;
+            gap: .4rem;
+            margin-top: .5rem;
         }
         .carousel-dots span {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: var(--gold);
             opacity: .35;
@@ -204,57 +242,83 @@
             background: var(--terracotta);
         }
 
-            <!-- ─── DROP ZONE ─── -->
-    <section>
-        <h2 class="section-title">📸 Drop Your Photos</h2>
-        <p class="section-sub">Tap to select photos from your gallery</p>
-        <div class="drop" id="dropZone">
-            <span class="icon">📱</span>
-            <p class="main">Tap to Choose Photos</p>
-            <p class="sub">or drag & drop on computer · JPG, PNG, WEBP</p>
-            <input type="file" id="fileInput" accept="image/*" multiple />
-        </div>
-        <div class="toolbar">
-            <span class="count">📷 <strong id="photoCount">0</strong> photos</span>
-            <button class="btn btn-danger" id="clearAllBtn">🗑️ Clear All</button>
-        </div>
-    </section>
+        /* ─── MOBILE-FRIENDLY DROP ZONE ─── */
+        .drop {
+            border: 3px dashed var(--gold);
+            border-radius: 20px;
+            padding: 2rem 1rem;
+            text-align: center;
+            background: rgba(255, 255, 255, .5);
+            transition: .3s ease;
+            cursor: pointer;
+            margin: .8rem 0;
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            -webkit-tap-highlight-color: transparent;
         }
-        .drop:hover {
+        .drop:active {
+            transform: scale(.97);
             border-color: var(--terracotta);
             background: var(--pink);
         }
         .drop .icon {
-            font-size: 3.5rem;
+            font-size: 3rem;
             display: block;
         }
         .drop .main {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
+            color: var(--charcoal);
+            margin-top: .2rem;
         }
         .drop .sub {
-            font-size: .85rem;
+            font-size: .75rem;
             color: #A09080;
+            margin-top: .2rem;
         }
         .drop input[type="file"] {
             display: none;
         }
 
+        /* ─── VISIBLE CHOOSE BUTTON (Mobile friendly) ─── */
+        .choose-btn {
+            display: inline-block;
+            padding: .6rem 2rem;
+            background: var(--terracotta);
+            color: #fff;
+            border-radius: 40px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .3s ease;
+            margin-top: .5rem;
+            font-family: 'Inter', sans-serif;
+        }
+        .choose-btn:active {
+            transform: scale(.95);
+            background: var(--burgundy);
+        }
+
         .btn {
-            padding: .5rem 1.8rem;
+            padding: .4rem 1.5rem;
             border-radius: 40px;
             font-weight: 500;
             cursor: pointer;
             border: none;
-            font-size: .8rem;
+            font-size: .75rem;
         }
         .btn-danger {
             background: var(--pink);
             color: var(--charcoal);
         }
-        .btn-danger:hover {
+        .btn-danger:active {
             background: var(--terracotta);
             color: #fff;
+            transform: scale(.95);
         }
 
         .toolbar {
@@ -262,38 +326,36 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: .8rem;
-            margin-top: .5rem;
+            gap: .5rem;
+            margin-top: .3rem;
         }
         .count {
             font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
         .count strong {
             color: var(--terracotta);
-            font-size: 1.6rem;
+            font-size: 1.4rem;
         }
 
-        /* ─── COLLAGE ─── */
         .collage {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: .5rem;
+            margin-top: .8rem;
         }
         .collage-item {
             position: relative;
-            border-radius: 16px;
+            border-radius: 12px;
             overflow: hidden;
             aspect-ratio: 1/1;
             background: var(--gold-light);
-            border: 3px solid var(--gold-light);
+            border: 2px solid var(--gold-light);
             cursor: pointer;
-            transition: .3s ease;
+            transition: .2s ease;
         }
-        .collage-item:hover {
-            transform: scale(1.05);
-            border-color: var(--terracotta);
+        .collage-item:active {
+            transform: scale(.95);
         }
         .collage-item img {
             width: 100%;
@@ -302,66 +364,65 @@
         }
         .collage-item .num {
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: 6px;
+            left: 6px;
             background: rgba(44, 44, 44, .75);
             color: #fff;
             font-family: 'Playfair Display', serif;
-            font-size: .8rem;
-            padding: .15rem .7rem;
-            border-radius: 30px;
+            font-size: .6rem;
+            padding: .1rem .5rem;
+            border-radius: 20px;
         }
         .collage-item .del {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 6px;
+            right: 6px;
             background: rgba(198, 124, 94, .9);
             color: #fff;
             border: none;
             border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            font-size: .75rem;
+            width: 26px;
+            height: 26px;
+            font-size: .65rem;
             cursor: pointer;
             opacity: 0;
-            transition: .3s ease;
+            transition: .2s ease;
         }
-        .collage-item:hover .del {
+        .collage-item:active .del {
             opacity: 1;
         }
         .empty {
             grid-column: 1/-1;
             text-align: center;
-            padding: 4rem 2rem;
+            padding: 3rem 1rem;
             color: #A09080;
             font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             background: var(--pink);
-            border-radius: 20px;
-            border: 3px dashed var(--gold);
+            border-radius: 16px;
+            border: 2px dashed var(--gold);
         }
         .empty span {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             display: block;
         }
 
-        /* ─── FLIP CARDS ─── */
         .flip-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.2rem;
-            margin: 1rem 0;
+            grid-template-columns: 1fr;
+            gap: .8rem;
+            margin: .5rem 0;
         }
         .flip {
             perspective: 800px;
-            height: 260px;
+            height: 200px;
             cursor: pointer;
         }
         .flip-inner {
             position: relative;
             width: 100%;
             height: 100%;
-            transition: transform .6s;
+            transition: transform .5s;
             transform-style: preserve-3d;
         }
         .flip.flipped .flip-inner {
@@ -373,8 +434,8 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: 20px;
-            padding: 1.5rem;
+            border-radius: 16px;
+            padding: 1.2rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -387,11 +448,11 @@
             transform: rotateY(0);
         }
         .flip-front .emoji {
-            font-size: 3rem;
+            font-size: 2.5rem;
         }
         .flip-front .title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: var(--terracotta);
         }
         .flip-back {
@@ -400,31 +461,31 @@
             transform: rotateY(180deg);
         }
         .flip-back .label {
-            font-size: .55rem;
+            font-size: .5rem;
             text-transform: uppercase;
             opacity: .7;
         }
         .flip-back .val {
-            font-size: .9rem;
+            font-size: .8rem;
             font-weight: 500;
         }
 
         .mini-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 1rem;
-            margin: 1rem 0;
+            grid-template-columns: repeat(2, 1fr);
+            gap: .6rem;
+            margin: .5rem 0;
         }
         .mini {
             perspective: 600px;
-            height: 150px;
+            height: 120px;
             cursor: pointer;
         }
         .mini-inner {
             position: relative;
             width: 100%;
             height: 100%;
-            transition: transform .5s;
+            transition: transform .4s;
             transform-style: preserve-3d;
         }
         .mini.flipped .mini-inner {
@@ -436,8 +497,8 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: 14px;
-            padding: 1rem;
+            border-radius: 12px;
+            padding: .6rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -450,10 +511,10 @@
             transform: rotateY(0);
         }
         .mini-front .emoji {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
         }
         .mini-front .name {
-            font-size: .8rem;
+            font-size: .7rem;
             font-weight: 600;
         }
         .mini-back {
@@ -461,12 +522,12 @@
             color: #fff;
         }
         .mini-back .label {
-            font-size: .5rem;
+            font-size: .45rem;
             text-transform: uppercase;
             opacity: .7;
         }
         .mini-back .val {
-            font-size: .8rem;
+            font-size: .7rem;
         }
         .mini-back.food {
             background: var(--terracotta);
@@ -483,36 +544,36 @@
 
         .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 1.6rem;
             color: var(--terracotta);
             font-weight: 400;
-            margin: 2.5rem 0 .3rem;
+            margin: 1.5rem 0 .2rem;
         }
         .section-sub {
             color: var(--olive);
             font-weight: 300;
-            font-size: .9rem;
-            margin-bottom: .5rem;
+            font-size: .8rem;
+            margin-bottom: .3rem;
         }
 
         .market-card {
             background: var(--white);
-            border-radius: 16px;
-            padding: 1.5rem;
+            border-radius: 14px;
+            padding: 1rem;
             border: 2px solid var(--gold-light);
-            margin: .5rem 0;
+            margin: .4rem 0;
         }
 
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1rem;
-            margin: 1rem 0;
+            grid-template-columns: 1fr;
+            gap: .6rem;
+            margin: .5rem 0;
         }
         .contact {
             background: var(--white);
-            border-radius: 14px;
-            padding: 1.2rem;
+            border-radius: 12px;
+            padding: 1rem;
             border: 2px solid var(--gold-light);
             text-align: center;
         }
@@ -523,73 +584,89 @@
 
         .footer {
             text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
             border-top: 2px solid var(--gold-light);
             color: #A09080;
-            font-size: .75rem;
+            font-size: .65rem;
         }
 
-        .border-top,
-        .border-bottom {
+        .back-section {
             text-align: center;
-            color: #D4A373;
-            font-size: 1rem;
-            letter-spacing: 18px;
-            opacity: .3;
-            font-family: 'Playfair Display', serif;
-            margin: .5rem 0;
+            margin: .5rem 0 1rem;
         }
 
-        @media (max-width:768px) {
+        @media (min-width: 768px) {
             body {
-                padding: 1rem;
+                padding: 2rem 1.5rem;
+            }
+            body::before {
+                top: 12px;
+                left: 12px;
+                right: 12px;
+                bottom: 12px;
+                border-radius: 28px;
             }
             .header h1 {
-                font-size: 2.8rem;
+                font-size: 4rem;
             }
             .collage {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 1rem;
             }
             .flip-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1.2rem;
             }
             .flip {
-                height: 220px;
+                height: 260px;
             }
             .mini-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 1rem;
+            }
+            .mini {
+                height: 150px;
+            }
+            .overview {
+                grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
             }
             .carousel-wrap {
-                max-height: 280px;
+                max-height: 420px;
+            }
+            .contact-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            }
+            body::after {
+                font-size: .65rem;
+                letter-spacing: 10px;
+                bottom: 24px;
+            }
+            .border-top,
+            .border-bottom {
+                font-size: 1rem;
+                letter-spacing: 18px;
             }
         }
-        @media (max-width:480px) {
+
+        @media (max-width: 380px) {
             .header h1 {
                 font-size: 2.2rem;
             }
             .collage {
-                grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-            }
-            .flip-grid {
-                grid-template-columns: 1fr;
-            }
-            .flip {
-                height: 200px;
+                grid-template-columns: repeat(2, 1fr);
             }
             .mini-grid {
                 grid-template-columns: 1fr 1fr;
             }
             .mini {
-                height: 130px;
+                height: 100px;
             }
-            .carousel-wrap {
-                max-height: 200px;
+            .mini-front .emoji {
+                font-size: 1.5rem;
             }
-            .carousel-btn {
-                width: 30px;
-                height: 30px;
-                font-size: 1rem;
+            .mini-front .name {
+                font-size: .6rem;
             }
         }
     </style>
@@ -601,10 +678,16 @@
 
     <!-- ─── HEADER ─── -->
     <header class="header">
+        <span class="badge">🇫🇷 City 1 of 3</span>
         <h1>🏰 Montauban</h1>
         <p class="sub">The Pink Brick Gem</p>
         <span class="dates">📅 21 – 25 June 2026 · 4 Nights</span>
     </header>
+
+    <!-- ─── BACK BUTTON ─── -->
+    <div class="back-section">
+        <a href="index.html" class="back-btn">← Back to All Cities</a>
+    </div>
 
     <!-- ─── OVERVIEW ─── -->
     <section class="overview">
@@ -622,7 +705,7 @@
         <div class="carousel-wrap">
             <div class="carousel-track" id="carouselTrack">
                 <div class="carousel-slide" style="background:#2C2C2C;">
-                    <div style="color:#E8DDD0;font-size:1.2rem;text-align:center;padding:1rem;">🌅 Drop photos to start</div>
+                    <div style="color:#E8DDD0;font-size:1rem;text-align:center;padding:1rem;">🌅 Tap "Choose Photos" to start</div>
                 </div>
             </div>
             <button class="carousel-btn prev" id="prevBtn">‹</button>
@@ -633,14 +716,17 @@
 
     <!-- ─── DROP ZONE ─── -->
     <section>
-        <h2 class="section-title">📸 Drop Your Photos</h2>
-        <p class="section-sub">Drag & drop or click to add photos</p>
+        <h2 class="section-title">📸 Add Your Photos</h2>
+        <p class="section-sub">Tap the button below to select photos from your gallery</p>
+
         <div class="drop" id="dropZone">
-            <span class="icon">🖼️</span>
-            <p class="main">Drop photos here</p>
-            <p class="sub">or click to browse · JPG, PNG, WEBP</p>
+            <span class="icon">📱</span>
+            <p class="main">Tap to Choose Photos</p>
+            <p class="sub">or drag & drop on computer · JPG, PNG, WEBP</p>
+            <button class="choose-btn" id="chooseBtn">📸 Choose Photos</button>
             <input type="file" id="fileInput" accept="image/*" multiple />
         </div>
+
         <div class="toolbar">
             <span class="count">📷 <strong id="photoCount">0</strong> photos</span>
             <button class="btn btn-danger" id="clearAllBtn">🗑️ Clear All</button>
@@ -650,20 +736,20 @@
     <!-- ─── COLLAGE ─── -->
     <section>
         <h2 class="section-title">🖼️ Photo Collage</h2>
-        <p class="section-sub">Click a photo to view full size</p>
+        <p class="section-sub">Tap a photo to view full size</p>
         <div class="collage" id="collageGrid">
-            <div class="empty"><span>🖼️</span>No photos yet<br><span style="font-size:1rem;color:#A09080;">Drop some above</span></div>
+            <div class="empty"><span>🖼️</span>No photos yet<br><span style="font-size:.85rem;color:#A09080;">Tap "Choose Photos" above</span></div>
         </div>
     </section>
 
     <!-- ─── ACCOMMODATION ─── -->
     <section>
         <h2 class="section-title">🏨 Where We're Staying</h2>
-        <p class="section-sub">👆 Click to flip</p>
+        <p class="section-sub">👆 Tap to flip</p>
         <div class="flip-grid">
             <div class="flip" onclick="this.classList.toggle('flipped')">
                 <div class="flip-inner">
-                    <div class="flip-front"><span class="emoji">🏰</span><span class="title">L'authentique</span><span style="font-size:.9rem;">Montauban</span></div>
+                    <div class="flip-front"><span class="emoji">🏰</span><span class="title">L'authentique</span><span style="font-size:.8rem;">Montauban</span></div>
                     <div class="flip-back"><span class="label">📍 Address</span><span class="val">34 Rue Bessières, 82000</span><span class="label">📅 Stay</span><span class="val">21–25 Jun · 4 nights</span><span class="label">📞 Phone</span><span class="val">+33 6 84 08 09 50</span></div>
                 </div>
             </div>
@@ -673,7 +759,7 @@
     <!-- ─── FOOD ─── -->
     <section>
         <h2 class="section-title">🍽️ Food Targets</h2>
-        <p class="section-sub">👆 Click to flip</p>
+        <p class="section-sub">👆 Tap to flip</p>
         <div class="mini-grid">
             <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🍕</span><span class="name">IL POPOLO</span></div><div class="mini-back food"><span class="label">Order</span><span class="val">Pizza · Italian</span></div></div></div>
             <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🍫</span><span class="name">Pascal Caffet</span></div><div class="mini-back food"><span class="label">Get</span><span class="val">Chocolates · Pastries</span></div></div></div>
@@ -685,7 +771,7 @@
     <!-- ─── MUSEUMS ─── -->
     <section>
         <h2 class="section-title">🏛️ Museums</h2>
-        <p class="section-sub">👆 Click to flip</p>
+        <p class="section-sub">👆 Tap to flip</p>
         <div class="mini-grid">
             <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🎨</span><span class="name">Ingres-Bourdelle</span></div><div class="mini-back museum"><span class="label">Inside</span><span class="val">4,500+ drawings</span></div></div></div>
             <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🕊️</span><span class="name">Résistance</span></div><div class="mini-back museum"><span class="label">About</span><span class="val">WWII memorial</span></div></div></div>
@@ -697,7 +783,7 @@
     <!-- ─── LANDMARKS ─── -->
     <section>
         <h2 class="section-title">📍 Landmarks</h2>
-        <p class="section-sub">👆 Click to flip</p>
+        <p class="section-sub">👆 Tap to flip</p>
         <div class="mini-grid">
             <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🟠</span><span class="name">Place Nationale</span></div><div class="mini-back landmark"><span class="label">What</span><span class="val">Pink brick arcades</span></div></div></div>
             <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🌉</span><span class="name">Pont Vieux</span></div><div class="mini-back landmark"><span class="label">What</span><span class="val">14th-century bridge</span></div></div></div>
@@ -709,7 +795,7 @@
     <!-- ─── PARKS ─── -->
     <section>
         <h2 class="section-title">🌳 Parks & River Walks</h2>
-        <p class="section-sub">👆 Click to flip</p>
+        <p class="section-sub">👆 Tap to flip</p>
         <div class="mini-grid">
             <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🌊</span><span class="name">Berges du Tarn</span></div><div class="mini-back landmark"><span class="label">What</span><span class="val">Walking paths</span></div></div></div>
             <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🌸</span><span class="name">Jardin des Plantes</span></div><div class="mini-back landmark"><span class="label">Vibe</span><span class="val">Peaceful · shaded</span></div></div></div>
@@ -720,7 +806,7 @@
     <!-- ─── DAY TRIPS ─── -->
     <section>
         <h2 class="section-title">🚗 Day Trips</h2>
-        <p class="section-sub">👆 Click to flip</p>
+        <p class="section-sub">👆 Tap to flip</p>
         <div class="mini-grid">
             <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">⛪</span><span class="name">Moissac Abbey</span></div><div class="mini-back trip"><span class="label">What</span><span class="val">UNESCO cloister</span></div></div></div>
             <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🏞️</span><span class="name">Saint-Antonin</span></div><div class="mini-back trip"><span class="label">What</span><span class="val">Medieval village</span></div></div></div>
@@ -734,20 +820,20 @@
     <section>
         <h2 class="section-title">🛍️ Market Day</h2>
         <div class="market-card">
-            <span style="font-size:2rem;">🟠</span>
-            <span style="font-weight:600;font-size:1.1rem;color:var(--terracotta);">Place Nationale Market</span>
-            <p><strong>Sunday 21 June</strong> · 08:00 – 13:00</p>
-            <p style="color:var(--olive);">✅ You arrive Sunday — perfect timing!</p>
+            <span style="font-size:1.8rem;">🟠</span>
+            <span style="font-weight:600;font-size:1rem;color:var(--terracotta);">Place Nationale Market</span>
+            <p style="font-size:.85rem;"><strong>Sunday 21 June</strong> · 08:00 – 13:00</p>
+            <p style="color:var(--olive);font-size:.8rem;">✅ You arrive Sunday — perfect timing!</p>
         </div>
     </section>
 
     <!-- ─── TRANSPORT ─── -->
     <section>
         <h2 class="section-title">🚆 Getting Around</h2>
-        <div style="background:var(--white);border-radius:16px;padding:1.2rem 1.5rem;border:2px solid var(--gold-light);">
-            <p><strong>🚆 Train:</strong> Gare de Montauban-Ville-Bourbon · Trains to Toulouse (30-40 min)</p>
-            <p><strong>🚶 Walk:</strong> Historic centre is walkable · Most sights within 15-20 min</p>
-            <p><strong>🚲 Bike:</strong> Rent at tourist office · Great for river paths</p>
+        <div style="background:var(--white);border-radius:14px;padding:1rem 1.2rem;border:2px solid var(--gold-light);">
+            <p style="font-size:.85rem;"><strong>🚆 Train:</strong> Gare de Montauban-Ville-Bourbon · Trains to Toulouse (30-40 min)</p>
+            <p style="font-size:.85rem;"><strong>🚶 Walk:</strong> Historic centre is walkable · Most sights within 15-20 min</p>
+            <p style="font-size:.85rem;"><strong>🚲 Bike:</strong> Rent at tourist office · Great for river paths</p>
         </div>
     </section>
 
@@ -755,19 +841,21 @@
     <section>
         <h2 class="section-title">📞 Contact</h2>
         <div class="contact-grid">
-            <div class="contact"><div class="city">🏰 Montauban</div><div>L'authentique</div><div>📞 +33 6 84 08 09 50</div></div>
+            <div class="contact"><div class="city">🏰 Montauban</div><div style="font-size:.85rem;">L'authentique</div><div style="font-size:.8rem;">📞 +33 6 84 08 09 50</div></div>
         </div>
     </section>
-    <div style="text-align:center;margin:2rem 0;">
-        <a href="index.html" style="display:inline-block;padding:.6rem 2rem;background:var(--terracotta);color:#fff;border-radius:40px;text-decoration:none;font-weight:500;transition:.3s ease;">← Back to All Cities</a>
+
+    <!-- ─── BACK BUTTON ─── -->
+    <div class="back-section">
+        <a href="index.html" class="back-btn">← Back to All Cities</a>
     </div>
 
     <footer class="footer">
-        <p>🇫🇷 Montauban · 21–25 June 2026 · 4 Nights</p>
+        <p>🏰 Montauban · 21–25 June 2026 · 4 Nights</p>
     </footer>
     <div class="border-bottom">✦ ✦ ✦</div>
 
-        <!-- ─── JAVASCRIPT ─── -->
+    <!-- ─── JAVASCRIPT ─── -->
     <script>
         // ─── CONFIG ───
         const STORAGE_KEY = 'montaubanPhotos';
@@ -776,6 +864,7 @@
 
         // ─── DOM REFS ───
         const drop = document.getElementById('dropZone');
+        const chooseBtn = document.getElementById('chooseBtn');
         const fileInput = document.getElementById('fileInput');
         const clearBtn = document.getElementById('clearAllBtn');
         const grid = document.getElementById('collageGrid');
@@ -791,13 +880,13 @@
             dots.innerHTML = '';
             if (images.length === 0) {
                 track.innerHTML =
-                    `<div class="carousel-slide" style="background:#2C2C2C;"><div style="color:#E8DDD0;font-size:1.2rem;text-align:center;padding:1rem;">🌅 Tap "Choose Photos" to start</div></div>`;
+                    `<div class="carousel-slide" style="background:#2C2C2C;"><div style="color:#E8DDD0;font-size:1rem;text-align:center;padding:1rem;">🌅 Tap "Choose Photos" to start</div></div>`;
                 currentSlide = 0;
             } else {
                 images.forEach((src, i) => {
                     let s = document.createElement('div');
                     s.className = 'carousel-slide';
-                    s.innerHTML = `<img src="${src}" /><div class="caption">Montauban · Photo ${i+1}</div>`;
+                    s.innerHTML = `<img src="${src}" loading="lazy" /><div class="caption">Montauban · Photo ${i+1}</div>`;
                     track.appendChild(s);
                     let d = document.createElement('span');
                     d.onclick = () => goTo(i);
@@ -810,13 +899,13 @@
             grid.innerHTML = '';
             if (images.length === 0) {
                 grid.innerHTML =
-                    `<div class="empty"><span>🖼️</span>No photos yet<br><span style="font-size:1rem;color:#A09080;">Tap "Choose Photos" above to add</span></div>`;
+                    `<div class="empty"><span>🖼️</span>No photos yet<br><span style="font-size:.85rem;color:#A09080;">Tap "Choose Photos" above</span></div>`;
             } else {
                 images.forEach((src, i) => {
                     let div = document.createElement('div');
                     div.className = 'collage-item';
                     div.innerHTML =
-                        `<img src="${src}" /><span class="num">#${i+1}</span><button class="del" onclick="event.stopPropagation();del(${i})">✕</button>`;
+                        `<img src="${src}" loading="lazy" /><span class="num">#${i+1}</span><button class="del" onclick="event.stopPropagation();del(${i})">✕</button>`;
                     div.onclick = () => window.open(src, '_blank');
                     grid.appendChild(div);
                 });
@@ -854,9 +943,12 @@
             }
         }
 
-        // ─── HANDLE FILES (WORKS ON PHONE & COMPUTER) ───
+        // ─── HANDLE FILES (WORKS ON PHONE) ───
         function handleFiles(files) {
-            if (!files || files.length === 0) return;
+            if (!files || files.length === 0) {
+                alert('Please select at least one photo.');
+                return;
+            }
 
             let pending = 0;
             let newImages = [];
@@ -888,48 +980,58 @@
 
         // ─── EVENTS ───
 
-        // METHOD 1: Click the drop zone → opens file picker (WORKS ON PHONE)
-        drop.onclick = function(e) {
+        // METHOD 1: Click the "Choose Photos" button (WORKS ON PHONE)
+        chooseBtn.addEventListener('click', function(e) {
             e.preventDefault();
+            e.stopPropagation();
             fileInput.click();
-        };
+        });
 
-        // METHOD 2: File input change (WORKS ON PHONE)
-        fileInput.onchange = function(e) {
+        // METHOD 2: Click the drop zone (WORKS ON PHONE)
+        drop.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Don't trigger if the click was on the button (to avoid double-trigger)
+            if (e.target.id === 'chooseBtn') return;
+            fileInput.click();
+        });
+
+        // METHOD 3: File input change (WORKS ON PHONE)
+        fileInput.addEventListener('change', function(e) {
             if (e.target.files && e.target.files.length > 0) {
                 handleFiles(e.target.files);
                 fileInput.value = ''; // Reset so same file can be re-added
             }
-        };
+        });
 
-        // METHOD 3: Drag & drop (COMPUTER ONLY)
-        drop.ondragover = function(e) {
+        // METHOD 4: Drag & drop (COMPUTER ONLY)
+        drop.addEventListener('dragover', function(e) {
             e.preventDefault();
             this.classList.add('dragover');
-        };
+        });
 
-        drop.ondragleave = function(e) {
+        drop.addEventListener('dragleave', function(e) {
             this.classList.remove('dragover');
-        };
+        });
 
-        drop.ondrop = function(e) {
+        drop.addEventListener('drop', function(e) {
             e.preventDefault();
             this.classList.remove('dragover');
             if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
                 handleFiles(e.dataTransfer.files);
             }
-        };
+        });
 
         // ─── CLEAR ALL ───
-        clearBtn.onclick = function() {
+        clearBtn.addEventListener('click', function() {
             if (images.length === 0) return;
             if (confirm('Delete all photos?')) {
                 images = [];
                 render();
             }
-        };
+        });
 
         // ─── INIT ───
         render();
     </script>
+</body>
 </html>
