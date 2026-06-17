@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🇫🇷 France Trip 2026</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FFF8F0;
+            color: #1E1E2A;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* ─── DECORATIVE BORDER ─── */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            right: 16px;
+            bottom: 16px;
+            border: 2px solid #C67C5E;
+            border-radius: 32px;
+            pointer-events: none;
+            z-index: 0;
+            box-shadow: inset 0 0 80px rgba(198, 124, 94, .06);
+        }
+
+        body::after {
+            content: '✦ ✦ ✦ ✦ ✦';
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #D4A373;
+            font-size: .7rem;
+            letter-spacing: 12px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: .3;
+        }
+
+        * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+            padding: 2rem 1.5rem;
+        }
+
+        /* ─── HEADER ─── */
+        .header {
+            margin-bottom: 3rem;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: #C67C5E;
+            color: #fff;
+            padding: .2rem 1.5rem;
+            border-radius: 40px;
+            font-size: .65rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 500;
+            margin-bottom: .5rem;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            color: #C67C5E;
+            letter-spacing: 6px;
+        }
+
+        .header h1 span {
+            color: #D4A373;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .header .sub {
+            font-size: 1.1rem;
+            color: #8A9A7A;
+            font-weight: 300;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-top: .2rem;
+        }
+
+        .header .dates {
+            display: inline-block;
+            margin-top: .8rem;
+            padding: .4rem 2.5rem;
+            background: linear-gradient(135deg, #C67C5E, #D4A373);
+            color: #fff;
+            border-radius: 40px;
+            font-size: .9rem;
+            letter-spacing: 1px;
+            font-weight: 500;
+            box-shadow: 0 4px 20px rgba(198, 124, 94, .2);
+        }
+
+        .divider {
+            text-align: center;
+            color: #D4A373;
+            font-size: 1.2rem;
+            letter-spacing: 16px;
+            margin: 1rem 0 2.5rem;
+            opacity: .3;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* ─── CITY BUTTONS ─── */
+        .city-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0 3rem;
+        }
+
+        .city-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2.5rem 1.5rem;
+            border-radius: 24px;
+            border: 2px solid #F0D5B0;
+            background: rgba(253, 248, 243, .7);
+            backdrop-filter: blur(8px);
+            text-decoration: none;
+            color: #1E1E2A;
+            transition: all .4s cubic-bezier(.34, 1.56, .64, 1);
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .04);
+            min-height: 240px;
+        }
+
+        .city-btn:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: #C67C5E;
+            box-shadow: 0 16px 50px rgba(198, 124, 94, .15);
+            background: rgba(255, 255, 255, .9);
+        }
+
+        .city-btn .emoji {
+            font-size: 4.5rem;
+            margin-bottom: .8rem;
+            transition: transform .4s ease;
+        }
+
+        .city-btn:hover .emoji {
+            transform: scale(1.1) rotate(-3deg);
+        }
+
+        .city-btn .city-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #C67C5E;
+        }
+
+        .city-btn .city-sub {
+            font-size: .85rem;
+            color: #8A9A7A;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: .1rem;
+        }
+
+        .city-btn .city-dates {
+            font-size: .8rem;
+            color: #A09080;
+            margin-top: .5rem;
+            font-weight: 400;
+        }
+
+        .city-btn .arrow {
+            font-size: 1.5rem;
+            margin-top: .8rem;
+            opacity: 0;
+            transition: all .3s ease;
+            transform: translateY(10px);
+        }
+
+        .city-btn:hover .arrow {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Individual button colors on hover */
+        .city-btn.montauban:hover {
+            border-color: #C67C5E;
+        }
+        .city-btn.toulouse:hover {
+            border-color: #D4A373;
+        }
+        .city-btn.paris:hover {
+            border-color: #8A9A7A;
+        }
+
+        /* ─── FOOTER ─── */
+        .footer {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid #F0D5B0;
+            color: #A09080;
+            font-size: .75rem;
+            font-weight: 300;
+            letter-spacing: .5px;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            .city-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .city-btn {
+                min-height: 160px;
+                padding: 1.8rem 1rem;
+                flex-direction: row;
+                gap: 1.5rem;
+            }
+
+            .city-btn .emoji {
+                font-size: 3rem;
+                margin-bottom: 0;
+            }
+
+            .city-btn .city-name {
+                font-size: 1.6rem;
+            }
+
+            .city-btn .arrow {
+                opacity: 1;
+                transform: translateY(0);
+                margin-top: 0;
+                margin-left: auto;
+            }
+
+            .header h1 {
+                font-size: 3.5rem;
+                letter-spacing: 4px;
+            }
+
+            body::before {
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+                border-radius: 20px;
+                border-width: 2px;
+            }
+
+            body::after {
+                font-size: .5rem;
+                letter-spacing: 8px;
+                bottom: 20px;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+
+            .city-btn {
+                min-height: 120px;
+                padding: 1.2rem 1rem;
+                gap: 1rem;
+            }
+
+            .city-btn .emoji {
+                font-size: 2.2rem;
+            }
+
+            .city-btn .city-name {
+                font-size: 1.3rem;
+            }
+
+            .city-btn .city-sub {
+                font-size: .7rem;
+            }
+
+            .city-btn .city-dates {
+                font-size: .7rem;
+            }
+
+            .divider {
+                font-size: .8rem;
+                letter-spacing: 10px;
+            }
+
+            body::before {
+                top: 6px;
+                left: 6px;
+                right: 6px;
+                bottom: 6px;
+                border-radius: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- ─── HEADER ─── -->
+        <header class="header">
+            <span class="badge">🇫🇷 Summer 2026</span>
+            <h1>FRANCE <span>· 2026</span></h1>
+            <p class="sub">Montauban · Toulouse · Paris</p>
+            <span class="dates">📅 20 June — 4 July 2026 · 12 Nights</span>
+        </header>
+
+        <div class="divider">✦ ✦ ✦</div>
+
+        <!-- ─── CITY BUTTONS ─── -->
+        <div class="city-grid">
+
+            <!-- Montauban -->
+            <a href="montauban.html" class="city-btn montauban">
+                <span class="emoji">🏰</span>
+                <div>
+                    <div class="city-name">Montauban</div>
+                    <div class="city-sub">The Pink Brick Gem</div>
+                    <div class="city-dates">21 – 25 June · 4 Nights</div>
+                </div>
+                <span class="arrow">→</span>
+            </a>
+
+            <!-- Toulouse -->
+            <a href="toulouse.html" class="city-btn toulouse">
+                <span class="emoji">🌸</span>
+                <div>
+                    <div class="city-name">Toulouse</div>
+                    <div class="city-sub">La Ville Rose</div>
+                    <div class="city-dates">25 – 29 June · 4 Nights</div>
+                </div>
+                <span class="arrow">→</span>
+            </a>
+
+            <!-- Paris -->
+            <a href="paris.html" class="city-btn paris">
+                <span class="emoji">🗼</span>
+                <div>
+                    <div class="city-name">Paris</div>
+                    <div class="city-sub">City of Light</div>
+                    <div class="city-dates">29 June – 3 July · 4 Nights</div>
+                </div>
+                <span class="arrow">→</span>
+            </a>
+
+        </div>
+
+        <div class="divider">✦ ✦ ✦</div>
+
+        <!-- ─── FOOTER ─── -->
+        <footer class="footer">
+            <p>🇫🇷 Bon voyage! · 3 cities · 3 travelers · 12 nights</p>
+            <p style="font-size:.65rem;margin-top:.3rem;opacity:.7;">✦ click a city to explore ✦</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
