@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🏰 Montauban · France 2026</title>
+
+    <style>
+        /* ─── FONTS ─── */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+        /* ─── RESET ─── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ─── BASE ─── */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FFF8F0;
+            color: #1E1E2A;
+            padding: 2rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* ─── DECORATIVE BORDER ─── */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            border: 2px solid #C67C5E;
+            border-radius: 28px;
+            pointer-events: none;
+            z-index: 0;
+            box-shadow: inset 0 0 60px rgba(198, 124, 94, 0.05);
+        }
+        body::after {
+            content: '✦ ✦ ✦ ✦ ✦';
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #D4A373;
+            font-size: .65rem;
+            letter-spacing: 10px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: .35;
+        }
+        * {
+            position: relative;
+            z-index: 1;
+        }
+        .border-top,
+        .border-bottom {
+            text-align: center;
+            color: #D4A373;
+            font-size: 1rem;
+            letter-spacing: 18px;
+            opacity: .3;
+            font-family: 'Playfair Display', serif;
+            margin: .5rem 0;
+        }
+
+        /* ─── COLORS ─── */
+        :root {
+            --terracotta: #C67C5E;
+            --terracotta-dark: #A86548;
+            --gold: #D4A373;
+            --gold-light: #F0D5B0;
+            --olive: #8A9A7A;
+            --cream: #FFF8F0;
+            --white: #FDF8F3;
+            --charcoal: #2C2C2C;
+            --pink: #F5E6D3;
+            --burgundy: #8B3A3A;
+        }
+
+        /* ─── HEADER ─── */
+        .header {
+            text-align: center;
+            padding: 1rem 0 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .header .badge {
+            display: inline-block;
+            background: var(--terracotta);
+            color: #fff;
+            padding: .2rem 1.5rem;
+            border-radius: 40px;
+            font-size: .65rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 500;
+            margin-bottom: .5rem;
+        }
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--terracotta);
+            letter-spacing: 4px;
+        }
+        .header h1 span {
+            color: var(--gold);
+            font-weight: 400;
+            font-style: italic;
+        }
+        .header .sub {
+            font-size: 1rem;
+            color: var(--olive);
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+        .header .dates {
+            display: inline-block;
+            margin-top: .5rem;
+            padding: .3rem 2rem;
+            background: var(--gold);
+            color: #fff;
+            border-radius: 40px;
+            font-size: .85rem;
+            letter-spacing: 1px;
+            font-weight: 500;
+            box-shadow: 0 4px 20px rgba(212, 163, 115, .3);
+        }
+
+        /* ─── OVERVIEW ─── */
+        .overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+            gap: .5rem;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 1.2rem 1.5rem;
+            margin: 1rem 0 2rem;
+            border: 2px solid var(--gold-light);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .05);
+        }
+        .overview-item {
+            text-align: center;
+            padding: .5rem;
+            border-radius: 12px;
+            transition: .3s ease;
+            cursor: default;
+        }
+        .overview-item:hover {
+            background: rgba(198, 124, 94, .08);
+            transform: scale(1.05);
+        }
+        .overview-item .icon {
+            font-size: 1.8rem;
+            display: block;
+        }
+        .overview-item .label {
+            font-size: .6rem;
+            color: var(--olive);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .overview-item .value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+
+        /* ─── DROP ZONE ─── */
+        .drop {
+            border: 3px dashed var(--gold);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            background: rgba(255, 255, 255, .5);
+            transition: .3s ease;
+            cursor: pointer;
+            margin: 1rem 0;
+        }
+        .drop:hover,
+        .drop.dragover {
+            border-color: var(--terracotta);
+            background: var(--pink);
+            transform: scale(1.01);
+        }
+        .drop .icon {
+            font-size: 3.5rem;
+            display: block;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+        .drop .main {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--charcoal);
+        }
+        .drop .sub {
+            font-size: .85rem;
+            color: #A09080;
+            margin-top: .3rem;
+        }
+        .drop input[type="file"] {
+            display: none;
+        }
+
+        /* ─── TOOLBAR ─── */
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: .8rem;
+            margin-top: .5rem;
+        }
+        .btn {
+            padding: .5rem 1.8rem;
+            border-radius: 40px;
+            font-weight: 500;
+            transition: .25s ease;
+            cursor: pointer;
+            border: none;
+            font-size: .8rem;
+            font-family: 'Inter', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+        }
+        .btn-primary {
+            background: var(--terracotta);
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background: var(--terracotta-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(198, 124, 94, .3);
+        }
+        .btn-danger {
+            background: var(--pink);
+            color: var(--charcoal);
+        }
+        .btn-danger:hover {
+            background: var(--terracotta);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        .count {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--charcoal);
+        }
+        .count strong {
+            color: var(--terracotta);
+            font-size: 1.6rem;
+        }
+
+        /* ─── COLLAGE ─── */
+        .collage {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .collage-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 1/1;
+            background: var(--gold-light);
+            border: 3px solid var(--gold-light);
+            transition: .4s cubic-bezier(.34, 1.56, .64, 1);
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .06);
+        }
+        .collage-item:hover {
+            transform: scale(1.05) rotate(-1deg);
+            border-color: var(--terracotta);
+            box-shadow: 0 12px 40px rgba(198, 124, 94, .2);
+            z-index: 5;
+        }
+        .collage-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .5s ease;
+        }
+        .collage-item:hover img {
+            transform: scale(1.05);
+        }
+        .collage-item .num {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(44, 44, 44, .75);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: .8rem;
+            padding: .15rem .7rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, .1);
+        }
+        .collage-item .del {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(198, 124, 94, .9);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: .75rem;
+            cursor: pointer;
+            transition: .3s ease;
+            opacity: 0;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, .15);
+        }
+        .collage-item:hover .del {
+            opacity: 1;
+        }
+        .collage-item .del:hover {
+            background: var(--burgundy);
+            transform: scale(1.15) rotate(90deg);
+        }
+        .collage-item .cap {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 1rem .8rem;
+            background: linear-gradient(transparent, rgba(44, 44, 44, .7));
+            color: #fff;
+            font-size: .75rem;
+            opacity: 0;
+            transition: opacity .4s ease;
+            font-weight: 300;
+        }
+        .collage-item:hover .cap {
+            opacity: 1;
+        }
+        .empty {
+            grid-column: 1/-1;
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #A09080;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 300;
+            background: var(--pink);
+            border-radius: 20px;
+            border: 3px dashed var(--gold);
+        }
+        .empty span {
+            font-size: 3.5rem;
+            display: block;
+            margin-bottom: .5rem;
+        }
+
+        /* ─── FLIP CARDS ─── */
+        .flip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin: 1rem 0;
+        }
+        .flip {
+            perspective: 800px;
+            height: 260px;
+            cursor: pointer;
+        }
+        .flip-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform .6s cubic-bezier(.34, 1.56, .64, 1);
+            transform-style: preserve-3d;
+        }
+        .flip.flipped .flip-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-front,
+        .flip-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 2px solid var(--gold-light);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .06);
+        }
+        .flip-front {
+            background: var(--white);
+            transform: rotateY(0);
+        }
+        .flip-front .emoji {
+            font-size: 3rem;
+            margin-bottom: .3rem;
+        }
+        .flip-front .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--terracotta);
+            font-weight: 700;
+        }
+        .flip-front .sub {
+            font-size: .9rem;
+            font-weight: 500;
+            color: var(--charcoal);
+        }
+        .flip-front .hint {
+            font-size: .6rem;
+            color: var(--olive);
+            margin-top: .6rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+        .flip-back {
+            background: var(--terracotta);
+            color: #fff;
+            transform: rotateY(180deg);
+            gap: .2rem;
+            border-color: var(--terracotta);
+        }
+        .flip-back .label {
+            font-size: .55rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: .7;
+            font-weight: 300;
+        }
+        .flip-back .val {
+            font-size: .9rem;
+            font-weight: 500;
+        }
+        .flip-back .val.gold {
+            color: var(--gold-light);
+            font-weight: 600;
+        }
+        .flip-back .badge {
+            display: inline-block;
+            margin-top: .3rem;
+            padding: .1rem 1rem;
+            background: rgba(255, 255, 255, .2);
+            border-radius: 20px;
+            font-size: .65rem;
+        }
+
+        /* ─── MINI FLIP (food/museum/landmark) ─── */
+        .mini-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .mini {
+            perspective: 600px;
+            height: 150px;
+            cursor: pointer;
+        }
+        .mini-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform .5s cubic-bezier(.34, 1.56, .64, 1);
+            transform-style: preserve-3d;
+        }
+        .mini.flipped .mini-inner {
+            transform: rotateY(180deg);
+        }
+        .mini-front,
+        .mini-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 14px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 2px solid var(--gold-light);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .04);
+        }
+        .mini-front {
+            background: var(--white);
+            transform: rotateY(0);
+        }
+        .mini-front .emoji {
+            font-size: 2.2rem;
+        }
+        .mini-front .name {
+            font-size: .8rem;
+            font-weight: 600;
+            margin-top: .1rem;
+        }
+        .mini-front .type {
+            font-size: .6rem;
+            color: var(--olive);
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+        .mini-back {
+            transform: rotateY(180deg);
+            gap: .1rem;
+        }
+        .mini-back .label {
+            font-size: .5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: .7;
+        }
+        .mini-back .val {
+            font-size: .8rem;
+            font-weight: 400;
+        }
+        .mini-back .badge {
+            display: inline-block;
+            margin-top: .2rem;
+            padding: .1rem .8rem;
+            background: rgba(255, 255, 255, .2);
+            border-radius: 20px;
+            font-size: .6rem;
+        }
+        /* Back colors by type */
+        .mini-back.food {
+            background: var(--terracotta);
+            color: #fff;
+            border-color: var(--terracotta);
+        }
+        .mini-back.museum {
+            background: var(--olive);
+            color: #fff;
+            border-color: var(--olive);
+        }
+        .mini-back.landmark {
+            background: var(--gold);
+            color: #fff;
+            border-color: var(--gold);
+        }
+        .mini-back.trip {
+            background: var(--burgundy);
+            color: #fff;
+            border-color: var(--burgundy);
+        }
+
+        /* ─── SECTIONS ─── */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--terracotta);
+            font-weight: 400;
+            margin: 2.5rem 0 .3rem;
+        }
+        .section-sub {
+            color: var(--olive);
+            font-weight: 300;
+            font-size: .9rem;
+            margin-bottom: .5rem;
+        }
+
+        /* ─── MARKET CARD ─── */
+        .market-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 2px solid var(--gold-light);
+            margin: .5rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+        .market-card .emoji {
+            font-size: 2rem;
+        }
+        .market-card .name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--terracotta);
+        }
+        .market-card .info {
+            color: var(--charcoal);
+            font-size: .9rem;
+        }
+        .market-card .tag {
+            background: var(--pink);
+            padding: .3rem 1.5rem;
+            border-radius: 40px;
+            font-size: .8rem;
+            font-weight: 500;
+            color: var(--charcoal);
+        }
+
+        /* ─── CONTACT ─── */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .contact {
+            background: var(--white);
+            border-radius: 14px;
+            padding: 1.2rem;
+            border: 2px solid var(--gold-light);
+            text-align: center;
+            transition: .3s ease;
+        }
+        .contact:hover {
+            transform: translateY(-3px);
+            border-color: var(--terracotta);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .06);
+        }
+        .contact .city {
+            font-weight: 600;
+            color: var(--terracotta);
+            font-size: .9rem;
+        }
+        .contact .hotel {
+            font-size: .85rem;
+            font-weight: 500;
+        }
+        .contact .phone {
+            font-size: .8rem;
+            color: var(--charcoal);
+        }
+
+        /* ─── TRANSPORT ─── */
+        .transport {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            border: 2px solid var(--gold-light);
+            margin: .5rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: space-between;
+        }
+        .transport .label {
+            font-weight: 600;
+            color: var(--terracotta);
+            font-size: .85rem;
+        }
+        .transport .detail {
+            font-size: .9rem;
+        }
+        .transport .sub {
+            font-size: .8rem;
+            color: var(--olive);
+        }
+
+        /* ─── FOOTER ─── */
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--gold-light);
+            color: #A09080;
+            font-size: .75rem;
+            font-weight: 300;
+            letter-spacing: .5px;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width:768px) {
+            body {
+                padding: 1rem;
+            }
+            body::before {
+                top: 6px;
+                left: 6px;
+                right: 6px;
+                bottom: 6px;
+                border-radius: 16px;
+                border-width: 2px;
+            }
+            .header h1 {
+                font-size: 2.8rem;
+                letter-spacing: 2px;
+            }
+            .overview {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 1rem;
+            }
+            .collage {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: .6rem;
+            }
+            .flip-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+            .flip {
+                height: 220px;
+            }
+            .mini-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .section-title {
+                font-size: 1.6rem;
+            }
+            .drop {
+                padding: 1.5rem 1rem;
+            }
+            .drop .main {
+                font-size: 1.1rem;
+            }
+            body::after {
+                font-size: .5rem;
+                letter-spacing: 6px;
+                bottom: 14px;
+            }
+            .border-top,
+            .border-bottom {
+                font-size: .7rem;
+                letter-spacing: 10px;
+            }
+            .transport {
+                flex-direction: column;
+                gap: .8rem;
+            }
+        }
+        @media (max-width:480px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            .collage {
+                grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+                gap: .4rem;
+            }
+            .flip-grid {
+                grid-template-columns: 1fr;
+                gap: .8rem;
+            }
+            .flip {
+                height: 200px;
+            }
+            .mini-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: .6rem;
+            }
+            .mini {
+                height: 130px;
+            }
+            .overview {
+                grid-template-columns: 1fr 1fr;
+                padding: .8rem;
+            }
+            .overview-item .icon {
+                font-size: 1.4rem;
+            }
+            .overview-item .value {
+                font-size: .85rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: .5rem;
+            }
+            .toolbar .btn {
+                justify-content: center;
+            }
+            .collage-item .num {
+                font-size: .6rem;
+                top: 6px;
+                left: 6px;
+                padding: .1rem .5rem;
+            }
+            .collage-item .del {
+                width: 24px;
+                height: 24px;
+                font-size: .6rem;
+                top: 6px;
+                right: 6px;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .market-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ─── DECORATIVE TOP ─── -->
+    <div class="border-top">✦ ✦ ✦</div>
+
+    <!-- ─── HEADER ─── -->
+    <header class="header">
+        <span class="badge">🇫🇷 City 1 of 3</span>
+        <h1>🏰 Montauban</h1>
+        <p class="sub">The Pink Brick Gem</p>
+        <span class="dates">📅 21 – 25 June 2026 · 4 Nights</span>
+    </header>
+
+    <!-- ─── OVERVIEW ─── -->
+    <section class="overview">
+        <div class="overview-item"><span class="icon">🏨</span><span class="label">Hotel</span><span class="value">L'authentique</span></div>
+        <div class="overview-item"><span class="icon">📅</span><span class="label">Dates</span><span class="value">21–25 Jun</span></div>
+        <div class="overview-item"><span class="icon">🌙</span><span class="label">Nights</span><span class="value">4</span></div>
+        <div class="overview-item"><span class="icon">📸</span><span class="label">Photos</span><span class="value" id="overviewCount">0</span></div>
+    </section>
+
+    <!-- ─── DROP ZONE ─── -->
+    <section>
+        <h2 class="section-title">📸 Drop Your Photos</h2>
+        <p class="section-sub">Drag & drop images — they'll appear in the collage below.</p>
+        <div class="drop" id="dropZone">
+            <span class="icon">🖼️</span>
+            <p class="main">Drop photos here</p>
+            <p class="sub">or click to browse · JPG, PNG, WEBP</p>
+            <input type="file" id="fileInput" accept="image/*" multiple />
+        </div>
+        <div class="toolbar">
+            <span class="count">📷 <strong id="photoCount">0</strong> photos</span>
+            <button class="btn btn-danger" id="clearAllBtn">🗑️ Clear All</button>
+        </div>
+    </section>
+
+    <!-- ─── COLLAGE ─── -->
+    <section>
+        <div class="collage" id="collageGrid"><div class="empty"><span>🖼️</span>No photos yet<br><span style="font-size:1rem;color:#A09080;">Drop some above</span></div></div>
+    </section>
+
+    <!-- ─── ACCOMMODATION ─── -->
+    <section>
+        <h2 class="section-title">🏨 Where We're Staying</h2>
+        <p class="section-sub">👆 Click to flip</p>
+        <div class="flip-grid">
+            <div class="flip" onclick="this.classList.toggle('flipped')">
+                <div class="flip-inner">
+                    <div class="flip-front"><span class="emoji">🏰</span><span class="title">L'authentique</span><span class="sub">Montauban</span><span class="hint">👆 click to flip</span></div>
+                    <div class="flip-back"><span class="label">📍 Address</span><span class="val">34 Rue Bessières, 82000</span><span class="label">📅 Stay</span><span class="val">21–25 Jun · 4 nights</span><span class="label">📞 Phone</span><span class="val gold">+33 6 84 08 09 50</span><span class="label">✅ Conf</span><span class="val">#6613780955</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── FOOD ─── -->
+    <section>
+        <h2 class="section-title">🍽️ Food Targets</h2>
+        <p class="section-sub">👆 Click to flip</p>
+        <div class="mini-grid">
+            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🍕</span><span class="name">IL POPOLO</span><span class="type">Pizza</span></div><div class="mini-back food"><span class="label">🍽️ Order</span><span class="val">Pizza · Italian</span></div></div></div>
+            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🍫</span><span class="name">Pascal Caffet</span><span class="type">Chocolate</span></div><div class="mini-back food"><span class="label">🍫 Get</span><span class="val">Chocolates · Pastries</span><span class="badge">🏆 Champion!</span></div></div></div>
+            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🦆</span><span class="name">Le Saint-Martial</span><span class="type">Bistro</span></div><div class="mini-back food"><span class="label">🍽️ Order</span><span class="val">Duck Confit</span></div></div></div>
+            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🍷</span><span class="name">Le Tonneau de Modane</span><span class="type">Bar</span></div><div class="mini-back food"><span class="label">🍷 Get</span><span class="val">Beer selection</span></div></div></div>
+        </div>
+    </section>
+
+    <!-- ─── MUSEUMS ─── -->
+    <section>
+        <h2 class="section-title">🏛️ Museums</h2>
+        <p class="section-sub">👆 Click to flip</p>
+        <div class="mini-grid">
+            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🎨</span><span class="name">Ingres-Bourdelle</span><span class="type">Art</span></div><div class="mini-back museum"><span class="label">🎨 Inside</span><span class="val">4,500+ drawings</span><span class="badge">⭐ Must-see!</span></div></div></div>
+            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🕊️</span><span class="name">Résistance</span><span class="type">History</span></div><div class="mini-back museum"><span class="label">🕊️ About</span><span class="val">WWII memorial</span></div></div></div>
+            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🦜</span><span class="name">Histoire Naturelle</span><span class="type">Natural History</span></div><div class="mini-back museum"><span class="label">🦜 Inside</span><span class="val">3,000 bird specimens!</span></div></div></div>
+            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🧸</span><span class="name">Musée des Jouets</span><span class="type">Toys</span></div><div class="mini-back museum"><span class="label">🧸 Inside</span><span class="val">Vintage toys</span><span class="badge">🎉 Fun!</span></div></div></div>
+        </div>
+    </section>
+
+    <!-- ─── LANDMARKS ─── -->
+    <section>
+        <h2 class="section-title">📍 Landmarks</h2>
+        <p class="section-sub">👆 Click to flip</p>
+        <div class="mini-grid">
+            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🟠</span><span class="name">Place Nationale</span><span class="type">Heart</span></div><div class="mini-back landmark"><span class="label">📍 What</span><span class="val">Pink brick arcades</span><span class="badge">✅ Sunday market!</span></div></div></div>
+            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🌉</span><span class="name">Pont Vieux</span><span class="type">Bridge</span></div><div class="mini-back landmark"><span class="label">🌉 What</span><span class="val">14th-century bridge</span><span class="badge">📸 Sunset spot!</span></div></div></div>
+            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">⛪</span><span class="name">Notre-Dame</span><span class="type">Cathedral</span></div><div class="mini-back landmark"><span class="label">⛪ Inside</span><span class="val">Ingres painting</span></div></div></div>
+            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🌿</span><span class="name">Couvent des Carmes</span><span class="type">Garden</span></div><div class="mini-back landmark"><span class="label">🌿 What</span><span class="val">Medieval garden</span><span class="badge">✨ Free!</span></div></div></div>
+        </div>
+    </section>
+
+    <!-- ─── PARKS ─── -->
+    <section>
+        <h2 class="section-title">🌳 Parks & River Walks</h2>
+        <p class="section-sub">👆 Click to flip</p>
+        <div class="mini-grid">
+            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🌊</span><span class="name">Berges du Tarn</span><span class="type">River</span></div><div class="mini-back landmark"><span class="label">🌊 What</span><span class="val">Walking paths</span></div></div></div>
+            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🌸</span><span class="name">Jardin des Plantes</span><span class="type">Park</span></div><div class="mini-back landmark"><span class="label">🌸 Vibe</span><span class="val">Peaceful · shaded</span></div></div></div>
+            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🚤</span><span class="name">Port Canal</span><span class="type">Canal</span></div><div class="mini-back landmark"><span class="label">🚤 What</span><span class="val">Watch barges</span></div></div></div>
+        </div>
+    </section>
+
+    <!-- ─── DAY TRIPS ─── -->
+    <section>
+        <h2 class="section-title">🚗 Day Trips</h2>
+        <p class="section-sub">👆 Click to flip</p>
+        <div class="mini-grid">
+            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">⛪</span><span class="name">Moissac Abbey</span><span class="type">20 min</span></div><div class="mini-back trip"><span class="label">⛪ What</span><span class="val">UNESCO cloister</span></div></div></div>
+            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🏞️</span><span class="name">Saint-Antonin</span><span class="type">40 min</span></div><div class="mini-back trip"><span class="label">🏞️ What</span><span class="val">Medieval village</span></div></div></div>
+            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">☁️</span><span class="name">Cordes-sur-Ciel</span><span class="type">1 hr</span></div><div class="mini-back trip"><span class="label">☁️ What</span><span class="val">"Village in the sky"</span><span class="badge">🏆 Beautiful!</span></div></div></div>
+            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🏰</span><span class="name">Bruniquel</span><span class="type">45 min</span></div><div class="mini-back trip"><span class="label">🏰 What</span><span class="val">Cliff-top + castles</span></div></div></div>
+            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🌻</span><span class="name">Lauzerte</span><span class="type">35 min</span></div><div class="mini-back trip"><span class="label">🌻 What</span><span class="val">Most beautiful village</span></div></div></div>
+        </div>
+    </section>
+
+    <!-- ─── MARKET ─── -->
+    <section>
+        <h2 class="section-title">🛍️ Market Day</h2>
+        <div class="market-card">
+            <div><span class="emoji">🟠</span><span class="name">Place Nationale Market</span><div class="info"><strong>Sunday 21 June</strong> · 08:00 – 13:00</div><div style="color:var(--olive);font-size:.85rem;">✅ You arrive Sunday — perfect timing! · Also Tue-Fri</div></div>
+            <div><span class="tag">⭐ Don't miss!</span></div>
+        </div>
+    </section>
+
+    <!-- ─── TRANSPORT ─── -->
+    <section>
+        <h2 class="section-title">🚆 Getting Around</h2>
+        <div class="transport">
+            <div><span class="label">🚆 Train</span><div class="detail">Gare de Montauban-Ville-Bourbon</div><div class="sub">Trains to Toulouse · 30-40 min</div></div>
+            <div><span class="label">🚶 Walk</span><div class="detail">Historic centre is walkable</div><div class="sub">Most sights within 15-20 min</div></div>
+            <div><span class="label">🚲 Bike</span><div class="detail">Rent at tourist office</div><div class="sub">Great for river paths</div></div>
+        </div>
+    </section>
+
+    <!-- ─── CONTACT ─── -->
+    <section>
+        <h2 class="section-title">📞 Contact</h2>
+        <div class="contact-grid">
+            <div class="contact"><div class="city">🏰 Montauban</div><div class="hotel">L'authentique</div><div class="phone">📞 +33 6 84 08 09 50</div></div>
+        </div>
+    </section>
+
+    <!-- ─── FOOTER ─── -->
+    <footer class="footer">
+        <p>🇫🇷 Montauban · 21–25 June 2026 · 4 Nights</p>
+        <p style="font-size:.65rem;margin-top:.3rem;letter-spacing:.5px;">✦ drag & drop · click cards to flip · click ✕ to delete ✦</p>
+    </footer>
+    <div class="border-bottom">✦ ✦ ✦</div>
+
+    <!-- ─── JAVASCRIPT ─── -->
+    <script>
+        // ─── CONFIG ───
+        const STORAGE_KEY = 'montaubanPhotos';
+        let images = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+
+        // ─── DOM REFS ───
+        const $ = id => document.getElementById(id);
+        const drop = $('dropZone'),
+            fileInput = $('fileInput'),
+            clearBtn = $('clearAllBtn'),
+            grid = $('collageGrid'),
+            count = $('photoCount'),
+            overview = $('overviewCount');
+
+        // ─── RENDER ───
+        function render() {
+            grid.innerHTML = images.length === 0 ?
+                `<div class="empty"><span>🖼️</span>No photos yet<br><span style="font-size:1rem;color:#A09080;">Drop some above</span></div>` :
+                images.map((src, i) =>
+                    `<div class="collage-item" onclick="window.open('${src}','_blank')">
+                        <img src="${src}" loading="lazy" />
+                        <span class="num">#${i+1}</span>
+                        <button class="del" onclick="event.stopPropagation();del(${i})">✕</button>
+                        <span class="cap">Montauban · Photo ${i+1}</span>
+                    </div>`
+                ).join('');
+            count.textContent = images.length;
+            overview.textContent = images.length;
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(images));
+        }
+
+        // ─── DELETE ───
+        function del(i) {
+            if (confirm(`Delete photo ${i+1}?`)) {
+                images.splice(i, 1);
+                render();
+            }
+        }
+
+        // ─── HANDLE FILES ───
+        function handle(files) {
+            let pending = 0,
+                newImages = [];
+            Array.from(files).forEach(f => {
+                if (!f.type.startsWith('image/')) return;
+                pending++;
+                const r = new FileReader();
+                r.onload = e => { newImages.push(e.target.result);
+                    pending-- || (images = images.concat(newImages), render()); };
+                r.readAsDataURL(f);
+            });
+        }
+
+        // ─── EVENTS ───
+        drop.onclick = () => fileInput.click();
+        fileInput.onchange = e => (handle(e.target.files), fileInput.value = '');
+        drop.ondragover = e => (e.preventDefault(), drop.classList.add('dragover'));
+        drop.ondragleave = () => drop.classList.remove('dragover');
+        drop.ondrop = e => (e.preventDefault(), drop.classList.remove('dragover'), handle(e.dataTransfer.files));
+        clearBtn.onclick = () => images.length && confirm('Delete all?') && (images = [], render());
+
+        // ─── INIT ───
+        render();
+    </script>
+</body>
+</html>
