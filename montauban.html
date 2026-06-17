@@ -204,16 +204,21 @@
             background: var(--terracotta);
         }
 
-        /* ─── DROP ZONE ─── */
-        .drop {
-            border: 3px dashed var(--gold);
-            border-radius: 24px;
-            padding: 2.5rem 2rem;
-            text-align: center;
-            background: rgba(255, 255, 255, .5);
-            transition: .3s ease;
-            cursor: pointer;
-            margin: 1rem 0;
+            <!-- ─── DROP ZONE ─── -->
+    <section>
+        <h2 class="section-title">📸 Drop Your Photos</h2>
+        <p class="section-sub">Tap to select photos from your gallery</p>
+        <div class="drop" id="dropZone">
+            <span class="icon">📱</span>
+            <p class="main">Tap to Choose Photos</p>
+            <p class="sub">or drag & drop on computer · JPG, PNG, WEBP</p>
+            <input type="file" id="fileInput" accept="image/*" multiple />
+        </div>
+        <div class="toolbar">
+            <span class="count">📷 <strong id="photoCount">0</strong> photos</span>
+            <button class="btn btn-danger" id="clearAllBtn">🗑️ Clear All</button>
+        </div>
+    </section>
         }
         .drop:hover {
             border-color: var(--terracotta);
@@ -762,14 +767,14 @@
     </footer>
     <div class="border-bottom">✦ ✦ ✦</div>
 
-    <!-- ─── JAVASCRIPT ─── -->
+        <!-- ─── JAVASCRIPT ─── -->
     <script>
         // ─── CONFIG ───
         const STORAGE_KEY = 'montaubanPhotos';
         let images = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
         let currentSlide = 0;
 
-        // ─── DOM ───
+        // ─── DOM REFS ───
         const drop = document.getElementById('dropZone');
         const fileInput = document.getElementById('fileInput');
         const clearBtn = document.getElementById('clearAllBtn');
@@ -786,7 +791,7 @@
             dots.innerHTML = '';
             if (images.length === 0) {
                 track.innerHTML =
-                    `<div class="carousel-slide" style="background:#2C2C2C;"><div style="color:#E8DDD0;font-size:1.2rem;text-align:center;padding:1rem;">🌅 Drop photos to start</div></div>`;
+                    `<div class="carousel-slide" style="background:#2C2C2C;"><div style="color:#E8DDD0;font-size:1.2rem;text-align:center;padding:1rem;">🌅 Tap "Choose Photos" to start</div></div>`;
                 currentSlide = 0;
             } else {
                 images.forEach((src, i) => {
@@ -805,7 +810,7 @@
             grid.innerHTML = '';
             if (images.length === 0) {
                 grid.innerHTML =
-                    `<div class="empty"><span>🖼️</span>No photos yet<br><span style="font-size:1rem;color:#A09080;">Drop some above</span></div>`;
+                    `<div class="empty"><span>🖼️</span>No photos yet<br><span style="font-size:1rem;color:#A09080;">Tap "Choose Photos" above to add</span></div>`;
             } else {
                 images.forEach((src, i) => {
                     let div = document.createElement('div');
@@ -819,7 +824,13 @@
 
             count.textContent = images.length;
             overview.textContent = images.length;
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(images));
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(images));
+            } catch (e) {
+                console.log('Storage full, clearing...');
+                localStorage.clear();
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(images));
+            }
         }
 
         // ─── CAROUSEL ───
@@ -831,6 +842,7 @@
                 d.classList.toggle('active', idx === currentSlide);
             });
         }
+
         document.getElementById('nextBtn').onclick = () => goTo(currentSlide + 1);
         document.getElementById('prevBtn').onclick = () => goTo(currentSlide - 1);
 
@@ -842,35 +854,82 @@
             }
         }
 
-        // ─── HANDLE FILES ───
+        // ─── HANDLE FILES (WORKS ON PHONE & COMPUTER) ───
         function handleFiles(files) {
-            let pending = 0,
-                newImages = [];
-            Array.from(files).forEach(f => {
-                if (!f.type.startsWith('image/')) return;
+            if (!files || files.length === 0) return;
+
+            let pending = 0;
+            let newImages = [];
+
+            for (let f of files) {
+                if (!f.type.startsWith('image/')) continue;
                 pending++;
                 let r = new FileReader();
-                r.onload = e => { newImages.push(e.target.result);
-                    pending-- || (images = images.concat(newImages), render()); };
+                r.onload = function(e) {
+                    newImages.push(e.target.result);
+                    pending--;
+                    if (pending === 0) {
+                        images = images.concat(newImages);
+                        render();
+                    }
+                };
+                r.onerror = function() {
+                    pending--;
+                    console.log('Error reading file');
+                };
                 r.readAsDataURL(f);
-            });
+            }
+
+            // If no valid images were found
+            if (pending === 0 && newImages.length === 0) {
+                alert('Please select image files (JPG, PNG, WEBP)');
+            }
         }
 
         // ─── EVENTS ───
-        drop.onclick = () => fileInput.click();
-        fileInput.onchange = e => { handleFiles(e.target.files);
-            fileInput.value = ''; };
-        drop.ondragover = e => { e.preventDefault();
-            drop.classList.add('dragover'); };
-        drop.ondragleave = () => drop.classList.remove('dragover');
-        drop.ondrop = e => { e.preventDefault();
-            drop.classList.remove('dragover');
-            handleFiles(e.dataTransfer.files); };
-        clearBtn.onclick = () => { if (images.length && confirm('Delete all?')) { images = [];
-                render(); } };
 
-        // ─── START ───
+        // METHOD 1: Click the drop zone → opens file picker (WORKS ON PHONE)
+        drop.onclick = function(e) {
+            e.preventDefault();
+            fileInput.click();
+        };
+
+        // METHOD 2: File input change (WORKS ON PHONE)
+        fileInput.onchange = function(e) {
+            if (e.target.files && e.target.files.length > 0) {
+                handleFiles(e.target.files);
+                fileInput.value = ''; // Reset so same file can be re-added
+            }
+        };
+
+        // METHOD 3: Drag & drop (COMPUTER ONLY)
+        drop.ondragover = function(e) {
+            e.preventDefault();
+            this.classList.add('dragover');
+        };
+
+        drop.ondragleave = function(e) {
+            this.classList.remove('dragover');
+        };
+
+        drop.ondrop = function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+            if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                handleFiles(e.dataTransfer.files);
+            }
+        };
+
+        // ─── CLEAR ALL ───
+        clearBtn.onclick = function() {
+            if (images.length === 0) return;
+            if (confirm('Delete all photos?')) {
+                images = [];
+                render();
+            }
+        };
+
+        // ─── INIT ───
         render();
     </script>
-</body>
 </html>
