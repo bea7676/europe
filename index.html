@@ -41,7 +41,7 @@
             border-radius: 28px;
             pointer-events: none;
             z-index: 0;
-            box-shadow: inset 0 0 60px rgba(198, 124, 94, .05);
+            box-shadow: inset 0 0 60px rgba(198, 124, 94, 0.05);
         }
         body::after {
             content: '✦ ✦ ✦ ✦ ✦';
@@ -174,99 +174,6 @@
             color: var(--charcoal);
         }
 
-        /* ─── CAROUSEL ─── */
-        .carousel-wrap {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            background: var(--charcoal);
-            aspect-ratio: 16/9;
-            max-height: 420px;
-            margin: 1rem 0;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, .1);
-        }
-        .carousel-track {
-            display: flex;
-            transition: transform .6s cubic-bezier(.4, 0, .2, 1);
-            height: 100%;
-        }
-        .carousel-slide {
-            min-width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--charcoal);
-            position: relative;
-        }
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .carousel-slide .caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 2rem 1.5rem 1.2rem;
-            background: linear-gradient(transparent, rgba(44, 44, 44, .8));
-            color: #fff;
-            font-size: .9rem;
-            font-weight: 300;
-            font-family: 'Playfair Display', serif;
-        }
-        .carousel-slide .caption strong {
-            font-weight: 700;
-            color: var(--gold-light);
-        }
-        .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(253, 248, 243, .85);
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            color: var(--charcoal);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
-            transition: .2s;
-            z-index: 10;
-        }
-        .carousel-btn:hover {
-            background: #fff;
-            transform: translateY(-50%) scale(1.05);
-        }
-        .carousel-btn.prev {
-            left: 12px;
-        }
-        .carousel-btn.next {
-            right: 12px;
-        }
-        .carousel-dots {
-            display: flex;
-            justify-content: center;
-            gap: .6rem;
-            margin-top: .8rem;
-        }
-        .carousel-dots span {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--gold);
-            opacity: .35;
-            cursor: pointer;
-            transition: .2s;
-        }
-        .carousel-dots span.active {
-            opacity: 1;
-            background: var(--terracotta);
-            transform: scale(1.2);
-        }
-
         /* ─── DROP ZONE ─── */
         .drop {
             border: 3px dashed var(--gold);
@@ -290,13 +197,8 @@
             animation: float 3s ease-in-out infinite;
         }
         @keyframes float {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-8px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
         .drop .main {
             font-family: 'Playfair Display', serif;
@@ -365,7 +267,7 @@
         /* ─── COLLAGE ─── */
         .collage {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             gap: 1rem;
             margin-top: 1rem;
         }
@@ -640,6 +542,7 @@
             border-radius: 20px;
             font-size: .6rem;
         }
+        /* Back colors by type */
         .mini-back.food {
             background: var(--terracotta);
             color: #fff;
@@ -654,11 +557,6 @@
             background: var(--gold);
             color: #fff;
             border-color: var(--gold);
-        }
-        .mini-back.trip {
-            background: var(--burgundy);
-            color: #fff;
-            border-color: var(--burgundy);
         }
 
         /* ─── SECTIONS ─── */
@@ -676,265 +574,45 @@
             margin-bottom: .5rem;
         }
 
-        /* ─── MARKET ─── */
-        .market-card {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 1.5rem;
-            border: 2px solid var(--gold-light);
-            margin: .5rem 0;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-        }
-        .market-card .emoji {
-            font-size: 2rem;
-        }
-        .market-card .name {
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: var(--terracotta);
-        }
-        .market-card .info {
-            color: var(--charcoal);
-            font-size: .9rem;
-        }
-        .market-card .tag {
-            background: var(--pink);
-            padding: .3rem 1.5rem;
-            border-radius: 40px;
-            font-size: .8rem;
-            font-weight: 500;
-            color: var(--charcoal);
-        }
-
-        /* ─── CONTACT ─── */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-        .contact {
-            background: var(--white);
-            border-radius: 14px;
-            padding: 1.2rem;
-            border: 2px solid var(--gold-light);
-            text-align: center;
-            transition: .3s ease;
-        }
-        .contact:hover {
-            transform: translateY(-3px);
-            border-color: var(--terracotta);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, .06);
-        }
-        .contact .city {
-            font-weight: 600;
-            color: var(--terracotta);
-            font-size: .9rem;
-        }
-        .contact .hotel {
-            font-size: .85rem;
-            font-weight: 500;
-        }
-        .contact .phone {
-            font-size: .8rem;
-            color: var(--charcoal);
-        }
-
-        /* ─── TRANSPORT ─── */
-        .transport {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 1.2rem 1.5rem;
-            border: 2px solid var(--gold-light);
-            margin: .5rem 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            justify-content: space-between;
-        }
-        .transport .label {
-            font-weight: 600;
-            color: var(--terracotta);
-            font-size: .85rem;
-        }
-        .transport .detail {
-            font-size: .9rem;
-        }
-        .transport .sub {
-            font-size: .8rem;
-            color: var(--olive);
-        }
-
-        /* ─── FOOTER ─── */
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 2px solid var(--gold-light);
-            color: #A09080;
-            font-size: .75rem;
-            font-weight: 300;
-            letter-spacing: .5px;
-        }
-
         /* ─── RESPONSIVE ─── */
         @media (max-width:768px) {
-            body {
-                padding: 1rem;
-            }
-            body::before {
-                top: 6px;
-                left: 6px;
-                right: 6px;
-                bottom: 6px;
-                border-radius: 16px;
-                border-width: 2px;
-            }
-            .header h1 {
-                font-size: 2.8rem;
-                letter-spacing: 2px;
-            }
-            .overview {
-                grid-template-columns: repeat(2, 1fr);
-                padding: 1rem;
-            }
-            .collage {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-                gap: .6rem;
-            }
-            .flip-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 1rem;
-            }
-            .flip {
-                height: 220px;
-            }
-            .mini-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .section-title {
-                font-size: 1.6rem;
-            }
-            .drop {
-                padding: 1.5rem 1rem;
-            }
-            .drop .main {
-                font-size: 1.1rem;
-            }
-            body::after {
-                font-size: .5rem;
-                letter-spacing: 6px;
-                bottom: 14px;
-            }
-            .border-top,
-            .border-bottom {
-                font-size: .7rem;
-                letter-spacing: 10px;
-            }
-            .transport {
-                flex-direction: column;
-                gap: .8rem;
-            }
-            .carousel-btn {
-                width: 32px;
-                height: 32px;
-                font-size: 1rem;
-            }
-            .carousel-btn.prev {
-                left: 8px;
-            }
-            .carousel-btn.next {
-                right: 8px;
-            }
-            .carousel-wrap {
-                max-height: 280px;
-            }
+            body { padding: 1rem; }
+            body::before { top: 6px; left: 6px; right: 6px; bottom: 6px; border-radius: 16px; }
+            .header h1 { font-size: 2.8rem; letter-spacing: 2px; }
+            .overview { grid-template-columns: repeat(2, 1fr); padding: 1rem; }
+            .collage { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: .6rem; }
+            .flip-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+            .flip { height: 220px; }
+            .mini-grid { grid-template-columns: repeat(2, 1fr); }
+            .section-title { font-size: 1.6rem; }
+            .drop { padding: 1.5rem 1rem; }
+            .drop .main { font-size: 1.1rem; }
+            body::after { font-size: .5rem; letter-spacing: 6px; bottom: 14px; }
+            .border-top, .border-bottom { font-size: .7rem; letter-spacing: 10px; }
         }
         @media (max-width:480px) {
-            .header h1 {
-                font-size: 2.2rem;
-            }
-            .collage {
-                grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-                gap: .4rem;
-            }
-            .flip-grid {
-                grid-template-columns: 1fr;
-                gap: .8rem;
-            }
-            .flip {
-                height: 200px;
-            }
-            .mini-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: .6rem;
-            }
-            .mini {
-                height: 130px;
-            }
-            .overview {
-                grid-template-columns: 1fr 1fr;
-                padding: .8rem;
-            }
-            .overview-item .icon {
-                font-size: 1.4rem;
-            }
-            .overview-item .value {
-                font-size: .85rem;
-            }
-            .section-title {
-                font-size: 1.3rem;
-            }
-            .toolbar {
-                flex-direction: column;
-                align-items: stretch;
-                gap: .5rem;
-            }
-            .toolbar .btn {
-                justify-content: center;
-            }
-            .collage-item .num {
-                font-size: .6rem;
-                top: 6px;
-                left: 6px;
-                padding: .1rem .5rem;
-            }
-            .collage-item .del {
-                width: 24px;
-                height: 24px;
-                font-size: .6rem;
-                top: 6px;
-                right: 6px;
-            }
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-            .market-card {
-                flex-direction: column;
-                text-align: center;
-            }
-            .carousel-wrap {
-                max-height: 200px;
-            }
-            .carousel-btn {
-                width: 28px;
-                height: 28px;
-                font-size: .8rem;
-            }
+            .header h1 { font-size: 2.2rem; }
+            .collage { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: .4rem; }
+            .flip-grid { grid-template-columns: 1fr; gap: .8rem; }
+            .flip { height: 200px; }
+            .mini-grid { grid-template-columns: repeat(2, 1fr); gap: .6rem; }
+            .mini { height: 130px; }
+            .overview { grid-template-columns: 1fr 1fr; padding: .8rem; }
+            .overview-item .icon { font-size: 1.4rem; }
+            .overview-item .value { font-size: .85rem; }
+            .section-title { font-size: 1.3rem; }
+            .toolbar { flex-direction: column; align-items: stretch; gap: .5rem; }
+            .toolbar .btn { justify-content: center; }
+            .collage-item .num { font-size: .6rem; top: 6px; left: 6px; padding: .1rem .5rem; }
+            .collage-item .del { width: 24px; height: 24px; font-size: .6rem; top: 6px; right: 6px; }
         }
     </style>
 </head>
 
 <body>
 
-    <!-- ─── DECORATIVE TOP ─── -->
     <div class="border-top">✦ ✦ ✦</div>
 
-    <!-- ─── HEADER ─── -->
     <header class="header">
         <span class="badge">🇫🇷 City 1 of 3</span>
         <h1>🏰 Montauban</h1>
@@ -942,7 +620,6 @@
         <span class="dates">📅 21 – 25 June 2026 · 4 Nights</span>
     </header>
 
-    <!-- ─── OVERVIEW ─── -->
     <section class="overview">
         <div class="overview-item"><span class="icon">🏨</span><span class="label">Hotel</span><span class="value">L'authentique</span></div>
         <div class="overview-item"><span class="icon">📅</span><span class="label">Dates</span><span class="value">21–25 Jun</span></div>
@@ -950,27 +627,9 @@
         <div class="overview-item"><span class="icon">📸</span><span class="label">Photos</span><span class="value" id="overviewCount">0</span></div>
     </section>
 
-    <!-- ─── CAROUSEL ─── -->
-    <section>
-        <h2 class="section-title">🎠 Montauban Gallery</h2>
-        <p class="section-sub">Swipe through your photos — drag & drop new ones below</p>
-
-        <div class="carousel-wrap">
-            <div class="carousel-track" id="carouselTrack">
-                <div class="carousel-slide" style="background:#2C2C2C;">
-                    <div style="color:#E8DDD0;font-size:1.2rem;text-align:center;padding:1rem;">🌅 Drop photos to start your gallery</div>
-                </div>
-            </div>
-            <button class="carousel-btn prev" id="prevBtn">‹</button>
-            <button class="carousel-btn next" id="nextBtn">›</button>
-        </div>
-        <div class="carousel-dots" id="carouselDots"></div>
-    </section>
-
-    <!-- ─── DROP ZONE ─── -->
     <section>
         <h2 class="section-title">📸 Drop Your Photos</h2>
-        <p class="section-sub">Drag & drop images — they'll appear in the carousel AND collage below.</p>
+        <p class="section-sub">Drag & drop images — they'll appear in the collage below.</p>
         <div class="drop" id="dropZone">
             <span class="icon">🖼️</span>
             <p class="main">Drop photos here</p>
@@ -983,16 +642,12 @@
         </div>
     </section>
 
-    <!-- ─── COLLAGE ─── -->
     <section>
-        <h2 class="section-title">🖼️ Photo Collage</h2>
-        <p class="section-sub">Click a photo to view full size · hover for delete</p>
         <div class="collage" id="collageGrid">
             <div class="empty"><span>🖼️</span>No photos yet<br><span style="font-size:1rem;color:#A09080;">Drop some above</span></div>
         </div>
     </section>
 
-    <!-- ─── ACCOMMODATION ─── -->
     <section>
         <h2 class="section-title">🏨 Where We're Staying</h2>
         <p class="section-sub">👆 Click to flip</p>
@@ -1006,7 +661,6 @@
         </div>
     </section>
 
-    <!-- ─── FOOD ─── -->
     <section>
         <h2 class="section-title">🍽️ Food Targets</h2>
         <p class="section-sub">👆 Click to flip</p>
@@ -1018,7 +672,6 @@
         </div>
     </section>
 
-    <!-- ─── MUSEUMS ─── -->
     <section>
         <h2 class="section-title">🏛️ Museums</h2>
         <p class="section-sub">👆 Click to flip</p>
@@ -1030,7 +683,6 @@
         </div>
     </section>
 
-    <!-- ─── LANDMARKS ─── -->
     <section>
         <h2 class="section-title">📍 Landmarks</h2>
         <p class="section-sub">👆 Click to flip</p>
@@ -1041,182 +693,3 @@
             <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🌿</span><span class="name">Couvent des Carmes</span><span class="type">Garden</span></div><div class="mini-back landmark"><span class="label">🌿 What</span><span class="val">Medieval garden</span><span class="badge">✨ Free!</span></div></div></div>
         </div>
     </section>
-
-    <!-- ─── PARKS ─── -->
-    <section>
-        <h2 class="section-title">🌳 Parks & River Walks</h2>
-        <p class="section-sub">👆 Click to flip</p>
-        <div class="mini-grid">
-            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🌊</span><span class="name">Berges du Tarn</span><span class="type">River</span></div><div class="mini-back landmark"><span class="label">🌊 What</span><span class="val">Walking paths</span></div></div></div>
-            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🌸</span><span class="name">Jardin des Plantes</span><span class="type">Park</span></div><div class="mini-back landmark"><span class="label">🌸 Vibe</span><span class="val">Peaceful · shaded</span></div></div></div>
-            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🚤</span><span class="name">Port Canal</span><span class="type">Canal</span></div><div class="mini-back landmark"><span class="label">🚤 What</span><span class="val">Watch barges</span></div></div></div>
-        </div>
-    </section>
-
-    <!-- ─── DAY TRIPS ─── -->
-    <section>
-        <h2 class="section-title">🚗 Day Trips</h2>
-        <p class="section-sub">👆 Click to flip</p>
-        <div class="mini-grid">
-            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">⛪</span><span class="name">Moissac Abbey</span><span class="type">20 min</span></div><div class="mini-back trip"><span class="label">⛪ What</span><span class="val">UNESCO cloister</span></div></div></div>
-            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🏞️</span><span class="name">Saint-Antonin</span><span class="type">40 min</span></div><div class="mini-back trip"><span class="label">🏞️ What</span><span class="val">Medieval village</span></div></div></div>
-            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">☁️</span><span class="name">Cordes-sur-Ciel</span><span class="type">1 hr</span></div><div class="mini-back trip"><span class="label">☁️ What</span><span class="val">"Village in the sky"</span><span class="badge">🏆 Beautiful!</span></div></div></div>
-            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🏰</span><span class="name">Bruniquel</span><span class="type">45 min</span></div><div class="mini-back trip"><span class="label">🏰 What</span><span class="val">Cliff-top + castles</span></div></div></div>
-            <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🌻</span><span class="name">Lauzerte</span><span class="type">35 min</span></div><div class="mini-back trip"><span class="label">🌻 What</span><span class="val">Most beautiful village</span></div></div></div>
-        </div>
-    </section>
-
-    <!-- ─── MARKET ─── -->
-    <section>
-        <h2 class="section-title">🛍️ Market Day</h2>
-        <div class="market-card">
-            <div><span class="emoji">🟠</span><span class="name">Place Nationale Market</span><div class="info"><strong>Sunday 21 June</strong> · 08:00 – 13:00</div><div style="color:var(--olive);font-size:.85rem;">✅ You arrive Sunday — perfect timing! · Also Tue-Fri</div></div>
-            <div><span class="tag">⭐ Don't miss!</span></div>
-        </div>
-    </section>
-
-    <!-- ─── TRANSPORT ─── -->
-    <section>
-        <h2 class="section-title">🚆 Getting Around</h2>
-        <div class="transport">
-            <div><span class="label">🚆 Train</span><div class="detail">Gare de Montauban-Ville-Bourbon</div><div class="sub">Trains to Toulouse · 30-40 min</div></div>
-            <div><span class="label">🚶 Walk</span><div class="detail">Historic centre is walkable</div><div class="sub">Most sights within 15-20 min</div></div>
-            <div><span class="label">🚲 Bike</span><div class="detail">Rent at tourist office</div><div class="sub">Great for river paths</div></div>
-        </div>
-    </section>
-
-    <!-- ─── CONTACT ─── -->
-    <section>
-        <h2 class="section-title">📞 Contact</h2>
-        <div class="contact-grid">
-            <div class="contact"><div class="city">🏰 Montauban</div><div class="hotel">L'authentique</div><div class="phone">📞 +33 6 84 08 09 50</div></div>
-        </div>
-    </section>
-
-    <!-- ─── FOOTER ─── -->
-    <footer class="footer">
-        <p>🇫🇷 Montauban · 21–25 June 2026 · 4 Nights</p>
-        <p style="font-size:.65rem;margin-top:.3rem;letter-spacing:.5px;">✦ drag & drop · click cards to flip · click ✕ to delete ✦</p>
-    </footer>
-    <div class="border-bottom">✦ ✦ ✦</div>
-
-    <!-- ─── JAVASCRIPT ─── -->
-    <script>
-        // ─── CONFIG ───
-        const STORAGE_KEY = 'montaubanPhotos';
-        let images = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-        let currentSlide = 0;
-
-        // ─── DOM REFS ───
-        const $ = id => document.getElementById(id);
-        const drop = $('dropZone'),
-            fileInput = $('fileInput'),
-            clearBtn = $('clearAllBtn'),
-            grid = $('collageGrid'),
-            track = $('carouselTrack'),
-            dots = $('carouselDots'),
-            count = $('photoCount'),
-            overview = $('overviewCount');
-
-        // ─── RENDER CAROUSEL ───
-        function renderCarousel() {
-            track.innerHTML = '';
-            dots.innerHTML = '';
-
-            if (images.length === 0) {
-                track.innerHTML =
-                    `<div class="carousel-slide" style="background:#2C2C2C;"><div style="color:#E8DDD0;font-size:1.2rem;text-align:center;padding:1rem;">🌅 Drop photos to start your gallery</div></div>`;
-                currentSlide = 0;
-                return;
-            }
-
-            images.forEach((src, i) => {
-                const slide = document.createElement('div');
-                slide.className = 'carousel-slide';
-                slide.innerHTML =
-                    `<img src="${src}" loading="lazy" /><div class="caption"><strong>Montauban</strong> · Photo ${i+1}</div>`;
-                track.appendChild(slide);
-
-                const dot = document.createElement('span');
-                dot.onclick = () => goToSlide(i);
-                dots.appendChild(dot);
-            });
-
-            goToSlide(0);
-        }
-
-        // ─── CAROUSEL CONTROLS ───
-        function goToSlide(i) {
-            if (images.length === 0) return;
-            currentSlide = (i + images.length) % images.length;
-            track.style.transform = `translateX(-${currentSlide * 100}%)`;
-            document.querySelectorAll('#carouselDots span').forEach((d, idx) => {
-                d.classList.toggle('active', idx === currentSlide);
-            });
-        }
-
-        document.getElementById('nextBtn').onclick = () => goToSlide(currentSlide + 1);
-        document.getElementById('prevBtn').onclick = () => goToSlide(currentSlide - 1);
-        document.addEventListener('keydown', e => {
-            if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
-            if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
-        });
-
-        // ─── RENDER COLLAGE ───
-        function renderCollage() {
-            grid.innerHTML = images.length === 0 ?
-                `<div class="empty"><span>🖼️</span>No photos yet<br><span style="font-size:1rem;color:#A09080;">Drop some above</span></div>` :
-                images.map((src, i) =>
-                    `<div class="collage-item" onclick="window.open('${src}','_blank')">
-                                <img src="${src}" loading="lazy" />
-                                <span class="num">#${i+1}</span>
-                                <button class="del" onclick="event.stopPropagation();del(${i})">✕</button>
-                                <span class="cap">Montauban · Photo ${i+1}</span>
-                            </div>`
-                ).join('');
-            count.textContent = images.length;
-            overview.textContent = images.length;
-        }
-
-        // ─── RENDER ALL ───
-        function render() {
-            renderCarousel();
-            renderCollage();
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(images));
-        }
-
-        // ─── DELETE ───
-        function del(i) {
-            if (confirm(`Delete photo ${i+1}?`)) {
-                images.splice(i, 1);
-                render();
-            }
-        }
-
-        // ─── HANDLE FILES ───
-        function handle(files) {
-            let pending = 0,
-                newImages = [];
-            Array.from(files).forEach(f => {
-                if (!f.type.startsWith('image/')) return;
-                pending++;
-                const r = new FileReader();
-                r.onload = e => { newImages.push(e.target.result);
-                    pending-- || (images = images.concat(newImages), render()); };
-                r.readAsDataURL(f);
-            });
-        }
-
-        // ─── EVENTS ───
-        drop.onclick = () => fileInput.click();
-        fileInput.onchange = e => (handle(e.target.files), fileInput.value = '');
-        drop.ondragover = e => (e.preventDefault(), drop.classList.add('dragover'));
-        drop.ondragleave = () => drop.classList.remove('dragover');
-        drop.ondrop = e => (e.preventDefault(), drop.classList.remove('dragover'), handle(e.dataTransfer.files));
-        clearBtn.onclick = () => images.length && confirm('Delete all?') && (images = [], render());
-
-        // ─── INIT ───
-        render();
-    </script>
-</body>
-</html>
