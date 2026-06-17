@@ -4,213 +4,145 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>🏰 Montauban</title>
-
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: Arial, sans-serif;
             background: #FFF8F0;
-            padding: 20px;
-            max-width: 900px;
+            padding: 15px;
+            max-width: 1000px;
             margin: 0 auto;
         }
-
         h1 {
-            font-family: Georgia, serif;
-            color: #C67C5E;
             text-align: center;
+            color: #C67C5E;
             font-size: 2.5rem;
+            font-family: Georgia, serif;
         }
-
         .sub {
             text-align: center;
             color: #8A9A7A;
-            font-size: 1rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 3px;
         }
-
         .dates {
             display: block;
             text-align: center;
             background: #D4A373;
             color: #fff;
-            padding: 6px 20px;
+            padding: 5px 20px;
             border-radius: 40px;
             margin: 10px auto;
             max-width: 300px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
-
         .back-btn {
             display: block;
             text-align: center;
-            margin: 15px 0;
+            margin: 15px auto;
             padding: 10px 20px;
             background: #C67C5E;
             color: #fff;
             text-decoration: none;
             border-radius: 40px;
             max-width: 200px;
-            margin-left: auto;
-            margin-right: auto;
         }
-
-        .overview {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            background: #fff;
-            border-radius: 16px;
-            padding: 15px;
-            margin: 15px 0;
-            border: 2px solid #F0D5B0;
-            text-align: center;
+        .section-title {
+            font-size: 1.4rem;
+            color: #C67C5E;
+            font-family: Georgia, serif;
+            margin: 20px 0 5px;
         }
-
-        .overview-item .icon {
-            font-size: 1.5rem;
-            display: block;
-        }
-        .overview-item .label {
-            font-size: 0.6rem;
+        .section-sub {
             color: #8A9A7A;
-            text-transform: uppercase;
-        }
-        .overview-item .value {
-            font-size: 0.85rem;
-            font-weight: 600;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
         }
 
-        /* ─── CAROUSEL ─── */
-        .carousel-wrap {
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            background: #2C2C2C;
-            aspect-ratio: 16/9;
-            max-height: 350px;
+        /* ─── PHOTO GRID ─── */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
             margin: 15px 0;
         }
-
-        .carousel-track {
-            display: flex;
-            transition: transform 0.5s ease;
-            height: 100%;
-        }
-
-        .carousel-slide {
-            min-width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #2C2C2C;
+        .photo-item {
             position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 1/1;
+            background: #F0D5B0;
+            border: 2px solid #F0D5B0;
         }
-
-        .carousel-slide img {
+        .photo-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
-        .carousel-slide .caption {
+        .photo-item .num {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 15px;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            top: 6px;
+            left: 6px;
+            background: rgba(0, 0, 0, 0.7);
             color: #fff;
-            font-size: 0.85rem;
+            font-size: 0.7rem;
+            padding: 2px 10px;
+            border-radius: 20px;
         }
-
-        .carousel-btn {
+        .photo-item .del {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.85);
+            top: 6px;
+            right: 6px;
+            background: rgba(198, 124, 94, 0.9);
+            color: #fff;
             border: none;
             border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            z-index: 10;
-        }
-        .carousel-btn.prev {
-            left: 10px;
-        }
-        .carousel-btn.next {
-            right: 10px;
-        }
-
-        .carousel-dots {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin: 10px 0 15px;
-        }
-
-        .carousel-dots span {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #D4A373;
-            opacity: 0.4;
+            width: 28px;
+            height: 28px;
+            font-size: 0.7rem;
             cursor: pointer;
         }
-
-        .carousel-dots span.active {
-            opacity: 1;
-            background: #C67C5E;
+        .empty-state {
+            grid-column: 1/-1;
+            text-align: center;
+            padding: 40px 20px;
+            color: #A09080;
+            background: #F5E6D3;
+            border-radius: 16px;
+            border: 2px dashed #D4A373;
+        }
+        .empty-state span {
+            font-size: 3rem;
+            display: block;
         }
 
-        /* ─── DROP ZONE ─── */
-        .drop-zone {
+        /* ─── UPLOAD BUTTON ─── */
+        .upload-area {
             border: 3px dashed #D4A373;
             border-radius: 20px;
             padding: 30px 20px;
             text-align: center;
             background: #fff;
             margin: 15px 0;
-            cursor: pointer;
-            transition: 0.3s;
         }
-
-        .drop-zone:hover {
-            border-color: #C67C5E;
-            background: #FDF8F3;
-        }
-
-        .drop-zone .icon {
+        .upload-area .icon {
             font-size: 3rem;
             display: block;
         }
-
-        .drop-zone .main-text {
-            font-size: 1.2rem;
+        .upload-area .main {
+            font-size: 1.1rem;
             font-weight: 600;
             color: #2C2C2C;
-            margin-top: 5px;
         }
-
-        .drop-zone .sub-text {
+        .upload-area .sub {
             font-size: 0.8rem;
             color: #8A9A7A;
         }
-
-        .drop-zone input[type="file"] {
-            display: none;
-        }
-
-        /* ─── VISIBLE UPLOAD BUTTON ─── */
         .upload-btn {
             display: inline-block;
             padding: 12px 30px;
@@ -222,315 +154,37 @@
             font-weight: 600;
             cursor: pointer;
             margin-top: 10px;
-            transition: 0.3s;
         }
-
-        .upload-btn:hover {
-            background: #A86548;
-        }
-
         .upload-btn:active {
             transform: scale(0.95);
         }
+        #fileInput {
+            display: none;
+        }
 
-        /* ─── TOOLBAR ─── */
         .toolbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
             margin: 10px 0;
         }
-
-        .photo-count {
-            font-size: 1rem;
+        .count {
             font-weight: 600;
         }
-
-        .photo-count strong {
+        .count strong {
             color: #C67C5E;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
         }
-
         .btn-danger {
             padding: 8px 20px;
             background: #F5E6D3;
             border: none;
             border-radius: 40px;
-            font-size: 0.8rem;
             cursor: pointer;
-            transition: 0.3s;
         }
-
         .btn-danger:hover {
             background: #C67C5E;
             color: #fff;
-        }
-
-        /* ─── COLLAGE ─── */
-        .collage {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 10px;
-            margin: 15px 0;
-        }
-
-        .collage-item {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            aspect-ratio: 1/1;
-            background: #F0D5B0;
-            border: 2px solid #F0D5B0;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .collage-item:hover {
-            transform: scale(1.03);
-            border-color: #C67C5E;
-        }
-
-        .collage-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .collage-item .num {
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            background: rgba(0, 0, 0, 0.7);
-            color: #fff;
-            font-size: 0.7rem;
-            padding: 2px 10px;
-            border-radius: 20px;
-        }
-
-        .collage-item .del {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: rgba(198, 124, 94, 0.9);
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            width: 28px;
-            height: 28px;
-            font-size: 0.7rem;
-            cursor: pointer;
-            opacity: 0;
-            transition: 0.3s;
-        }
-
-        .collage-item:hover .del {
-            opacity: 1;
-        }
-
-        .empty-state {
-            grid-column: 1/-1;
-            text-align: center;
-            padding: 40px 20px;
-            color: #A09080;
-            background: #F5E6D3;
-            border-radius: 16px;
-            border: 2px dashed #D4A373;
-            font-size: 1.1rem;
-        }
-
-        .empty-state span {
-            font-size: 3rem;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        /* ─── FLIP CARDS ─── */
-        .flip-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 15px 0;
-        }
-
-        .flip-card {
-            perspective: 800px;
-            height: 220px;
-            cursor: pointer;
-        }
-
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-        }
-
-        .flip-card.flipped .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .flip-card-front,
-        .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 16px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            border: 2px solid #F0D5B0;
-            background: #fff;
-        }
-
-        .flip-card-front .emoji {
-            font-size: 2.5rem;
-        }
-
-        .flip-card-front .name {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #C67C5E;
-            margin-top: 5px;
-        }
-
-        .flip-card-back {
-            transform: rotateY(180deg);
-            background: #C67C5E;
-            color: #fff;
-            border-color: #C67C5E;
-        }
-
-        .flip-card-back .label {
-            font-size: 0.55rem;
-            text-transform: uppercase;
-            opacity: 0.7;
-        }
-
-        .flip-card-back .value {
-            font-size: 0.9rem;
-            font-weight: 500;
-            margin-bottom: 5px;
-        }
-
-        /* ─── MINI FLIP CARDS ─── */
-        .mini-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 10px;
-            margin: 15px 0;
-        }
-
-        .mini-card {
-            perspective: 600px;
-            height: 120px;
-            cursor: pointer;
-        }
-
-        .mini-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.5s;
-            transform-style: preserve-3d;
-        }
-
-        .mini-card.flipped .mini-card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .mini-card-front,
-        .mini-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 12px;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            border: 2px solid #F0D5B0;
-            background: #fff;
-        }
-
-        .mini-card-front .emoji {
-            font-size: 1.8rem;
-        }
-        .mini-card-front .name {
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-
-        .mini-card-back {
-            transform: rotateY(180deg);
-            color: #fff;
-        }
-
-        .mini-card-back .label {
-            font-size: 0.45rem;
-            text-transform: uppercase;
-            opacity: 0.7;
-        }
-        .mini-card-back .value {
-            font-size: 0.7rem;
-        }
-
-        .mini-card-back.food {
-            background: #C67C5E;
-        }
-        .mini-card-back.museum {
-            background: #8A9A7A;
-        }
-        .mini-card-back.landmark {
-            background: #D4A373;
-        }
-        .mini-card-back.trip {
-            background: #8B3A3A;
-        }
-
-        .section-title {
-            font-size: 1.6rem;
-            color: #C67C5E;
-            font-family: Georgia, serif;
-            margin: 25px 0 5px;
-        }
-
-        .section-sub {
-            color: #8A9A7A;
-            font-size: 0.85rem;
-            margin-bottom: 5px;
-        }
-
-        .market-card {
-            background: #fff;
-            border-radius: 14px;
-            padding: 15px;
-            border: 2px solid #F0D5B0;
-            margin: 10px 0;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 10px;
-            margin: 10px 0;
-        }
-
-        .contact {
-            background: #fff;
-            border-radius: 12px;
-            padding: 15px;
-            border: 2px solid #F0D5B0;
-            text-align: center;
         }
 
         .footer {
@@ -542,11 +196,147 @@
             font-size: 0.7rem;
         }
 
+        /* ─── FLIP CARDS ─── */
+        .flip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .flip {
+            perspective: 800px;
+            height: 200px;
+            cursor: pointer;
+        }
+        .flip-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+        }
+        .flip.flipped .flip-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-front,
+        .flip-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 16px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 2px solid #F0D5B0;
+            background: #fff;
+        }
+        .flip-front .emoji {
+            font-size: 2.5rem;
+        }
+        .flip-front .name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #C67C5E;
+        }
+        .flip-back {
+            transform: rotateY(180deg);
+            background: #C67C5E;
+            color: #fff;
+            border-color: #C67C5E;
+        }
+        .flip-back .label {
+            font-size: 0.5rem;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+        .flip-back .value {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .mini-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .mini {
+            perspective: 600px;
+            height: 110px;
+            cursor: pointer;
+        }
+        .mini-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.4s;
+            transform-style: preserve-3d;
+        }
+        .mini.flipped .mini-inner {
+            transform: rotateY(180deg);
+        }
+        .mini-front,
+        .mini-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 2px solid #F0D5B0;
+            background: #fff;
+        }
+        .mini-front .emoji {
+            font-size: 1.6rem;
+        }
+        .mini-front .name {
+            font-size: 0.65rem;
+            font-weight: 600;
+        }
+        .mini-back {
+            transform: rotateY(180deg);
+            color: #fff;
+        }
+        .mini-back .label {
+            font-size: 0.4rem;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+        .mini-back .value {
+            font-size: 0.65rem;
+        }
+        .mini-back.food {
+            background: #C67C5E;
+        }
+        .mini-back.museum {
+            background: #8A9A7A;
+        }
+        .mini-back.landmark {
+            background: #D4A373;
+        }
+        .mini-back.trip {
+            background: #8B3A3A;
+        }
+
+        .market-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 15px;
+            border: 2px solid #F0D5B0;
+            margin: 10px 0;
+        }
+
         @media (max-width: 600px) {
-            .overview {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .collage {
+            .photo-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
             .mini-grid {
@@ -555,23 +345,11 @@
             .flip-grid {
                 grid-template-columns: 1fr;
             }
-            .flip-card {
-                height: 180px;
-            }
-            .mini-card {
-                height: 100px;
+            .flip {
+                height: 170px;
             }
             h1 {
                 font-size: 2rem;
-            }
-            .carousel-wrap {
-                max-height: 220px;
-            }
-            .drop-zone {
-                padding: 20px 15px;
-            }
-            .drop-zone .main-text {
-                font-size: 1rem;
             }
         }
     </style>
@@ -579,455 +357,197 @@
 
 <body>
 
-    <!-- ============================================================
-    HEADER
-    ============================================================ -->
+    <!-- ============ HEADER ============ -->
     <h1>🏰 Montauban</h1>
     <p class="sub">The Pink Brick Gem</p>
     <span class="dates">📅 21 – 25 June 2026 · 4 Nights</span>
 
     <a href="index.html" class="back-btn">← Back to All Cities</a>
 
-    <!-- ============================================================
-    OVERVIEW
-    ============================================================ -->
-    <div class="overview">
-        <div class="overview-item">
-            <span class="icon">🏨</span>
-            <span class="label">Hotel</span>
-            <span class="value">L'authentique</span>
-        </div>
-        <div class="overview-item">
-            <span class="icon">📅</span>
-            <span class="label">Dates</span>
-            <span class="value">21–25 Jun</span>
-        </div>
-        <div class="overview-item">
-            <span class="icon">🌙</span>
-            <span class="label">Nights</span>
-            <span class="value">4</span>
-        </div>
-        <div class="overview-item">
-            <span class="icon">📸</span>
-            <span class="label">Photos</span>
-            <span class="value" id="photoCountDisplay">0</span>
-        </div>
+    <!-- ============ OVERVIEW ============ -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;background:#fff;border-radius:16px;padding:15px;margin:15px 0;border:2px solid #F0D5B0;text-align:center;">
+        <div><span style="font-size:1.5rem;display:block;">🏨</span><span style="font-size:0.6rem;color:#8A9A7A;text-transform:uppercase;">Hotel</span><br><span style="font-weight:600;">L'authentique</span></div>
+        <div><span style="font-size:1.5rem;display:block;">📅</span><span style="font-size:0.6rem;color:#8A9A7A;text-transform:uppercase;">Dates</span><br><span style="font-weight:600;">21–25 Jun</span></div>
+        <div><span style="font-size:1.5rem;display:block;">🌙</span><span style="font-size:0.6rem;color:#8A9A7A;text-transform:uppercase;">Nights</span><br><span style="font-weight:600;">4</span></div>
+        <div><span style="font-size:1.5rem;display:block;">📸</span><span style="font-size:0.6rem;color:#8A9A7A;text-transform:uppercase;">Photos</span><br><span style="font-weight:600;" id="photoCountDisplay">0</span></div>
     </div>
 
-    <!-- ============================================================
-    CAROUSEL
-    ============================================================ -->
-    <h2 class="section-title">🎠 Gallery</h2>
-    <p class="section-sub">Swipe through your photos</p>
-
-    <div class="carousel-wrap">
-        <div class="carousel-track" id="carouselTrack">
-            <div class="carousel-slide" style="background:#2C2C2C;">
-                <div style="color:#E8DDD0; font-size:1.1rem; text-align:center; padding:20px;">
-                    🌅 Add photos below
-                </div>
-            </div>
-        </div>
-        <button class="carousel-btn prev" id="prevBtn">‹</button>
-        <button class="carousel-btn next" id="nextBtn">›</button>
-    </div>
-    <div class="carousel-dots" id="carouselDots"></div>
-
-    <!-- ============================================================
-    DROP ZONE — THIS IS THE IMPORTANT PART
-    ============================================================ -->
+    <!-- ============ UPLOAD AREA ============ -->
     <h2 class="section-title">📸 Add Your Photos</h2>
-    <p class="section-sub">Click the button below to select photos from your device</p>
+    <p class="section-sub">Click the button below to select photos</p>
 
-    <div class="drop-zone" id="dropZone">
+    <div class="upload-area" id="dropZone">
         <span class="icon">🖼️</span>
-        <p class="main-text">Click here or press the button below</p>
-        <p class="sub-text">JPG, PNG, WEBP — multiple photos allowed</p>
-        <input type="file" id="fileInput" accept="image/*" multiple />
-
-        <!-- THIS BUTTON MAKES IT WORK ON PHONE -->
+        <p class="main">Click here or press the button below</p>
+        <p class="sub">JPG, PNG, WEBP — multiple photos allowed</p>
         <button class="upload-btn" id="chooseBtn">📸 Choose Photos</button>
+        <input type="file" id="fileInput" accept="image/*" multiple />
     </div>
 
     <div class="toolbar">
-        <span class="photo-count">📷 <strong id="photoCount">0</strong> photos</span>
+        <span class="count">📷 <strong id="photoCount">0</strong> photos</span>
         <button class="btn-danger" id="clearAllBtn">🗑️ Clear All</button>
     </div>
 
-    <!-- ============================================================
-    COLLAGE
-    ============================================================ -->
-    <h2 class="section-title">🖼️ Photo Collage</h2>
+    <!-- ============ PHOTO GRID ============ -->
+    <h2 class="section-title">🖼️ Your Photos</h2>
     <p class="section-sub">Click a photo to view full size</p>
 
-    <div class="collage" id="collageGrid">
-        <div class="empty-state">
-            <span>🖼️</span>
-            No photos yet<br>
-            <span style="font-size:0.85rem; color:#A09080;">Click "Choose Photos" above</span>
-        </div>
+    <div class="photo-grid" id="photoGrid">
+        <div class="empty-state"><span>🖼️</span>No photos yet<br><span style="font-size:0.8rem;color:#A09080;">Click "Choose Photos" above</span></div>
     </div>
 
-    <!-- ============================================================
-    ACCOMMODATION
-    ============================================================ -->
+    <!-- ============ ACCOMMODATION ============ -->
     <h2 class="section-title">🏨 Where We're Staying</h2>
     <p class="section-sub">👆 Click to flip</p>
 
     <div class="flip-grid">
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <span class="emoji">🏰</span>
-                    <span class="name">L'authentique</span>
-                    <span style="font-size:0.8rem; color:#8A9A7A;">Montauban</span>
-                </div>
-                <div class="flip-card-back">
-                    <span class="label">📍 Address</span>
-                    <span class="value">34 Rue Bessières, 82000</span>
-                    <span class="label">📅 Stay</span>
-                    <span class="value">21–25 Jun · 4 nights</span>
-                    <span class="label">📞 Phone</span>
-                    <span class="value">+33 6 84 08 09 50</span>
-                </div>
+        <div class="flip" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+                <div class="flip-front"><span class="emoji">🏰</span><span class="name">L'authentique</span><span style="font-size:0.8rem;color:#8A9A7A;">Montauban</span></div>
+                <div class="flip-back"><span class="label">📍 Address</span><span class="value">34 Rue Bessières, 82000</span><span class="label">📅 Stay</span><span class="value">21–25 Jun · 4 nights</span><span class="label">📞 Phone</span><span class="value">+33 6 84 08 09 50</span></div>
             </div>
         </div>
     </div>
 
-    <!-- ============================================================
-    FOOD
-    ============================================================ -->
+    <!-- ============ FOOD ============ -->
     <h2 class="section-title">🍽️ Food Targets</h2>
     <p class="section-sub">👆 Click to flip</p>
-
     <div class="mini-grid">
-        <div class="mini-card" onclick="this.classList.toggle('flipped')">
-            <div class="mini-card-inner">
-                <div class="mini-card-front"><span class="emoji">🍕</span><span class="name">IL POPOLO</span></div>
-                <div class="mini-card-back food"><span class="label">Order</span><span class="value">Pizza · Italian</span></div>
-            </div>
-        </div>
-        <div class="mini-card" onclick="this.classList.toggle('flipped')">
-            <div class="mini-card-inner">
-                <div class="mini-card-front"><span class="emoji">🍫</span><span class="name">Pascal Caffet</span></div>
-                <div class="mini-card-back food"><span class="label">Get</span><span class="value">Chocolates · Pastries</span></div>
-            </div>
-        </div>
-        <div class="mini-card" onclick="this.classList.toggle('flipped')">
-            <div class="mini-card-inner">
-                <div class="mini-card-front"><span class="emoji">🦆</span><span class="name">Le Saint-Martial</span></div>
-                <div class="mini-card-back food"><span class="label">Order</span><span class="value">Duck Confit</span></div>
-            </div>
-        </div>
-        <div class="mini-card" onclick="this.classList.toggle('flipped')">
-            <div class="mini-card-inner">
-                <div class="mini-card-front"><span class="emoji">🍷</span><span class="name">Le Tonneau</span></div>
-                <div class="mini-card-back food"><span class="label">Get</span><span class="value">Beer selection</span></div>
-            </div>
-        </div>
+        <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🍕</span><span class="name">IL POPOLO</span></div><div class="mini-back food"><span class="label">Order</span><span class="value">Pizza</span></div></div></div>
+        <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🍫</span><span class="name">Pascal Caffet</span></div><div class="mini-back food"><span class="label">Get</span><span class="value">Chocolates</span></div></div></div>
+        <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🦆</span><span class="name">Le Saint-Martial</span></div><div class="mini-back food"><span class="label">Order</span><span class="value">Duck Confit</span></div></div></div>
+        <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🍷</span><span class="name">Le Tonneau</span></div><div class="mini-back food"><span class="label">Get</span><span class="value">Beer</span></div></div></div>
     </div>
 
-    <!-- ============================================================
-    MUSEUMS
-    ============================================================ -->
+    <!-- ============ MUSEUMS ============ -->
     <h2 class="section-title">🏛️ Museums</h2>
     <p class="section-sub">👆 Click to flip</p>
-
     <div class="mini-grid">
-        <div class="mini-card" onclick="this.classList.toggle('flipped')">
-            <div class="mini-card-inner">
-                <div class="mini-card-front"><span class="emoji">🎨</span><span class="name">Ingres-Bourdelle</span></div>
-                <div class="mini-card-back museum"><span class="label">Inside</span><span class="value">4,500+ drawings</span></div>
-            </div>
-        </div>
-        <div class="mini-card" onclick="this.classList.toggle('flipped')">
-            <div class="mini-card-inner">
-                <div class="mini-card-front"><span class="emoji">🕊️</span><span class="name">Résistance</span></div>
-                <div class="mini-card-back museum"><span class="label">About</span><span class="value">WWII memorial</span></div>
-            </div>
-        </div>
-        <div class="mini-card" onclick="this.classList.toggle('flipped')">
-            <div class="mini-card-inner">
-                <div class="mini-card-front"><span class="emoji">🦜</span><span class="name">Histoire Naturelle</span></div>
-                <div class="mini-card-back museum"><span class="label">Inside</span><span class="value">3,000 bird specimens</span></div>
-            </div>
-        </div>
-        <div class="mini-card" onclick="this.classList.toggle('flipped')">
-            <div class="mini-card-inner">
-                <div class="mini-card-front"><span class="emoji">🧸</span><span class="name">Musée des Jouets</span></div>
-                <div class="mini-card-back museum"><span class="label">Inside</span><span class="value">Vintage toys</span></div>
-            </div>
-        </div>
+        <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🎨</span><span class="name">Ingres-Bourdelle</span></div><div class="mini-back museum"><span class="label">Inside</span><span class="value">4,500 drawings</span></div></div></div>
+        <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🕊️</span><span class="name">Résistance</span></div><div class="mini-back museum"><span class="label">About</span><span class="value">WWII memorial</span></div></div></div>
+        <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🦜</span><span class="name">Histoire Naturelle</span></div><div class="mini-back museum"><span class="label">Inside</span><span class="value">3,000 birds</span></div></div></div>
+        <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🧸</span><span class="name">Musée des Jouets</span></div><div class="mini-back museum"><span class="label">Inside</span><span class="value">Vintage toys</span></div></div></div>
     </div>
 
-    <!-- ============================================================
-    LANDMARKS
-    ============================================================ -->
+    <!-- ============ LANDMARKS ============ -->
     <h2 class="section-title">📍 Landmarks</h2>
     <p class="section-sub">👆 Click to flip</p>
-
     <div class="mini-grid">
-        <div class="mini-card" onclick="this.classList.toggle('flipped')">
-            <div class="mini-card-inner">
-                <div class="mini-card-front"><span class="emoji">🟠</span><span class="name">Place Nationale</span></div>
-                <div class="mini-card-back landmark"><span class="label">What</span><span class="value">Pink brick arcades</span></div>
-            </div>
-        </div>
-        <div class="mini-card" onclick="this.classList.toggle('flipped')">
-            <div class="mini-card-inner">
-                <div class="mini-card-front"><span class="emoji">🌉</span><span class="name">Pont Vieux</span></div>
-                <div class="mini-card-back landmark"><span class="label">What</span><span class="value">14th-century bridge</span></div>
-            </div>
-        </div>
-        <div class="mini-card" onclick="this.classList.toggle('flipped')">
-            <div class="mini-card-inner">
-                <div class="mini-card-front"><span class="emoji">⛪</span><span class="name">Notre-Dame</span></div>
-                <div class="mini-card-back landmark"><span class="label">Inside</span><span class="value">Ingres painting</span></div>
-            </div>
-        </div>
-        <div class="mini-card" onclick="this.classList.toggle('flipped')">
-            <div class="mini-card-inner">
-                <div class="mini-card-front"><span class="emoji">🌿</span><span class="name">Couvent des Carmes</span></div>
-                <div class="mini-card-back landmark"><span class="label">What</span><span class="value">Medieval garden</span></div>
-            </div>
-        </div>
+        <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🟠</span><span class="name">Place Nationale</span></div><div class="mini-back landmark"><span class="label">What</span><span class="value">Pink brick arcades</span></div></div></div>
+        <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🌉</span><span class="name">Pont Vieux</span></div><div class="mini-back landmark"><span class="label">What</span><span class="value">14th-century bridge</span></div></div></div>
+        <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">⛪</span><span class="name">Notre-Dame</span></div><div class="mini-back landmark"><span class="label">Inside</span><span class="value">Ingres painting</span></div></div></div>
+        <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🌿</span><span class="name">Couvent des Carmes</span></div><div class="mini-back landmark"><span class="label">What</span><span class="value">Medieval garden</span></div></div></div>
     </div>
 
-    <!-- ============================================================
-    PARKS
-    ============================================================ -->
+    <!-- ============ PARKS ============ -->
     <h2 class="section-title">🌳 Parks & River Walks</h2>
     <p class="section-sub">👆 Click to flip</p>
-
     <div class="mini-grid">
-        <div class="mini-card" onclick="this.classList.toggle('flipped')">
-            <div class="mini-card-inner">
-                <div class="mini-card-front"><span class="emoji">🌊</span><span class="name">Berges du Tarn</span></div>
-                <div class="mini-card-back landmark"><span class="label">What</span><span class="value">Walking paths</span></div>
-            </div>
-        </div>
-        <div class="mini-card" onclick="this.classList.toggle('flipped')">
-            <div class="mini-card-inner">
-                <div class="mini-card-front"><span class="emoji">🌸</span><span class="name">Jardin des Plantes</span></div>
-                <div class="mini-card-back landmark"><span class="label">Vibe</span><span class="value">Peaceful · shaded</span></div>
-            </div>
-        </div>
-        <div class="mini-card" onclick="this.classList.toggle('flipped')">
-            <div class="mini-card-inner">
-                <div class="mini-card-front"><span class="emoji">🚤</span><span class="name">Port Canal</span></div>
-                <div class="mini-card-back landmark"><span class="label">What</span><span class="value">Watch barges</span></div>
-            </div>
-        </div>
+        <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🌊</span><span class="name">Berges du Tarn</span></div><div class="mini-back landmark"><span class="label">What</span><span class="value">Walking paths</span></div></div></div>
+        <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🌸</span><span class="name">Jardin des Plantes</span></div><div class="mini-back landmark"><span class="label">Vibe</span><span class="value">Peaceful</span></div></div></div>
+        <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🚤</span><span class="name">Port Canal</span></div><div class="mini-back landmark"><span class="label">What</span><span class="value">Watch barges</span></div></div></div>
     </div>
 
-    <!-- ============================================================
-    DAY TRIPS
-    ============================================================ -->
+    <!-- ============ DAY TRIPS ============ -->
     <h2 class="section-title">🚗 Day Trips</h2>
     <p class="section-sub">👆 Click to flip</p>
-
     <div class="mini-grid">
-        <div class="mini-card" onclick="this.classList.toggle('flipped')">
-            <div class="mini-card-inner">
-                <div class="mini-card-front"><span class="emoji">⛪</span><span class="name">Moissac Abbey</span></div>
-                <div class="mini-card-back trip"><span class="label">What</span><span class="value">UNESCO cloister</span></div>
-            </div>
-        </div>
-        <div class="mini-card" onclick="this.classList.toggle('flipped')">
-            <div class="mini-card-inner">
-                <div class="mini-card-front"><span class="emoji">🏞️</span><span class="name">Saint-Antonin</span></div>
-                <div class="mini-card-back trip"><span class="label">What</span><span class="value">Medieval village</span></div>
-            </div>
-        </div>
-        <div class="mini-card" onclick="this.classList.toggle('flipped')">
-            <div class="mini-card-inner">
-                <div class="mini-card-front"><span class="emoji">☁️</span><span class="name">Cordes-sur-Ciel</span></div>
-                <div class="mini-card-back trip"><span class="label">What</span><span class="value">"Village in the sky"</span></div>
-            </div>
-        </div>
-        <div class="mini-card" onclick="this.classList.toggle('flipped')">
-            <div class="mini-card-inner">
-                <div class="mini-card-front"><span class="emoji">🏰</span><span class="name">Bruniquel</span></div>
-                <div class="mini-card-back trip"><span class="label">What</span><span class="value">Cliff-top + castles</span></div>
-            </div>
-        </div>
-        <div class="mini-card" onclick="this.classList.toggle('flipped')">
-            <div class="mini-card-inner">
-                <div class="mini-card-front"><span class="emoji">🌻</span><span class="name">Lauzerte</span></div>
-                <div class="mini-card-back trip"><span class="label">What</span><span class="value">Most beautiful village</span></div>
-            </div>
-        </div>
+        <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">⛪</span><span class="name">Moissac Abbey</span></div><div class="mini-back trip"><span class="label">What</span><span class="value">UNESCO cloister</span></div></div></div>
+        <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🏞️</span><span class="name">Saint-Antonin</span></div><div class="mini-back trip"><span class="label">What</span><span class="value">Medieval village</span></div></div></div>
+        <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">☁️</span><span class="name">Cordes-sur-Ciel</span></div><div class="mini-back trip"><span class="label">What</span><span class="value">"Village in the sky"</span></div></div></div>
+        <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🏰</span><span class="name">Bruniquel</span></div><div class="mini-back trip"><span class="label">What</span><span class="value">Cliff-top castles</span></div></div></div>
+        <div class="mini" onclick="this.classList.toggle('flipped')"><div class="mini-inner"><div class="mini-front"><span class="emoji">🌻</span><span class="name">Lauzerte</span></div><div class="mini-back trip"><span class="label">What</span><span class="value">Most beautiful village</span></div></div></div>
     </div>
 
-    <!-- ============================================================
-    MARKET
-    ============================================================ -->
+    <!-- ============ MARKET ============ -->
     <h2 class="section-title">🛍️ Market Day</h2>
-
     <div class="market-card">
         <span style="font-size:1.8rem;">🟠</span>
-        <span style="font-weight:600; font-size:1.1rem; color:#C67C5E;">Place Nationale Market</span>
+        <span style="font-weight:600;font-size:1.1rem;color:#C67C5E;">Place Nationale Market</span>
         <p style="font-size:0.9rem;"><strong>Sunday 21 June</strong> · 08:00 – 13:00</p>
-        <p style="color:#8A9A7A; font-size:0.85rem;">✅ You arrive Sunday — perfect timing!</p>
+        <p style="color:#8A9A7A;font-size:0.85rem;">✅ You arrive Sunday — perfect timing!</p>
     </div>
 
-    <!-- ============================================================
-    TRANSPORT
-    ============================================================ -->
+    <!-- ============ TRANSPORT ============ -->
     <h2 class="section-title">🚆 Getting Around</h2>
-
-    <div style="background:#fff; border-radius:14px; padding:15px; border:2px solid #F0D5B0; margin:10px 0;">
-        <p style="font-size:0.9rem;"><strong>🚆 Train:</strong> Gare de Montauban-Ville-Bourbon · Trains to Toulouse (30-40 min)</p>
-        <p style="font-size:0.9rem;"><strong>🚶 Walk:</strong> Historic centre is walkable · Most sights within 15-20 min</p>
-        <p style="font-size:0.9rem;"><strong>🚲 Bike:</strong> Rent at tourist office · Great for river paths</p>
+    <div style="background:#fff;border-radius:14px;padding:15px;border:2px solid #F0D5B0;margin:10px 0;">
+        <p style="font-size:0.9rem;"><strong>🚆 Train:</strong> Gare de Montauban-Ville-Bourbon</p>
+        <p style="font-size:0.9rem;"><strong>🚶 Walk:</strong> Historic centre is walkable</p>
+        <p style="font-size:0.9rem;"><strong>🚲 Bike:</strong> Rent at tourist office</p>
     </div>
 
-    <!-- ============================================================
-    CONTACT
-    ============================================================ -->
+    <!-- ============ CONTACT ============ -->
     <h2 class="section-title">📞 Contact</h2>
-
-    <div class="contact-grid">
-        <div class="contact">
-            <div style="font-weight:600; color:#C67C5E;">🏰 Montauban</div>
-            <div style="font-size:0.9rem;">L'authentique</div>
-            <div style="font-size:0.85rem;">📞 +33 6 84 08 09 50</div>
-        </div>
+    <div style="background:#fff;border-radius:14px;padding:15px;border:2px solid #F0D5B0;text-align:center;margin:10px 0;">
+        <div style="font-weight:600;color:#C67C5E;">🏰 Montauban</div>
+        <div style="font-size:0.9rem;">L'authentique</div>
+        <div style="font-size:0.85rem;">📞 +33 6 84 08 09 50</div>
     </div>
 
-    <!-- ============================================================
-    BACK BUTTON
-    ============================================================ -->
     <a href="index.html" class="back-btn">← Back to All Cities</a>
 
-    <!-- ============================================================
-    FOOTER
-    ============================================================ -->
     <div class="footer">
         <p>🏰 Montauban · 21–25 June 2026 · 4 Nights</p>
-        <p style="font-size:0.6rem; margin-top:5px;">✨ Click "Choose Photos" to add photos · Click cards to flip ✨</p>
+        <p style="font-size:0.6rem;margin-top:5px;">✨ Click "Choose Photos" to add photos · Click cards to flip ✨</p>
     </div>
 
     <!-- ============================================================
-    JAVASCRIPT — SIMPLE & WORKING
+    JAVASCRIPT — SIMPLE AND WORKING
     ============================================================ -->
     <script>
-        // ─── STORAGE ───
-        const STORAGE_KEY = 'montaubanPhotos';
-        let images = [];
+        // ─── SIMPLE PHOTO STORAGE ───
+        let photos = [];
 
-        // ─── LOAD SAVED PHOTOS ───
-        function loadPhotos() {
-            try {
-                const saved = localStorage.getItem(STORAGE_KEY);
-                if (saved) {
-                    images = JSON.parse(saved);
-                }
-            } catch (e) {
-                images = [];
+        // Try to load saved photos
+        try {
+            const saved = localStorage.getItem('montaubanPhotos');
+            if (saved) photos = JSON.parse(saved);
+        } catch (e) {}
+
+        // ─── RENDER PHOTOS ───
+        function renderPhotos() {
+            const grid = document.getElementById('photoGrid');
+            grid.innerHTML = '';
+
+            if (photos.length === 0) {
+                grid.innerHTML =
+                    `<div class="empty-state"><span>🖼️</span>No photos yet<br><span style="font-size:0.8rem;color:#A09080;">Click "Choose Photos" above</span></div>`;
+                document.getElementById('photoCount').textContent = '0';
+                document.getElementById('photoCountDisplay').textContent = '0';
+                return;
             }
-            renderAll();
+
+            photos.forEach((src, i) => {
+                const div = document.createElement('div');
+                div.className = 'photo-item';
+                div.innerHTML = `
+                    <img src="${src}" loading="lazy" />
+                    <span class="num">#${i+1}</span>
+                    <button class="del" onclick="event.stopPropagation(); deletePhoto(${i})">✕</button>
+                `;
+                div.onclick = () => window.open(src, '_blank');
+                grid.appendChild(div);
+            });
+
+            document.getElementById('photoCount').textContent = photos.length;
+            document.getElementById('photoCountDisplay').textContent = photos.length;
+        }
+
+        // ─── DELETE PHOTO ───
+        function deletePhoto(index) {
+            if (confirm('Delete this photo?')) {
+                photos.splice(index, 1);
+                savePhotos();
+                renderPhotos();
+            }
         }
 
         // ─── SAVE PHOTOS ───
         function savePhotos() {
             try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(images));
-            } catch (e) {
-                console.log('Could not save photos');
-            }
-            renderAll();
-        }
-
-        // ─── RENDER EVERYTHING ───
-        function renderAll() {
-            renderCarousel();
-            renderCollage();
-            updateCounts();
-        }
-
-        // ─── UPDATE COUNTS ───
-        function updateCounts() {
-            document.getElementById('photoCount').textContent = images.length;
-            document.getElementById('photoCountDisplay').textContent = images.length;
-        }
-
-        // ─── RENDER CAROUSEL ───
-        function renderCarousel() {
-            const track = document.getElementById('carouselTrack');
-            const dots = document.getElementById('carouselDots');
-            track.innerHTML = '';
-            dots.innerHTML = '';
-
-            if (images.length === 0) {
-                track.innerHTML =
-                    `<div class="carousel-slide" style="background:#2C2C2C;"><div style="color:#E8DDD0; font-size:1.1rem; text-align:center; padding:20px;">🌅 Add photos below</div></div>`;
-                return;
-            }
-
-            images.forEach((src, i) => {
-                const slide = document.createElement('div');
-                slide.className = 'carousel-slide';
-                slide.innerHTML =
-                    `<img src="${src}" loading="lazy" /><div class="caption">Montauban · Photo ${i+1}</div>`;
-                track.appendChild(slide);
-
-                const dot = document.createElement('span');
-                dot.onclick = () => goToSlide(i);
-                dots.appendChild(dot);
-            });
-
-            goToSlide(0);
-        }
-
-        // ─── CAROUSEL CONTROLS ───
-        let currentSlide = 0;
-
-        function goToSlide(i) {
-            if (images.length === 0) return;
-            currentSlide = (i + images.length) % images.length;
-            const track = document.getElementById('carouselTrack');
-            track.style.transform = `translateX(-${currentSlide * 100}%)`;
-            const dots = document.querySelectorAll('#carouselDots span');
-            dots.forEach((d, idx) => {
-                d.classList.toggle('active', idx === currentSlide);
-            });
-        }
-
-        document.getElementById('prevBtn').onclick = () => goToSlide(currentSlide - 1);
-        document.getElementById('nextBtn').onclick = () => goToSlide(currentSlide + 1);
-
-        // ─── RENDER COLLAGE ───
-        function renderCollage() {
-            const grid = document.getElementById('collageGrid');
-            grid.innerHTML = '';
-
-            if (images.length === 0) {
-                grid.innerHTML =
-                    `<div class="empty-state"><span>🖼️</span>No photos yet<br><span style="font-size:0.85rem; color:#A09080;">Click "Choose Photos" above</span></div>`;
-                return;
-            }
-
-            images.forEach((src, i) => {
-                const item = document.createElement('div');
-                item.className = 'collage-item';
-                item.innerHTML = `
-                    <img src="${src}" loading="lazy" />
-                    <span class="num">#${i+1}</span>
-                    <button class="del" onclick="event.stopPropagation(); deletePhoto(${i})">✕</button>
-                `;
-                item.onclick = () => window.open(src, '_blank');
-                grid.appendChild(item);
-            });
-        }
-
-        // ─── DELETE PHOTO ───
-        function deletePhoto(i) {
-            if (confirm(`Delete photo ${i+1}?`)) {
-                images.splice(i, 1);
-                savePhotos();
-                renderAll();
-            }
+                localStorage.setItem('montaubanPhotos', JSON.stringify(photos));
+            } catch (e) {}
         }
 
         // ─── HANDLE FILE UPLOAD ───
@@ -1038,19 +558,19 @@
             }
 
             let pending = 0;
-            let newImages = [];
+            let newPhotos = [];
 
             for (let f of files) {
                 if (!f.type.startsWith('image/')) continue;
                 pending++;
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    newImages.push(e.target.result);
+                    newPhotos.push(e.target.result);
                     pending--;
                     if (pending === 0) {
-                        images = images.concat(newImages);
+                        photos = photos.concat(newPhotos);
                         savePhotos();
-                        renderAll();
+                        renderPhotos();
                     }
                 };
                 reader.onerror = function() {
@@ -1060,7 +580,7 @@
                 reader.readAsDataURL(f);
             }
 
-            if (pending === 0 && newImages.length === 0) {
+            if (pending === 0 && newPhotos.length === 0) {
                 alert('Please select image files (JPG, PNG, WEBP)');
             }
         }
@@ -1068,14 +588,13 @@
         // ─── SETUP EVENTS ───
         function setupEvents() {
             const chooseBtn = document.getElementById('chooseBtn');
-            const dropZone = document.getElementById('dropZone');
             const fileInput = document.getElementById('fileInput');
+            const dropZone = document.getElementById('dropZone');
             const clearBtn = document.getElementById('clearAllBtn');
 
             // Button click — opens file picker
             chooseBtn.addEventListener('click', function(e) {
                 e.preventDefault();
-                e.stopPropagation();
                 fileInput.click();
             });
 
@@ -1085,7 +604,7 @@
                 fileInput.click();
             });
 
-            // File input change — processes the selected files
+            // File input change — processes files
             fileInput.addEventListener('change', function(e) {
                 if (this.files && this.files.length > 0) {
                     handleFiles(this.files);
@@ -1093,7 +612,7 @@
                 }
             });
 
-            // Drag and drop — for computer
+            // Drag and drop (computer only)
             dropZone.addEventListener('dragover', function(e) {
                 e.preventDefault();
                 this.style.borderColor = '#C67C5E';
@@ -1116,17 +635,17 @@
 
             // Clear all
             clearBtn.addEventListener('click', function() {
-                if (images.length === 0) return;
+                if (photos.length === 0) return;
                 if (confirm('Delete all photos?')) {
-                    images = [];
+                    photos = [];
                     savePhotos();
-                    renderAll();
+                    renderPhotos();
                 }
             });
         }
 
         // ─── START ───
-        loadPhotos();
+        renderPhotos();
         setupEvents();
     </script>
 
