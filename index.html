@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FRANCE 2026</title>
+    <title>🏰 Montauban · France 2026</title>
 
     <style>
         /* ============================================================
-           🎨 1. FONTS
+           🎨 FONTS
            ============================================================ */
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
 
         /* ============================================================
-           🎨 2. RESET & BASE
+           🎨 RESET & BASE
            ============================================================ */
         * {
             margin: 0;
@@ -22,37 +22,70 @@
 
         body {
             font-family: 'Inter', -apple-system, sans-serif;
-            background: #FCF8F3;
+            background: #FFF8F0;
             color: #1E1E2A;
-            padding: 1.5rem;
-            max-width: 1300px;
+            padding: 2rem 1.5rem;
+            max-width: 1200px;
             margin: 0 auto;
             line-height: 1.6;
             min-height: 100vh;
+            position: relative;
         }
 
         /* ============================================================
-           🎨 3. FUN DECORATIVE ELEMENTS
+           🖼️ EUROPEAN DECORATIVE BORDER
            ============================================================ */
-        /* Floating confetti-like dots */
         body::before {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image:
-                radial-gradient(circle at 10% 20%, #D4A373 1px, transparent 1px),
-                radial-gradient(circle at 80% 10%, #C67C5E 1px, transparent 1px),
-                radial-gradient(circle at 30% 90%, #8A9A7A 1px, transparent 1px),
-                radial-gradient(circle at 70% 70%, #D4A373 1px, transparent 1px),
-                radial-gradient(circle at 5% 50%, #C67C5E 1px, transparent 1px),
-                radial-gradient(circle at 95% 40%, #8A9A7A 1px, transparent 1px);
-            background-size: 200px 200px;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 3px solid #C67C5E;
+            border-radius: 30px;
             pointer-events: none;
             z-index: 0;
-            opacity: 0.15;
+            box-shadow:
+                inset 0 0 60px rgba(198, 124, 94, 0.06),
+                0 0 60px rgba(198, 124, 94, 0.04);
+        }
+
+        /* Decorative corner flourishes */
+        body::after {
+            content: '✦ ✦ ✦ ✦ ✦';
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #D4A373;
+            font-size: 0.7rem;
+            letter-spacing: 10px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Top decorative line */
+        .top-border {
+            text-align: center;
+            color: #D4A373;
+            font-size: 1.2rem;
+            letter-spacing: 20px;
+            margin-bottom: 0.5rem;
+            opacity: 0.3;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .bottom-border {
+            text-align: center;
+            color: #D4A373;
+            font-size: 1.2rem;
+            letter-spacing: 20px;
+            margin-top: 2rem;
+            opacity: 0.3;
+            font-family: 'Playfair Display', serif;
         }
 
         * {
@@ -61,167 +94,91 @@
         }
 
         /* ============================================================
-           🏠 4. HEADER
+           🎨 BOLD COLOR PALETTE
+           ============================================================ */
+        :root {
+            --terracotta: #C67C5E;
+            --terracotta-dark: #A86548;
+            --gold: #D4A373;
+            --gold-light: #F0D5B0;
+            --olive: #8A9A7A;
+            --cream: #FFF8F0;
+            --warm-white: #FDF8F3;
+            --charcoal: #2C2C2C;
+            --soft-pink: #F5E6D3;
+            --burgundy: #8B3A3A;
+        }
+
+        /* ============================================================
+           🏠 HEADER
            ============================================================ */
         .header {
             text-align: center;
-            padding: 1rem 0 2rem;
+            padding: 1rem 0 1.5rem;
             margin-bottom: 1.5rem;
+        }
+
+        .header .city-badge {
+            display: inline-block;
+            background: var(--terracotta);
+            color: white;
+            padding: 0.2rem 1.5rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
         }
 
         .header h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 5rem;
+            font-size: 4rem;
             font-weight: 700;
-            color: #C67C5E;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            animation: fadeInDown 0.8s ease;
+            color: var(--terracotta);
+            letter-spacing: 4px;
         }
 
         .header h1 span {
-            color: #D4A373;
+            color: var(--gold);
             font-weight: 400;
             font-style: italic;
         }
 
         .header .tagline {
-            font-size: 1.1rem;
-            color: #8A9A7A;
-            margin-top: 0.2rem;
+            font-size: 1rem;
+            color: var(--olive);
             font-weight: 300;
-            letter-spacing: 6px;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            animation: fadeInUp 0.8s ease 0.2s both;
         }
 
         .header .dates {
             display: inline-block;
-            margin-top: 0.6rem;
-            padding: 0.4rem 2.5rem;
-            background: linear-gradient(135deg, #C67C5E, #D4A373);
-            color: #FDF8F3;
+            margin-top: 0.5rem;
+            padding: 0.3rem 2rem;
+            background: var(--gold);
+            color: white;
             border-radius: 40px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             letter-spacing: 1px;
-            font-weight: 400;
-            animation: fadeInUp 0.8s ease 0.4s both;
-            box-shadow: 0 4px 20px rgba(198, 124, 94, 0.2);
-        }
-
-        .divider {
-            text-align: center;
-            color: #D4A373;
-            font-size: 1.5rem;
-            letter-spacing: 16px;
-            margin: 0.5rem 0 1.5rem;
-            opacity: 0.4;
+            font-weight: 500;
+            box-shadow: 0 4px 20px rgba(212, 163, 115, 0.3);
         }
 
         /* ============================================================
-           🎬 5. ANIMATIONS
-           ============================================================ */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes float {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-6px);
-            }
-        }
-
-        @keyframes pulse {
-            0%,
-            100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.02);
-            }
-        }
-
-        @keyframes flipIn {
-            from {
-                transform: rotateY(90deg) scale(0.9);
-                opacity: 0;
-            }
-            to {
-                transform: rotateY(0) scale(1);
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-on-load {
-            animation: slideUp 0.6s ease both;
-        }
-
-        .animate-on-load:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-        .animate-on-load:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        .animate-on-load:nth-child(3) {
-            animation-delay: 0.3s;
-        }
-        .animate-on-load:nth-child(4) {
-            animation-delay: 0.4s;
-        }
-        .animate-on-load:nth-child(5) {
-            animation-delay: 0.5s;
-        }
-        .animate-on-load:nth-child(6) {
-            animation-delay: 0.6s;
-        }
-
-        /* ============================================================
-           📋 6. OVERVIEW CARD
+           📋 OVERVIEW CARD
            ============================================================ */
         .overview-card {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
             gap: 0.5rem;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
+            background: var(--warm-white);
             border-radius: 20px;
             padding: 1.2rem 1.5rem;
             margin: 1rem 0 2rem;
-            border: 1px solid rgba(232, 221, 208, 0.4);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+            border: 2px solid var(--gold-light);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
         }
 
         .overview-item {
@@ -238,13 +195,13 @@
         }
 
         .overview-item .icon {
-            font-size: 1.8rem;
+            font-size: 2rem;
             display: block;
         }
 
         .overview-item .label {
-            font-size: 0.65rem;
-            color: #8A9A7A;
+            font-size: 0.6rem;
+            color: var(--olive);
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 400;
@@ -253,47 +210,55 @@
         .overview-item .value {
             font-size: 1rem;
             font-weight: 600;
-            color: #2C2C2C;
+            color: var(--charcoal);
         }
 
         /* ============================================================
-           📸 7. DROP ZONE
+           📸 DROP ZONE
            ============================================================ */
         .drop-zone {
-            border: 3px dashed #D4A373;
+            border: 3px dashed var(--gold);
             border-radius: 24px;
             padding: 2.5rem 2rem;
             text-align: center;
             background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(4px);
             transition: all 0.3s ease;
             cursor: pointer;
             margin: 1rem 0;
         }
 
         .drop-zone:hover {
-            border-color: #C67C5E;
-            background: rgba(255, 255, 255, 0.8);
+            border-color: var(--terracotta);
+            background: rgba(255, 248, 240, 0.8);
             transform: scale(1.01);
         }
 
         .drop-zone.dragover {
-            border-color: #C67C5E;
-            background: rgba(245, 237, 232, 0.8);
+            border-color: var(--terracotta);
+            background: var(--soft-pink);
             transform: scale(1.02);
-            animation: pulse 0.5s ease;
         }
 
         .drop-zone .upload-icon {
-            font-size: 3rem;
+            font-size: 3.5rem;
             display: block;
             animation: float 3s ease-in-out infinite;
         }
 
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
         .drop-zone .main-text {
             font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            color: #6B5B4E;
+            font-size: 1.5rem;
+            color: var(--charcoal);
         }
 
         .drop-zone .sub-text {
@@ -307,7 +272,7 @@
         }
 
         /* ============================================================
-           🛠️ 8. TOOLBAR
+           🛠️ TOOLBAR
            ============================================================ */
         .toolbar {
             display: flex;
@@ -334,52 +299,40 @@
         }
 
         .btn-primary {
-            background: #C67C5E;
-            color: #FDF8F3;
+            background: var(--terracotta);
+            color: white;
         }
 
         .btn-primary:hover {
-            background: #A86548;
+            background: var(--terracotta-dark);
             transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(198, 124, 94, 0.25);
+            box-shadow: 0 6px 24px rgba(198, 124, 94, 0.3);
         }
 
         .btn-danger {
-            background: #E8DDD0;
-            color: #6B5B4E;
+            background: var(--soft-pink);
+            color: var(--charcoal);
         }
 
         .btn-danger:hover {
-            background: #D4A373;
-            color: #FDF8F3;
-            transform: translateY(-2px);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: #C67C5E;
-            border: 2px solid #C67C5E;
-        }
-
-        .btn-outline:hover {
-            background: #C67C5E;
-            color: #FDF8F3;
+            background: var(--terracotta);
+            color: white;
             transform: translateY(-2px);
         }
 
         .photo-count {
             font-family: 'Playfair Display', serif;
             font-size: 1.1rem;
-            color: #6B5B4E;
+            color: var(--charcoal);
         }
 
         .photo-count strong {
-            color: #C67C5E;
+            color: var(--terracotta);
             font-size: 1.6rem;
         }
 
         /* ============================================================
-           🖼️ 9. COLLAGE GRID
+           🖼️ COLLAGE GRID
            ============================================================ */
         .collage-grid {
             display: grid;
@@ -393,17 +346,17 @@
             border-radius: 16px;
             overflow: hidden;
             aspect-ratio: 1 / 1;
-            background: #E8DDD0;
-            border: 2px solid rgba(232, 221, 208, 0.5);
+            background: var(--gold-light);
+            border: 3px solid var(--gold-light);
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             cursor: pointer;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
         }
 
         .collage-item:hover {
             transform: scale(1.05) rotate(-1deg);
-            border-color: #C67C5E;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            border-color: var(--terracotta);
+            box-shadow: 0 12px 40px rgba(198, 124, 94, 0.2);
             z-index: 5;
         }
 
@@ -422,9 +375,9 @@
             position: absolute;
             top: 10px;
             left: 10px;
-            background: rgba(44, 44, 44, 0.7);
+            background: rgba(44, 44, 44, 0.75);
             backdrop-filter: blur(4px);
-            color: #FDF8F3;
+            color: white;
             font-family: 'Playfair Display', serif;
             font-size: 0.8rem;
             padding: 0.15rem 0.7rem;
@@ -437,7 +390,7 @@
             top: 10px;
             right: 10px;
             background: rgba(198, 124, 94, 0.9);
-            color: #FDF8F3;
+            color: white;
             border: none;
             border-radius: 50%;
             width: 30px;
@@ -455,7 +408,7 @@
         }
 
         .collage-item .delete-btn:hover {
-            background: #C67C5E;
+            background: var(--burgundy);
             transform: scale(1.15) rotate(90deg);
         }
 
@@ -466,7 +419,7 @@
             right: 0;
             padding: 1.5rem 1rem 0.8rem;
             background: linear-gradient(transparent, rgba(44, 44, 44, 0.7));
-            color: #FDF8F3;
+            color: white;
             font-size: 0.75rem;
             opacity: 0;
             transition: opacity 0.4s ease;
@@ -485,9 +438,9 @@
             font-family: 'Playfair Display', serif;
             font-size: 1.3rem;
             font-weight: 300;
-            background: rgba(232, 221, 208, 0.2);
+            background: var(--soft-pink);
             border-radius: 20px;
-            border: 2px dashed #D4A373;
+            border: 3px dashed var(--gold);
         }
 
         .empty-gallery span {
@@ -497,7 +450,7 @@
         }
 
         /* ============================================================
-           🃏 10. FLIP CARDS (Accommodation)
+           🃏 FLIP CARDS
            ============================================================ */
         .flip-grid {
             display: grid;
@@ -537,13 +490,12 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            border: 1px solid rgba(232, 221, 208, 0.4);
+            border: 2px solid var(--gold-light);
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
         }
 
         .flip-card-front {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
+            background: var(--warm-white);
             transform: rotateY(0deg);
         }
 
@@ -555,19 +507,19 @@
         .flip-card-front .city-name {
             font-family: 'Playfair Display', serif;
             font-size: 1.4rem;
-            color: #C67C5E;
+            color: var(--terracotta);
             font-weight: 700;
         }
 
         .flip-card-front .hotel-name {
             font-size: 1rem;
             font-weight: 500;
-            color: #2C2C2C;
+            color: var(--charcoal);
         }
 
         .flip-card-front .click-hint {
-            font-size: 0.7rem;
-            color: #A09080;
+            font-size: 0.65rem;
+            color: var(--olive);
             margin-top: 0.8rem;
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -575,34 +527,34 @@
         }
 
         .flip-card-back {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(8px);
+            background: var(--terracotta);
+            color: white;
             transform: rotateY(180deg);
             justify-content: center;
             gap: 0.3rem;
+            border-color: var(--terracotta);
         }
 
         .flip-card-back .back-label {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: #8A9A7A;
-            font-weight: 400;
+            opacity: 0.7;
+            font-weight: 300;
         }
 
         .flip-card-back .back-value {
             font-size: 0.95rem;
             font-weight: 500;
-            color: #2C2C2C;
         }
 
         .flip-card-back .back-value.phone {
-            color: #C67C5E;
+            color: var(--gold-light);
             font-weight: 600;
         }
 
         /* ============================================================
-           🃏 11. FOOD FLIP CARDS
+           🍽️ FOOD FLIP CARDS
            ============================================================ */
         .food-flip-grid {
             display: grid;
@@ -642,13 +594,12 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            border: 1px solid rgba(232, 221, 208, 0.3);
+            border: 2px solid var(--gold-light);
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
         }
 
         .food-flip-front {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(4px);
+            background: var(--warm-white);
             transform: rotateY(0deg);
         }
 
@@ -664,23 +615,24 @@
 
         .food-flip-front .food-city {
             font-size: 0.65rem;
-            color: #8A9A7A;
+            color: var(--olive);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .food-flip-back {
-            background: linear-gradient(135deg, #C67C5E, #D4A373);
-            color: #FDF8F3;
+            background: var(--terracotta);
+            color: white;
             transform: rotateY(180deg);
             gap: 0.2rem;
+            border-color: var(--terracotta);
         }
 
         .food-flip-back .back-label {
             font-size: 0.6rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            opacity: 0.8;
+            opacity: 0.7;
         }
 
         .food-flip-back .back-value {
@@ -689,22 +641,22 @@
         }
 
         /* ============================================================
-           📍 12. MARKET FLIP CARDS
+           🏛️ MUSEUM FLIP CARDS
            ============================================================ */
-        .market-flip-grid {
+        .museum-flip-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1rem;
             margin: 1rem 0;
         }
 
-        .market-flip {
+        .museum-flip {
             perspective: 600px;
             height: 180px;
             cursor: pointer;
         }
 
-        .market-flip-inner {
+        .museum-flip-inner {
             position: relative;
             width: 100%;
             height: 100%;
@@ -712,12 +664,12 @@
             transform-style: preserve-3d;
         }
 
-        .market-flip.flipped .market-flip-inner {
+        .museum-flip.flipped .museum-flip-inner {
             transform: rotateY(180deg);
         }
 
-        .market-flip-front,
-        .market-flip-back {
+        .museum-flip-front,
+        .museum-flip-back {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -729,135 +681,263 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            border: 1px solid rgba(232, 221, 208, 0.3);
+            border: 2px solid var(--gold-light);
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
         }
 
-        .market-flip-front {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(4px);
+        .museum-flip-front {
+            background: var(--warm-white);
             transform: rotateY(0deg);
         }
 
-        .market-flip-front .emoji {
+        .museum-flip-front .emoji {
             font-size: 2.5rem;
         }
 
-        .market-flip-front .market-city {
-            font-size: 0.9rem;
+        .museum-flip-front .museum-name {
+            font-size: 0.85rem;
             font-weight: 600;
+            margin-top: 0.2rem;
         }
 
-        .market-flip-front .market-day {
-            font-size: 0.8rem;
-            color: #C67C5E;
-            font-weight: 500;
+        .museum-flip-front .museum-type {
+            font-size: 0.65rem;
+            color: var(--olive);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .market-flip-back {
-            background: linear-gradient(135deg, #8A9A7A, #D4A373);
-            color: #FDF8F3;
+        .museum-flip-back {
+            background: var(--olive);
+            color: white;
             transform: rotateY(180deg);
             gap: 0.2rem;
+            border-color: var(--olive);
         }
 
-        .market-flip-back .back-label {
+        .museum-flip-back .back-label {
             font-size: 0.6rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            opacity: 0.8;
+            opacity: 0.7;
         }
 
-        .market-flip-back .back-value {
+        .museum-flip-back .back-value {
             font-size: 0.85rem;
             font-weight: 400;
         }
 
-        .market-flip-back .back-badge {
+        .museum-flip-back .back-badge {
             display: inline-block;
             margin-top: 0.3rem;
             padding: 0.15rem 1rem;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 20px;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
         }
 
         /* ============================================================
-           ✈️ 13. TIMELINE
+           📍 LANDMARK FLIP CARDS
            ============================================================ */
-        .timeline {
+        .landmark-flip-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 0.8rem;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(8px);
-            border-radius: 16px;
-            padding: 1.2rem 1.5rem;
-            border: 1px solid rgba(232, 221, 208, 0.4);
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
             margin: 1rem 0;
         }
 
-        .timeline-item {
-            padding: 0.5rem 0.8rem;
-            border-left: 3px solid #D4A373;
-            transition: all 0.3s ease;
-            cursor: default;
+        .landmark-flip {
+            perspective: 600px;
+            height: 170px;
+            cursor: pointer;
         }
 
-        .timeline-item:hover {
-            border-left-color: #C67C5E;
-            padding-left: 1.2rem;
-            background: rgba(198, 124, 94, 0.04);
-            border-radius: 0 8px 8px 0;
+        .landmark-flip-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
         }
 
-        .timeline-item .flight-label {
+        .landmark-flip.flipped .landmark-flip-inner {
+            transform: rotateY(180deg);
+        }
+
+        .landmark-flip-front,
+        .landmark-flip-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 16px;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 2px solid var(--gold-light);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        .landmark-flip-front {
+            background: var(--warm-white);
+            transform: rotateY(0deg);
+        }
+
+        .landmark-flip-front .emoji {
+            font-size: 2.5rem;
+        }
+
+        .landmark-flip-front .landmark-name {
+            font-size: 0.85rem;
             font-weight: 600;
-            color: #C67C5E;
-            font-size: 0.75rem;
+            margin-top: 0.2rem;
+        }
+
+        .landmark-flip-front .landmark-type {
+            font-size: 0.65rem;
+            color: var(--olive);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        .timeline-item .flight-detail {
-            font-size: 0.85rem;
-            font-weight: 500;
+        .landmark-flip-back {
+            background: var(--gold);
+            color: white;
+            transform: rotateY(180deg);
+            gap: 0.2rem;
+            border-color: var(--gold);
         }
 
-        .timeline-item .flight-sub {
-            font-size: 0.75rem;
-            color: #6B5B4E;
+        .landmark-flip-back .back-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+
+        .landmark-flip-back .back-value {
+            font-size: 0.85rem;
+            font-weight: 400;
         }
 
         /* ============================================================
-           📞 14. CONTACT
+           📅 DAY TRIP FLIP CARDS
+           ============================================================ */
+        .trip-flip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .trip-flip {
+            perspective: 600px;
+            height: 170px;
+            cursor: pointer;
+        }
+
+        .trip-flip-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+        }
+
+        .trip-flip.flipped .trip-flip-inner {
+            transform: rotateY(180deg);
+        }
+
+        .trip-flip-front,
+        .trip-flip-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 16px;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 2px solid var(--gold-light);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        .trip-flip-front {
+            background: var(--warm-white);
+            transform: rotateY(0deg);
+        }
+
+        .trip-flip-front .emoji {
+            font-size: 2.5rem;
+        }
+
+        .trip-flip-front .trip-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 0.2rem;
+        }
+
+        .trip-flip-front .trip-type {
+            font-size: 0.65rem;
+            color: var(--olive);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .trip-flip-back {
+            background: var(--burgundy);
+            color: white;
+            transform: rotateY(180deg);
+            gap: 0.2rem;
+            border-color: var(--burgundy);
+        }
+
+        .trip-flip-back .back-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+
+        .trip-flip-back .back-value {
+            font-size: 0.85rem;
+            font-weight: 400;
+        }
+
+        /* ============================================================
+           📞 CONTACT
            ============================================================ */
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
             margin: 1rem 0;
         }
 
         .contact-item {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(4px);
+            background: var(--warm-white);
             border-radius: 14px;
             padding: 1.2rem;
-            border: 1px solid rgba(232, 221, 208, 0.4);
+            border: 2px solid var(--gold-light);
             text-align: center;
             transition: all 0.3s ease;
         }
 
         .contact-item:hover {
             transform: translateY(-3px);
-            border-color: #D4A373;
+            border-color: var(--terracotta);
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
         }
 
         .contact-item .city-name {
             font-weight: 600;
-            color: #C67C5E;
+            color: var(--terracotta);
             font-size: 0.9rem;
         }
 
@@ -868,22 +948,35 @@
 
         .contact-item .phone {
             font-size: 0.8rem;
-            color: #6B5B4E;
-        }
-
-        .contact-item .email {
-            font-size: 0.7rem;
-            color: #8A9A7A;
+            color: var(--charcoal);
         }
 
         /* ============================================================
-           🦶 15. FOOTER
+           📱 SECTION TITLES
+           ============================================================ */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--terracotta);
+            font-weight: 400;
+            margin: 2.5rem 0 0.3rem;
+        }
+
+        .section-sub {
+            color: var(--olive);
+            font-weight: 300;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ============================================================
+           🦶 FOOTER
            ============================================================ */
         .footer {
             text-align: center;
             margin-top: 3rem;
             padding-top: 2rem;
-            border-top: 2px solid #E8DDD0;
+            border-top: 2px solid var(--gold-light);
             color: #A09080;
             font-size: 0.75rem;
             font-weight: 300;
@@ -891,38 +984,29 @@
         }
 
         .footer .hearts {
-            color: #C67C5E;
+            color: var(--terracotta);
         }
 
         /* ============================================================
-           🎯 16. SECTION TITLES
-           ============================================================ */
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            color: #C67C5E;
-            font-weight: 400;
-            margin: 2rem 0 0.3rem;
-        }
-
-        .section-sub {
-            color: #8A9A7A;
-            font-weight: 300;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* ============================================================
-           📱 17. RESPONSIVE
+           📱 RESPONSIVE
            ============================================================ */
         @media (max-width: 768px) {
             body {
                 padding: 1rem;
             }
 
+            body::before {
+                top: 6px;
+                left: 6px;
+                right: 6px;
+                bottom: 6px;
+                border-radius: 16px;
+                border-width: 2px;
+            }
+
             .header h1 {
-                font-size: 3rem;
-                letter-spacing: 4px;
+                font-size: 2.8rem;
+                letter-spacing: 2px;
             }
 
             .overview-card {
@@ -949,13 +1033,16 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .market-flip-grid {
-                grid-template-columns: 1fr 1fr;
+            .museum-flip-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .timeline {
-                grid-template-columns: 1fr 1fr;
-                padding: 1rem;
+            .landmark-flip-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .trip-flip-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .section-title {
@@ -970,19 +1057,22 @@
                 font-size: 1.1rem;
             }
 
-            .flip-card-front .city-name {
-                font-size: 1.1rem;
+            .top-border,
+            .bottom-border {
+                font-size: 0.8rem;
+                letter-spacing: 12px;
             }
 
-            .flip-card-front .emoji {
-                font-size: 2.5rem;
+            body::after {
+                font-size: 0.5rem;
+                letter-spacing: 6px;
+                bottom: 18px;
             }
         }
 
         @media (max-width: 480px) {
             .header h1 {
                 font-size: 2.2rem;
-                letter-spacing: 2px;
             }
 
             .collage-grid {
@@ -1008,18 +1098,31 @@
                 height: 130px;
             }
 
-            .market-flip-grid {
+            .museum-flip-grid {
                 grid-template-columns: 1fr;
                 gap: 0.6rem;
             }
 
-            .market-flip {
+            .museum-flip {
                 height: 150px;
             }
 
-            .timeline {
+            .landmark-flip-grid {
                 grid-template-columns: 1fr;
-                padding: 0.8rem;
+                gap: 0.6rem;
+            }
+
+            .landmark-flip {
+                height: 150px;
+            }
+
+            .trip-flip-grid {
+                grid-template-columns: 1fr;
+                gap: 0.6rem;
+            }
+
+            .trip-flip {
+                height: 150px;
             }
 
             .overview-card {
@@ -1063,6 +1166,10 @@
                 top: 6px;
                 right: 6px;
             }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -1070,39 +1177,38 @@
 <body>
 
     <!-- ============================================================
+    🏠 DECORATIVE TOP BORDER
+    ============================================================ -->
+    <div class="top-border">✦ ✦ ✦</div>
+
+    <!-- ============================================================
     🏠 HEADER
     ============================================================ -->
     <header class="header">
-        <h1>FRANCE <span>· 2026</span></h1>
-        <p class="tagline">Montauban · Toulouse · Paris</p>
-        <span class="dates">📅 20 June — 4 July 2026</span>
+        <span class="city-badge">🇫🇷 City 1 of 3</span>
+        <h1>🏰 Montauban</h1>
+        <p class="tagline">The Pink Brick Gem</p>
+        <span class="dates">📅 21 – 25 June 2026 · 4 Nights</span>
     </header>
-
-    <div class="divider">✦ ✦ ✦</div>
 
     <!-- ============================================================
     📋 OVERVIEW CARD
     ============================================================ -->
     <section class="overview-card">
         <div class="overview-item">
-            <span class="icon">✈️</span>
-            <span class="label">Depart</span>
-            <span class="value">20 Jun</span>
+            <span class="icon">🏨</span>
+            <span class="label">Hotel</span>
+            <span class="value">L'authentique</span>
         </div>
         <div class="overview-item">
-            <span class="icon">🏠</span>
+            <span class="icon">📅</span>
+            <span class="label">Dates</span>
+            <span class="value">21–25 Jun</span>
+        </div>
+        <div class="overview-item">
+            <span class="icon">🌙</span>
             <span class="label">Nights</span>
-            <span class="value">12</span>
-        </div>
-        <div class="overview-item">
-            <span class="icon">👥</span>
-            <span class="label">Travelers</span>
-            <span class="value">3 Adults</span>
-        </div>
-        <div class="overview-item">
-            <span class="icon">📍</span>
-            <span class="label">Cities</span>
-            <span class="value">3</span>
+            <span class="value">4</span>
         </div>
         <div class="overview-item">
             <span class="icon">📸</span>
@@ -1115,7 +1221,7 @@
     📸 DROP ZONE
     ============================================================ -->
     <section>
-        <h2 class="section-title">📸 Drop Your Travel Photos</h2>
+        <h2 class="section-title">📸 Drop Your Montauban Photos</h2>
         <p class="section-sub">Drag & drop images — they'll appear in the collage below.</p>
 
         <div class="drop-zone" id="dropZone">
@@ -1138,18 +1244,16 @@
     ============================================================ -->
     <section>
         <div class="collage-grid" id="collageGrid">
-            <!-- Photos are inserted here by JavaScript -->
+            <!-- Photos inserted by JavaScript -->
         </div>
     </section>
 
-    <div class="divider">✦ ✦ ✦</div>
-
     <!-- ============================================================
-    🏨 ACCOMMODATION — FLIP CARDS!
+    🏨 ACCOMMODATION — FLIP CARDS
     ============================================================ -->
     <section>
         <h2 class="section-title">🏨 Where We're Staying</h2>
-        <p class="section-sub">👆 Click a card to flip it and see the details!</p>
+        <p class="section-sub">👆 Click a card to flip and see the details!</p>
 
         <div class="flip-grid">
 
@@ -1157,55 +1261,19 @@
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
                         <span class="emoji">🏰</span>
-                        <span class="city-name">Montauban</span>
-                        <span class="hotel-name">L'authentique</span>
+                        <span class="city-name">L'authentique</span>
+                        <span class="hotel-name">Montauban</span>
                         <span class="click-hint">👆 click to flip</span>
                     </div>
                     <div class="flip-card-back">
                         <span class="back-label">📍 Address</span>
                         <span class="back-value">34 Rue Bessières, 82000</span>
-                        <span class="back-label">📅 Dates</span>
+                        <span class="back-label">📅 Stay</span>
                         <span class="back-value">21–25 Jun · 4 nights</span>
                         <span class="back-label">📞 Phone</span>
                         <span class="back-value phone">+33 6 84 08 09 50</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flip-card" onclick="this.classList.toggle('flipped')">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <span class="emoji">🌸</span>
-                        <span class="city-name">Toulouse</span>
-                        <span class="hotel-name">Adagio Centre La Grave</span>
-                        <span class="click-hint">👆 click to flip</span>
-                    </div>
-                    <div class="flip-card-back">
-                        <span class="back-label">📍 Address</span>
-                        <span class="back-value">24 Rue du Pont Saint Pierre, 31300</span>
-                        <span class="back-label">📅 Dates</span>
-                        <span class="back-value">25–29 Jun · 4 nights</span>
-                        <span class="back-label">📞 Phone</span>
-                        <span class="back-value phone">+33 05 32 09 73 90</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flip-card" onclick="this.classList.toggle('flipped')">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <span class="emoji">🗼</span>
-                        <span class="city-name">Paris</span>
-                        <span class="hotel-name">Courtyard Gare de Lyon</span>
-                        <span class="click-hint">👆 click to flip</span>
-                    </div>
-                    <div class="flip-card-back">
-                        <span class="back-label">📍 Address</span>
-                        <span class="back-value">209 Rue de Bercy, 75012</span>
-                        <span class="back-label">📅 Dates</span>
-                        <span class="back-value">29 Jun–3 Jul · 4 nights</span>
                         <span class="back-label">✅ Confirmation</span>
-                        <span class="back-value">#79641552</span>
+                        <span class="back-value">#6613780955</span>
                     </div>
                 </div>
             </div>
@@ -1214,7 +1282,7 @@
     </section>
 
     <!-- ============================================================
-    🍽️ FOOD TARGETS — FLIP CARDS!
+    🍽️ FOOD TARGETS — FLIP CARDS
     ============================================================ -->
     <section>
         <h2 class="section-title">🍽️ Food Targets</h2>
@@ -1241,79 +1309,47 @@
             <div class="food-flip" onclick="this.classList.toggle('flipped')">
                 <div class="food-flip-inner">
                     <div class="food-flip-front">
-                        <span class="emoji">🥩</span>
-                        <span class="food-name">L'Entrecote</span>
-                        <span class="food-city">Toulouse</span>
-                    </div>
-                    <div class="food-flip-back">
-                        <span class="back-label">🍽️ What to get</span>
-                        <span class="back-value">Steak · frites</span>
-                        <span class="back-label">📍 Where</span>
-                        <span class="back-value">Toulouse centre</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="food-flip" onclick="this.classList.toggle('flipped')">
-                <div class="food-flip-inner">
-                    <div class="food-flip-front">
-                        <span class="emoji">🍪</span>
-                        <span class="food-name">My Cookie Factory</span>
-                        <span class="food-city">Toulouse</span>
-                    </div>
-                    <div class="food-flip-back">
-                        <span class="back-label">🍽️ What to get</span>
-                        <span class="back-value">Cookies! 🍪</span>
-                        <span class="back-label">📍 Where</span>
-                        <span class="back-value">Toulouse centre</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="food-flip" onclick="this.classList.toggle('flipped')">
-                <div class="food-flip-inner">
-                    <div class="food-flip-front">
-                        <span class="emoji">🍝</span>
-                        <span class="food-name">Mmmmm Carbonara</span>
-                        <span class="food-city">Paris</span>
-                    </div>
-                    <div class="food-flip-back">
-                        <span class="back-label">🍽️ What to get</span>
-                        <span class="back-value">Pasta · Carbonara</span>
-                        <span class="back-label">📍 Where</span>
-                        <span class="back-value">Paris</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="food-flip" onclick="this.classList.toggle('flipped')">
-                <div class="food-flip-inner">
-                    <div class="food-flip-front">
-                        <span class="emoji">🥐</span>
-                        <span class="food-name">Maison Conticini</span>
-                        <span class="food-city">Paris · BIG croissant!</span>
-                    </div>
-                    <div class="food-flip-back">
-                        <span class="back-label">🥐 What to get</span>
-                        <span class="back-value">BIG Croissant! 🥐</span>
-                        <span class="back-label">📍 Where</span>
-                        <span class="back-value">Paris</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="food-flip" onclick="this.classList.toggle('flipped')">
-                <div class="food-flip-inner">
-                    <div class="food-flip-front">
                         <span class="emoji">🍫</span>
-                        <span class="food-name">Maison Pillon</span>
-                        <span class="food-city">Toulouse</span>
+                        <span class="food-name">Pascal Caffet</span>
+                        <span class="food-city">Montauban</span>
                     </div>
                     <div class="food-flip-back">
                         <span class="back-label">🍫 What to get</span>
-                        <span class="back-value">Hot chocolate!</span>
+                        <span class="back-value">Chocolates · Pastries</span>
+                        <span class="back-label">🏆 Note</span>
+                        <span class="back-value">Champion du Monde!</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="food-flip" onclick="this.classList.toggle('flipped')">
+                <div class="food-flip-inner">
+                    <div class="food-flip-front">
+                        <span class="emoji">🦆</span>
+                        <span class="food-name">Le Saint-Martial</span>
+                        <span class="food-city">Montauban</span>
+                    </div>
+                    <div class="food-flip-back">
+                        <span class="back-label">🍽️ What to get</span>
+                        <span class="back-value">Duck confit</span>
                         <span class="back-label">📍 Where</span>
-                        <span class="back-value">3 Place du Capitole</span>
+                        <span class="back-value">Traditional bistro</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="food-flip" onclick="this.classList.toggle('flipped')">
+                <div class="food-flip-inner">
+                    <div class="food-flip-front">
+                        <span class="emoji">🍷</span>
+                        <span class="food-name">Le Tonneau de Modane</span>
+                        <span class="food-city">Montauban</span>
+                    </div>
+                    <div class="food-flip-back">
+                        <span class="back-label">🍷 What to get</span>
+                        <span class="back-value">Good beer selection</span>
+                        <span class="back-label">📍 Where</span>
+                        <span class="back-value">Local bar</span>
                     </div>
                 </div>
             </div>
@@ -1322,123 +1358,333 @@
     </section>
 
     <!-- ============================================================
-    ✈️ FLIGHTS
+    🏛️ MUSEUMS — FLIP CARDS
     ============================================================ -->
     <section>
-        <h2 class="section-title">✈️ Flights & Transport</h2>
+        <h2 class="section-title">🏛️ Museums</h2>
+        <p class="section-sub">👆 Click a card to flip and see the details!</p>
 
-        <div class="timeline">
+        <div class="museum-flip-grid">
 
-            <div class="timeline-item">
-                <div class="flight-label">🇸🇬 → 🇫🇷</div>
-                <div class="flight-detail">20 Jun · 22:20</div>
-                <div class="flight-sub">AF 257 · SIN → CDG</div>
+            <div class="museum-flip" onclick="this.classList.toggle('flipped')">
+                <div class="museum-flip-inner">
+                    <div class="museum-flip-front">
+                        <span class="emoji">🎨</span>
+                        <span class="museum-name">Musée Ingres-Bourdelle</span>
+                        <span class="museum-type">Art Museum</span>
+                    </div>
+                    <div class="museum-flip-back">
+                        <span class="back-label">🎨 What's inside</span>
+                        <span class="back-value">4,500+ drawings by Ingres</span>
+                        <span class="back-label">🗿 Also</span>
+                        <span class="back-value">70 sculptures by Bourdelle</span>
+                        <span class="back-badge">⭐ Must-see!</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="timeline-item">
-                <div class="flight-label">🇫🇷 → 🇫🇷</div>
-                <div class="flight-detail">21 Jun · 07:30</div>
-                <div class="flight-sub">AF 7402 · CDG → TLS</div>
+            <div class="museum-flip" onclick="this.classList.toggle('flipped')">
+                <div class="museum-flip-inner">
+                    <div class="museum-flip-front">
+                        <span class="emoji">🕊️</span>
+                        <span class="museum-name">Musée de la Résistance</span>
+                        <span class="museum-type">History Museum</span>
+                    </div>
+                    <div class="museum-flip-back">
+                        <span class="back-label">🕊️ About</span>
+                        <span class="back-value">WWII resistance fighters</span>
+                        <span class="back-label">💭 Note</span>
+                        <span class="back-value">Moving and powerful</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="timeline-item">
-                <div class="flight-label">🚆 Train</div>
-                <div class="flight-detail">25 Jun · Morning</div>
-                <div class="flight-sub">Montauban → Toulouse</div>
+            <div class="museum-flip" onclick="this.classList.toggle('flipped')">
+                <div class="museum-flip-inner">
+                    <div class="museum-flip-front">
+                        <span class="emoji">🦜</span>
+                        <span class="museum-name">Musée d'Histoire Naturelle</span>
+                        <span class="museum-type">Natural History</span>
+                    </div>
+                    <div class="museum-flip-back">
+                        <span class="back-label">🦜 What's inside</span>
+                        <span class="back-value">3,000 bird specimens!</span>
+                        <span class="back-label">🏛️ Style</span>
+                        <span class="back-value">19th-century cabinet</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="timeline-item">
-                <div class="flight-label">🇫🇷 → 🇫🇷</div>
-                <div class="flight-detail">29 Jun · 09:35</div>
-                <div class="flight-sub">AF 7403 · TLS → CDG</div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="flight-label">🇫🇷 → 🇸🇬</div>
-                <div class="flight-detail">3 Jul · 23:30</div>
-                <div class="flight-sub">AF 256 · CDG → SIN</div>
+            <div class="museum-flip" onclick="this.classList.toggle('flipped')">
+                <div class="museum-flip-inner">
+                    <div class="museum-flip-front">
+                        <span class="emoji">🧸</span>
+                        <span class="museum-name">Musée des Jouets</span>
+                        <span class="museum-type">Toy Museum</span>
+                    </div>
+                    <div class="museum-flip-back">
+                        <span class="back-label">🧸 What's inside</span>
+                        <span class="back-value">Vintage toys</span>
+                        <span class="back-label">🚀 Highlight</span>
+                        <span class="back-value">Giant Meccano crane!</span>
+                        <span class="back-badge">🎉 Fun for all ages</span>
+                    </div>
+                </div>
             </div>
 
         </div>
     </section>
 
     <!-- ============================================================
-    🛍️ MARKETS — FLIP CARDS!
+    📍 LANDMARKS — FLIP CARDS
     ============================================================ -->
     <section>
-        <h2 class="section-title">🛍️ Market Days</h2>
-        <p class="section-sub">👆 Click a card to flip and see market details!</p>
+        <h2 class="section-title">📍 Must-See Landmarks</h2>
+        <p class="section-sub">👆 Click a card to flip and see the details!</p>
 
-        <div class="market-flip-grid">
+        <div class="landmark-flip-grid">
 
-            <div class="market-flip" onclick="this.classList.toggle('flipped')">
-                <div class="market-flip-inner">
-                    <div class="market-flip-front">
-                        <span class="emoji">🏰</span>
-                        <span class="market-city">Montauban</span>
-                        <span class="market-day">Sunday 21 June</span>
+            <div class="landmark-flip" onclick="this.classList.toggle('flipped')">
+                <div class="landmark-flip-inner">
+                    <div class="landmark-flip-front">
+                        <span class="emoji">🟠</span>
+                        <span class="landmark-name">Place Nationale</span>
+                        <span class="landmark-type">Heart of Montauban</span>
                     </div>
-                    <div class="market-flip-back">
-                        <span class="back-label">📍 Where</span>
-                        <span class="back-value">Place Nationale</span>
-                        <span class="back-label">⏰ Hours</span>
-                        <span class="back-value">08:00 — 13:00</span>
+                    <div class="landmark-flip-back">
+                        <span class="back-label">📍 What</span>
+                        <span class="back-value">Pink brick arcades</span>
+                        <span class="back-label">🛍️ Market</span>
+                        <span class="back-value">Sunday 08:00-13:00</span>
                         <span class="back-badge">✅ You arrive Sunday!</span>
                     </div>
                 </div>
             </div>
 
-            <div class="market-flip" onclick="this.classList.toggle('flipped')">
-                <div class="market-flip-inner">
-                    <div class="market-flip-front">
+            <div class="landmark-flip" onclick="this.classList.toggle('flipped')">
+                <div class="landmark-flip-inner">
+                    <div class="landmark-flip-front">
+                        <span class="emoji">🌉</span>
+                        <span class="landmark-name">Pont Vieux</span>
+                        <span class="landmark-type">14th-Century Bridge</span>
+                    </div>
+                    <div class="landmark-flip-back">
+                        <span class="back-label">🌉 What</span>
+                        <span class="back-value">Old bridge over Tarn</span>
+                        <span class="back-label">🌅 Best time</span>
+                        <span class="back-value">Sunset! (around 21:30)</span>
+                        <span class="back-badge">📸 Best photo spot</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="landmark-flip" onclick="this.classList.toggle('flipped')">
+                <div class="landmark-flip-inner">
+                    <div class="landmark-flip-front">
+                        <span class="emoji">⛪</span>
+                        <span class="landmark-name">Cathédrale Notre-Dame</span>
+                        <span class="landmark-type">Cathedral</span>
+                    </div>
+                    <div class="landmark-flip-back">
+                        <span class="back-label">⛪ What</span>
+                        <span class="back-value">White stone cathedral</span>
+                        <span class="back-label">🎨 Inside</span>
+                        <span class="back-value">Ingres' famous painting</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="landmark-flip" onclick="this.classList.toggle('flipped')">
+                <div class="landmark-flip-inner">
+                    <div class="landmark-flip-front">
+                        <span class="emoji">🌿</span>
+                        <span class="landmark-name">Couvent des Carmes</span>
+                        <span class="landmark-type">Convent & Garden</span>
+                    </div>
+                    <div class="landmark-flip-back">
+                        <span class="back-label">🌿 What</span>
+                        <span class="back-value">18th-century convent</span>
+                        <span class="back-label">🌸 Garden</span>
+                        <span class="back-value">Medieval-style, free!</span>
+                        <span class="back-badge">✨ Hidden gem</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================
+    🌳 PARKS — FLIP CARDS
+    ============================================================ -->
+    <section>
+        <h2 class="section-title">🌳 Parks & River Walks</h2>
+        <p class="section-sub">👆 Click a card to flip and see the details!</p>
+
+        <div class="landmark-flip-grid">
+
+            <div class="landmark-flip" onclick="this.classList.toggle('flipped')">
+                <div class="landmark-flip-inner">
+                    <div class="landmark-flip-front">
+                        <span class="emoji">🌊</span>
+                        <span class="landmark-name">Les Berges du Tarn</span>
+                        <span class="landmark-type">River Walk</span>
+                    </div>
+                    <div class="landmark-flip-back">
+                        <span class="back-label">🌊 What</span>
+                        <span class="back-value">Walking & cycling paths</span>
+                        <span class="back-label">🌅 Best time</span>
+                        <span class="back-value">Evening stroll</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="landmark-flip" onclick="this.classList.toggle('flipped')">
+                <div class="landmark-flip-inner">
+                    <div class="landmark-flip-front">
                         <span class="emoji">🌸</span>
-                        <span class="market-city">Toulouse</span>
-                        <span class="market-day">Sunday 28 June</span>
+                        <span class="landmark-name">Jardin des Plantes</span>
+                        <span class="landmark-type">19th-Century Park</span>
                     </div>
-                    <div class="market-flip-back">
-                        <span class="back-label">📍 Where</span>
-                        <span class="back-value">Marché Victor Hugo</span>
-                        <span class="back-label">⏰ Hours</span>
-                        <span class="back-value">06:00 — 13:00</span>
-                        <span class="back-badge">⭐ Your main market day!</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="market-flip" onclick="this.classList.toggle('flipped')">
-                <div class="market-flip-inner">
-                    <div class="market-flip-front">
-                        <span class="emoji">🗼</span>
-                        <span class="market-city">Paris</span>
-                        <span class="market-day">Thursday 2 July</span>
-                    </div>
-                    <div class="market-flip-back">
-                        <span class="back-label">📍 Where</span>
-                        <span class="back-value">Bastille Market</span>
-                        <span class="back-label">⏰ Hours</span>
-                        <span class="back-value">07:00 — 14:30</span>
-                        <span class="back-badge">⭐ One of Paris's best!</span>
+                    <div class="landmark-flip-back">
+                        <span class="back-label">🌸 What</span>
+                        <span class="back-value">Shaded paths & trees</span>
+                        <span class="back-label">🌿 Vibe</span>
+                        <span class="back-value">Peaceful and relaxing</span>
                     </div>
                 </div>
             </div>
 
-            <div class="market-flip" onclick="this.classList.toggle('flipped')">
-                <div class="market-flip-inner">
-                    <div class="market-flip-front">
-                        <span class="emoji">🛍️</span>
-                        <span class="market-city">Paris</span>
-                        <span class="market-day">Monday 29 June</span>
+            <div class="landmark-flip" onclick="this.classList.toggle('flipped')">
+                <div class="landmark-flip-inner">
+                    <div class="landmark-flip-front">
+                        <span class="emoji">🚤</span>
+                        <span class="landmark-name">Port Canal</span>
+                        <span class="landmark-type">Canal Meeting Point</span>
                     </div>
-                    <div class="market-flip-back">
-                        <span class="back-label">📍 Where</span>
-                        <span class="back-value">Les Puces (Flea Market)</span>
-                        <span class="back-label">⏰ Hours</span>
-                        <span class="back-value">10:00 — 17:00</span>
-                        <span class="back-badge">🛍️ Vintage treasure!</span>
+                    <div class="landmark-flip-back">
+                        <span class="back-label">🚤 What</span>
+                        <span class="back-value">Where Tarn meets Canal</span>
+                        <span class="back-label">⛴️ Watch</span>
+                        <span class="back-value">Barges go by</span>
                     </div>
                 </div>
             </div>
 
+        </div>
+    </section>
+
+    <!-- ============================================================
+    🚗 DAY TRIPS — FLIP CARDS
+    ============================================================ -->
+    <section>
+        <h2 class="section-title">🚗 Day Trips from Montauban</h2>
+        <p class="section-sub">👆 Click a card to flip and see travel details!</p>
+
+        <div class="trip-flip-grid">
+
+            <div class="trip-flip" onclick="this.classList.toggle('flipped')">
+                <div class="trip-flip-inner">
+                    <div class="trip-flip-front">
+                        <span class="emoji">⛪</span>
+                        <span class="trip-name">Moissac Abbey</span>
+                        <span class="trip-type">20 min by train</span>
+                    </div>
+                    <div class="trip-flip-back">
+                        <span class="back-label">⛪ What</span>
+                        <span class="back-value">UNESCO-listed cloister</span>
+                        <span class="back-label">🏛️ Style</span>
+                        <span class="back-value">Romanesque masterpiece</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trip-flip" onclick="this.classList.toggle('flipped')">
+                <div class="trip-flip-inner">
+                    <div class="trip-flip-front">
+                        <span class="emoji">🏞️</span>
+                        <span class="trip-name">Saint-Antonin-Noble-Val</span>
+                        <span class="trip-type">40 min by car</span>
+                    </div>
+                    <div class="trip-flip-back">
+                        <span class="back-label">🏞️ What</span>
+                        <span class="back-value">Medieval village</span>
+                        <span class="back-label">🚣 Activity</span>
+                        <span class="back-value">Kayaking in gorges</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trip-flip" onclick="this.classList.toggle('flipped')">
+                <div class="trip-flip-inner">
+                    <div class="trip-flip-front">
+                        <span class="emoji">☁️</span>
+                        <span class="trip-name">Cordes-sur-Ciel</span>
+                        <span class="trip-type">1 hour by car</span>
+                    </div>
+                    <div class="trip-flip-back">
+                        <span class="back-label">☁️ What</span>
+                        <span class="back-value">"Village in the sky"</span>
+                        <span class="back-label">🏆 Status</span>
+                        <span class="back-value">One of France's most beautiful</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trip-flip" onclick="this.classList.toggle('flipped')">
+                <div class="trip-flip-inner">
+                    <div class="trip-flip-front">
+                        <span class="emoji">🏰</span>
+                        <span class="trip-name">Bruniquel</span>
+                        <span class="trip-type">45 min by car</span>
+                    </div>
+                    <div class="trip-flip-back">
+                        <span class="back-label">🏰 What</span>
+                        <span class="back-value">Cliff-top village</span>
+                        <span class="back-label">🏛️ Castles</span>
+                        <span class="back-value">Two castles!</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trip-flip" onclick="this.classList.toggle('flipped')">
+                <div class="trip-flip-inner">
+                    <div class="trip-flip-front">
+                        <span class="emoji">🌻</span>
+                        <span class="trip-name">Lauzerte</span>
+                        <span class="trip-type">35 min by car</span>
+                    </div>
+                    <div class="trip-flip-back">
+                        <span class="back-label">🌻 What</span>
+                        <span class="back-value">"Les Plus Beaux Villages"</span>
+                        <span class="back-label">🏆 Status</span>
+                        <span class="back-value">Officially one of the most beautiful</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================
+    🛍️ MARKET
+    ============================================================ -->
+    <section>
+        <h2 class="section-title">🛍️ Market Day</h2>
+
+        <div style="background:var(--warm-white); border-radius:16px; padding:1.5rem; border:2px solid var(--gold-light); margin:0.5rem 0;">
+            <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:1rem;">
+                <div>
+                    <span style="font-size:2rem;">🟠</span>
+                    <span style="font-weight:600; font-size:1.1rem; color:var(--terracotta);">Place Nationale Market</span>
+                    <p style="color:var(--charcoal); margin-top:0.2rem;"><strong>Sunday 21 June</strong> · 08:00 – 13:00</p>
+                    <p style="color:var(--olive); font-size:0.85rem;">✅ You arrive Sunday — perfect timing!</p>
+                    <p style="color:#A09080; font-size:0.8rem;">Also open Tuesday-Friday 08:00-13:00</p>
+                </div>
+                <div style="text-align:center; background:var(--soft-pink); padding:0.5rem 1.5rem; border-radius:40px;">
+                    <span style="font-size:0.8rem; font-weight:500; color:var(--charcoal);">⭐ Don't miss!</span>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1449,26 +1695,38 @@
         <h2 class="section-title">📞 Useful Contacts</h2>
 
         <div class="contact-grid">
-
             <div class="contact-item">
                 <div class="city-name">🏰 Montauban</div>
                 <div class="hotel-name">L'authentique</div>
                 <div class="phone">📞 +33 6 84 08 09 50</div>
             </div>
+        </div>
+    </section>
 
-            <div class="contact-item">
-                <div class="city-name">🌸 Toulouse</div>
-                <div class="hotel-name">Adagio Toulouse</div>
-                <div class="phone">📞 +33 05 32 09 73 90</div>
-                <div class="email">📧 hb62i@adagio-city.com</div>
+    <!-- ============================================================
+    🚆 TRANSPORT
+    ============================================================ -->
+    <section>
+        <h2 class="section-title">🚆 Getting Around</h2>
+
+        <div style="background:var(--warm-white); border-radius:16px; padding:1.2rem 1.5rem; border:2px solid var(--gold-light); margin:0.5rem 0;">
+            <div style="display:flex; flex-wrap:wrap; gap:1.5rem; justify-content:space-between;">
+                <div>
+                    <span style="font-weight:600; color:var(--terracotta);">🚆 Train Station</span>
+                    <p style="font-size:0.9rem;">Gare de Montauban-Ville-Bourbon</p>
+                    <p style="font-size:0.8rem; color:var(--olive);">Trains to Toulouse · 30-40 min</p>
+                </div>
+                <div>
+                    <span style="font-weight:600; color:var(--terracotta);">🚶 Getting Around</span>
+                    <p style="font-size:0.9rem;">The historic centre is very walkable!</p>
+                    <p style="font-size:0.8rem; color:var(--olive);">Most sights within 15-20 min walk</p>
+                </div>
+                <div>
+                    <span style="font-weight:600; color:var(--terracotta);">🚲 Bike Rental</span>
+                    <p style="font-size:0.9rem;">Available at tourist office</p>
+                    <p style="font-size:0.8rem; color:var(--olive);">Great for river paths</p>
+                </div>
             </div>
-
-            <div class="contact-item">
-                <div class="city-name">🗼 Paris</div>
-                <div class="hotel-name">Courtyard Gare de Lyon</div>
-                <div class="phone">📞 Check Marriott app</div>
-            </div>
-
         </div>
     </section>
 
@@ -1476,18 +1734,20 @@
     🦶 FOOTER
     ============================================================ -->
     <footer class="footer">
-        <p>🇫🇷 Bon voyage! · Montauban · Toulouse · Paris · 2026</p>
+        <p>🇫🇷 Montauban · 21–25 June 2026 · 4 Nights</p>
         <p style="font-size:0.65rem; margin-top:0.3rem; letter-spacing:0.5px;">
             ✦ drag & drop photos · click cards to flip · click ✕ to delete ✦
         </p>
     </footer>
 
+    <div class="bottom-border">✦ ✦ ✦</div>
+
     <!-- ============================================================
-    ⚡ JAVASCRIPT — All interactive features
+    ⚡ JAVASCRIPT — Photo upload & collage
     ============================================================ -->
     <script>
         // ------------------------------------------------------------
-        // 📸 1. DRAG & DROP + FILE INPUT
+        // 📸 DRAG & DROP + FILE INPUT
         // ------------------------------------------------------------
         const dropZone = document.getElementById('dropZone');
         const fileInput = document.getElementById('fileInput');
@@ -1497,10 +1757,11 @@
         const overviewPhotoCount = document.getElementById('overviewPhotoCount');
 
         let imageFiles = [];
+        const STORAGE_KEY = 'montaubanPhotos';
 
-        // Load saved photos from localStorage
+        // Load saved photos
         function loadSavedPhotos() {
-            const saved = localStorage.getItem('franceTripPhotos');
+            const saved = localStorage.getItem(STORAGE_KEY);
             if (saved) {
                 try {
                     imageFiles = JSON.parse(saved);
@@ -1513,11 +1774,11 @@
 
         // Save to localStorage
         function savePhotos() {
-            localStorage.setItem('franceTripPhotos', JSON.stringify(imageFiles));
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(imageFiles));
         }
 
         // ------------------------------------------------------------
-        // 🖼️ 2. RENDER COLLAGE
+        // 🖼️ RENDER COLLAGE
         // ------------------------------------------------------------
         function renderCollage() {
             collageGrid.innerHTML = '';
@@ -1527,7 +1788,7 @@
                     <div class="empty-gallery">
                         <span>🖼️</span>
                         No photos yet<br>
-                        <span style="font-size:1rem; color:#A09080;">Drop some above to start your collection</span>
+                        <span style="font-size:1rem; color:#A09080;">Drop some above to start your Montauban collection</span>
                     </div>
                 `;
                 photoCount.textContent = '0';
@@ -1543,7 +1804,7 @@
 
                 const img = document.createElement('img');
                 img.src = src;
-                img.alt = `Photo ${num}`;
+                img.alt = `Montauban ${num}`;
                 img.loading = 'lazy';
                 item.appendChild(img);
 
@@ -1555,7 +1816,6 @@
                 const delBtn = document.createElement('button');
                 delBtn.className = 'delete-btn';
                 delBtn.textContent = '✕';
-                delBtn.setAttribute('aria-label', 'Delete photo');
                 delBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
                     deletePhoto(index);
@@ -1564,10 +1824,9 @@
 
                 const caption = document.createElement('div');
                 caption.className = 'caption-overlay';
-                caption.textContent = `Photo ${num}`;
+                caption.textContent = `Montauban · Photo ${num}`;
                 item.appendChild(caption);
 
-                // Click to open in new tab
                 item.addEventListener('click', () => {
                     window.open(src, '_blank');
                 });
@@ -1580,7 +1839,7 @@
         }
 
         // ------------------------------------------------------------
-        // 🗑️ 3. DELETE PHOTO
+        // 🗑️ DELETE PHOTO
         // ------------------------------------------------------------
         function deletePhoto(index) {
             if (index < 0 || index >= imageFiles.length) return;
@@ -1592,7 +1851,7 @@
         }
 
         // ------------------------------------------------------------
-        // 📤 4. HANDLE FILES
+        // 📤 HANDLE FILES
         // ------------------------------------------------------------
         function handleFiles(files) {
             let newImages = [];
@@ -1617,19 +1876,15 @@
         }
 
         // ------------------------------------------------------------
-        // 🎯 5. EVENT LISTENERS
+        // 🎯 EVENT LISTENERS
         // ------------------------------------------------------------
-
-        // Click to browse
         dropZone.addEventListener('click', () => fileInput.click());
 
-        // File input change
         fileInput.addEventListener('change', (e) => {
             handleFiles(e.target.files);
             fileInput.value = '';
         });
 
-        // Drag & drop
         dropZone.addEventListener('dragover', (e) => {
             e.preventDefault();
             dropZone.classList.add('dragover');
@@ -1642,14 +1897,12 @@
         dropZone.addEventListener('drop', (e) => {
             e.preventDefault();
             dropZone.classList.remove('dragover');
-            const files = e.dataTransfer.files;
-            handleFiles(files);
+            handleFiles(e.dataTransfer.files);
         });
 
-        // Clear all
         clearAllBtn.addEventListener('click', () => {
             if (imageFiles.length === 0) return;
-            if (confirm('🗑️ Delete all photos from the gallery?')) {
+            if (confirm('🗑️ Delete all photos from Montauban?')) {
                 imageFiles = [];
                 savePhotos();
                 renderCollage();
@@ -1657,7 +1910,7 @@
         });
 
         // ------------------------------------------------------------
-        // 🚀 6. INITIALIZE
+        // 🚀 INITIALIZE
         // ------------------------------------------------------------
         loadSavedPhotos();
     </script>
